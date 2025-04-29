@@ -545,8 +545,8 @@
   </section>
 
   <section>
-    <h2 class="section-title">Beliebte Filme</h2>
-    <div class="film-grid" id="popular-films">
+    <h2 class="section-title">Alle Filme</h2>
+    <div class="film-grid" id="film-liste">
 
     </div>
   </section>
@@ -629,14 +629,6 @@
     beschreibung: "In den 1950er-Jahren wetteifern die New Yorker Verbrecherbosse Frank Costello und Vito Genovese um die Kontrolle über die Straßen. Einst waren sie beste Freunde, doch Eifersüchteleien und ein Verrat bringen sie schließlich auf einen tödlichen Kollisionskurs. Nach einem Mordanschlag auf Costello, den er verletzt überlebt, soll mit dem Krieg Schluss sein. Er will die organisierte Kriminalität hinter sich lassen. Doch bei der Mafia kann man nicht einfach seine Kündigung einreichen.",
     cover: "https://musicart.xboxlive.com/7/fb0b6e00-0000-0000-0000-000000000002/504/image.jpg",
     iframe: "https://supervideo.cc/e/fkrtc5xf499p"
-  },
-  {
-    titel: " Harry Potter und der Stein der Weisen",
-    jahr: 2001,
-    hochgeladenAm: "2025-04-26",
-    beschreibung: "Basierend auf dem beliebten Buch von J.K. Rowling wird die Geschichte eines Waisenjungen erzählt, der an seinem elften Geburtstag herausfindet, dass seine Eltern zwei mächtige Zauberer waren und er selbst auch magische Kräfte besitzt. Er wird von einem unerwünschten Kind zum Schüler der Hogwarts Schule für Hexerei und Zauberei, wo er verschiedene Freunde trifft, die zu seinen engsten Verbündeten werden und ihm helfen, die Wahrheit über den mysteriösen Tod seiner Eltern herauszufinden.",
-    cover: "https://musicart.xboxlive.com/7/8fe05000-0000-0000-0000-000000000002/504/image.jpg",
-    iframe: "https://supervideo.cc/e/22ld3pzy8p0o"
   },
   {
     titel: "A Working Man",
@@ -831,6 +823,14 @@
     iframe: "https://supervideo.cc/e/hcikkq07ydgd"
   },
   {
+    titel: " Harry Potter und der Stein der Weisen",
+    jahr: 2001,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Basierend auf dem beliebten Buch von J.K. Rowling wird die Geschichte eines Waisenjungen erzählt, der an seinem elften Geburtstag herausfindet, dass seine Eltern zwei mächtige Zauberer waren und er selbst auch magische Kräfte besitzt. Er wird von einem unerwünschten Kind zum Schüler der Hogwarts Schule für Hexerei und Zauberei, wo er verschiedene Freunde trifft, die zu seinen engsten Verbündeten werden und ihm helfen, die Wahrheit über den mysteriösen Tod seiner Eltern herauszufinden.",
+    cover: "https://musicart.xboxlive.com/7/8fe05000-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/22ld3pzy8p0o"
+  },
+  {
     titel: "Harry Potter und die Kammer des Schreckens",
     jahr: 2002,
     hochgeladenAm: "2025-04-26",
@@ -887,9 +887,17 @@
     iframe: "https://supervideo.cc/e/67f2q8d8r6wi"
   }
   ];
-
+        const filmListe = document.getElementById('film-liste');
+        const sortedByDate = [...filme].sort((a, b) => new Date(b.hochgeladenAm) - new Date(a.hochgeladenAm));
         const latestFilmsContainer = document.getElementById('latest-films');
-        const popularFilmsContainer = document.getElementById('popular-films');
+        sortedByDate.slice(0, 4).forEach(film => {
+                     latestFilmsContainer.appendChild(createFilmCard(film));
+       });
+
+                     sortedByDate.forEach(film =>{
+                    filmListe.appendChild(createFilmCard(film));
+       });
+
         const searchInput = document.querySelector('.search-input');
         const searchResults = document.querySelector('.search-results');
         const filmDetailOverlay = document.querySelector('.film-detail-overlay');
@@ -897,7 +905,7 @@
         const cookieBanner = document.querySelector('.cookie-banner');
         const cookieAccept = document.querySelector('.cookie-accept');
 
-        const sortedByDate = [...filme].sort((a, b) => new Date(b.hochgeladenAm) - new Date(a.hochgeladenAm));
+
 
         const randomized = [...filme].sort(() => Math.random() - 0.5);
 
@@ -913,15 +921,8 @@
             `;
             card.addEventListener('click', () => openFilmDetail(film));
             return card;
+
         }
-
-        sortedByDate.slice(0, 4).forEach(film => {
-            latestFilmsContainer.appendChild(createFilmCard(film));
-        });
-
-        randomized.slice(0, 8).forEach(film => {
-            popularFilmsContainer.appendChild(createFilmCard(film));
-        });
 
         searchInput.addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
