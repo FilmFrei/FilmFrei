@@ -1,0 +1,1128 @@
+
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filmfrei</title>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #F5F5F5;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 40px;
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background-color: #0A84FF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 0 10px rgba(10, 132, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(10, 132, 255, 0.5);
+        }
+
+        .brand-name {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 40px 10px 15px;
+            border-radius: 20px;
+            border: none;
+            background-color: #1E1E1E;
+            color: #F5F5F5;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            background-color: #2A2A2A;
+            box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.5);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            pointer-events: none;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 50px;
+            width: 100%;
+            background-color: #1A1A1A;
+            border-radius: 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 200;
+        }
+
+        .search-results.active {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .search-result-item:hover {
+            background-color: #2A2A2A;
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #F5F5F5;
+        }
+
+        .film-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .film-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            aspect-ratio: 2/3;
+            background-color: #1A1A1A;
+        }
+
+        .film-card:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .film-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .film-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 60px 15px 15px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .film-card:hover .film-info {
+            opacity: 1;
+        }
+
+        .film-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .film-year {
+            font-size: 14px;
+            color: #BBBBBB;
+        }
+
+        .film-detail-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .film-detail-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .film-detail-container {
+            display: flex;
+            max-width: 1200px;
+            width: 90%;
+            background-color: #1A1A1A;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .film-detail-overlay.active .film-detail-container {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .film-detail-left {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .film-detail-cover {
+            width: 100%;
+            aspect-ratio: 2/3;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .film-detail-info {
+            margin-top: 20px;
+        }
+
+        .film-detail-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .film-detail-meta {
+            display: flex;
+            margin-bottom: 15px;
+            color: #BBBBBB;
+            font-size: 14px;
+        }
+
+        .film-detail-year, .film-detail-upload {
+            margin-right: 20px;
+        }
+
+        .film-detail-description {
+            line-height: 1.6;
+            color: #DDDDDD;
+        }
+
+        .film-detail-right {
+            flex: 2;
+            position: relative;
+        }
+
+        .film-detail-player {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+        }
+
+        .film-player-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .film-detail-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1010;
+            transition: background-color 0.3s ease;
+        }
+
+        .film-detail-close:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .film-detail-close:before, .film-detail-close:after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 2px;
+            background-color: #FFF;
+        }
+
+        .film-detail-close:before {
+            transform: rotate(45deg);
+        }
+
+        .film-detail-close:after {
+            transform: rotate(-45deg);
+        }
+        
+        .cookie-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background-color: #1E1E1E;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            z-index: 900;
+            display: none;
+        }
+
+        .cookie-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .cookie-text {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            color: #DDDDDD;
+        }
+
+        .cookie-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .cookie-accept {
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            background-color: #0A84FF;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cookie-accept:hover {
+            background-color: #0071e3;
+        }
+
+        .cookie-more {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            align-self: center;
+        }
+
+        .cookie-more:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1024px) {
+            .film-detail-container {
+                flex-direction: column;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .film-detail-left {
+                display: flex;
+                flex-direction: row;
+                padding: 20px;
+            }
+
+            .film-detail-cover {
+                width: 40%;
+                max-width: 200px;
+            }
+
+            .film-detail-info {
+                margin-top: 0;
+                margin-left: 20px;
+                flex: 1;
+            }
+
+            .film-detail-right {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            .film-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 15px;
+            }
+
+            .film-detail-left {
+                flex-direction: column;
+            }
+
+            .film-detail-cover {
+                width: 100%;
+                max-width: none;
+            }
+
+            .film-detail-info {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+
+            .film-detail-right {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-container {
+                display: none;
+            }
+
+            .mobile-search-toggle {
+                display: block;
+                font-size: 20px;
+                color: #F5F5F5;
+                cursor: pointer;
+            }
+
+            .mobile-search-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                padding: 15px;
+                background-color: #1A1A1A;
+                z-index: 150;
+                display: none;
+            }
+
+            .mobile-search-container.active {
+                display: block;
+            }
+
+            .film-detail-overlay {
+                align-items: flex-end;
+            }
+
+            .film-detail-container {
+                width: 100%;
+                height: 90%;
+                border-radius: 15px 15px 0 0;
+            }
+
+        }
+  .loader {
+    border: 8px solid #333;
+    border-top: 8px solid #fff;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 30px auto;
+    display: none;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  #popupNotice {
+    margin-top: 20px;
+    color: #ffa500;
+    font-size: 14px;
+    display: none;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo">F</div>
+            <div class="brand-name">Filmfrei</div>
+        </div>
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Film suchen...">
+            <div class="search-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+            <div class="search-results"></div>
+        </div>
+        <div class="mobile-search-toggle" style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+        </div>
+    </header>
+<main>
+  <section>
+    <h2 class="section-title">Neueste Filme</h2>
+    <div class="film-grid" id="latest-films">
+
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Beliebte Filme</h2>
+    <div class="film-grid" id="popular-films">
+
+    </div>
+  </section>
+</main>
+
+<div class="film-detail-overlay">
+  <div class="film-detail-close"></div>
+  <div class="film-detail-container">
+    <div class="film-detail-left">
+      <img src="" alt="" class="film-detail-cover">
+      <div class="film-detail-info">
+        <h3 class="film-detail-title"></h3>
+        <div class="film-detail-meta">
+          <span class="film-detail-year"></span>
+          <span class="film-detail-upload"></span>
+        </div>
+        <p class="film-detail-description"></p>
+      </div>
+    </div>
+    <div class="film-detail-right">
+      <div id="loader" class="loader"></div>
+      <div id="popupNotice">🚫 Popup-Versuch wurde blockiert!</div>
+      <div class="film-detail-player">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cookie-banner">
+  <div class="cookie-title">Cookies gefällig?</div>
+  <div class="cookie-text">Diese Seite verwendet Cookies, um dein Erlebnis zu verbessern.</div>
+  <div class="cookie-actions">
+    <button class="cookie-accept">Verstanden</button>
+    <a href="/datenschutz.html" class="cookie-more">Mehr erfahren</a>
+  </div>
+</div>
+
+</div>
+
+    <script>
+
+        const filme = [
+   {
+    titel: "Mr No Pain",
+    jahr: 2025,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Ein sanftmütiger, Mann wird mit einer seltenen genetischen Störung geboren, die ihn unempfindlich gegen körperliche Schmerzen macht. Als sein neuer Verehrer bei einem Banküberfall als Geisel genommen wird, wird sein Leiden zu seiner Superkraft.",
+    cover: "https://musicart.xboxlive.com/7/8b066e00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/bsfjq6to2qpj"
+   },
+   {
+    titel: "The Whale",
+    jahr: 2022,
+    hochgeladenAm: "2025-04-29",
+    beschreibung: "Der frischgebackene Oscar®-Gewinner Brendan Fraser in der Rolle seines Lebens - THE WHALE von Kultregisseur Darren Aronofsky (REQUIEM FOR A DREAM).",
+    cover: "https://musicart.xboxlive.com/7/fc8f6600-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/4oqpjphbyxbc"
+  },
+              {
+    titel: "G20",
+    jahr: 2025,
+    hochgeladenAm: "2025-04-28",
+    beschreibung: "Die amtierende US-Präsidentin Danielle Sutton und ihre Familie reisen gemeinsam nach Südafrika. Dort nimmt Sutton am G20-Treffen in Kapstadt teil. Während der Veranstaltung dringen mehrere bewaffnete Terroristen in das Veranstaltungsgelände ein und nehmen zahlreiche Geiseln. Auch die Familie der US-Präsidentin wird als Geisel genommen. Ziel der Gruppe ist es, eine Neuordnung der Weltmärkte zu erzwingen. Daraufhin setzt Sutton alles daran, ihre Familie zu retten.",
+    cover: "https://images.plex.tv/photo?size=large-1920&scale=1&url=https%3A%2F%2Fmetadata-static.plex.tv%2F2%2Fgracenote%2F2142ee85bc02c10ef4077a31458f071c.jpg",
+    iframe: "https://supervideo.cc/e/5umr8xrz2zwt"
+  },
+              {
+    titel: "Titanic",
+    jahr: 1998,
+    hochgeladenAm: "2025-04-28",
+    beschreibung: "Wir beobachten das Leben der Reisenden auf dem zum Untergang verurteilten Luxus-Passagierschiff Titanic vor und während ihres tragischen Unfalls im Atlantischen Ozean.",
+    cover: "https://musicart.xboxlive.com/7/a2721100-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/0dy5bplmb9y0"
+  },
+            {
+    titel: "The Alto Knights",
+    jahr: 2025,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "In den 1950er-Jahren wetteifern die New Yorker Verbrecherbosse Frank Costello und Vito Genovese um die Kontrolle über die Straßen. Einst waren sie beste Freunde, doch Eifersüchteleien und ein Verrat bringen sie schließlich auf einen tödlichen Kollisionskurs. Nach einem Mordanschlag auf Costello, den er verletzt überlebt, soll mit dem Krieg Schluss sein. Er will die organisierte Kriminalität hinter sich lassen. Doch bei der Mafia kann man nicht einfach seine Kündigung einreichen.",
+    cover: "https://musicart.xboxlive.com/7/fb0b6e00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/fkrtc5xf499p"
+  },
+  {
+    titel: " Harry Potter und der Stein der Weisen",
+    jahr: 2001,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Basierend auf dem beliebten Buch von J.K. Rowling wird die Geschichte eines Waisenjungen erzählt, der an seinem elften Geburtstag herausfindet, dass seine Eltern zwei mächtige Zauberer waren und er selbst auch magische Kräfte besitzt. Er wird von einem unerwünschten Kind zum Schüler der Hogwarts Schule für Hexerei und Zauberei, wo er verschiedene Freunde trifft, die zu seinen engsten Verbündeten werden und ihm helfen, die Wahrheit über den mysteriösen Tod seiner Eltern herauszufinden.",
+    cover: "https://musicart.xboxlive.com/7/8fe05000-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/22ld3pzy8p0o"
+  },
+  {
+    titel: "A Working Man",
+    jahr: 2025,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Levon Cade gab seine erfolgreiche Militärkarriere im Geheimdienst auf, um ein einfaches Leben auf dem Bau zu führen. Doch als die Tochter seines Chefs, die für ihn wie eine Familie ist, von Menschenhändlern entführt wird, deckt seine Suche nach ihrer Rückkehr eine Welt der Korruption auf, die weit größer ist, als er es sich je hätte vorstellen können.",
+    cover: "https://musicart.xboxlive.com/7/5c0c6e00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/paoakbkcdlgk"
+  },
+  {
+    titel: "Der wilde Roboter",
+    jahr: 2024,
+    hochgeladenAm: "2025-04-28",
+    beschreibung: "In diesem sagenhaften Abenteuer strandet der Roboter ROZZUM der Einheit 7134, kurz „Roz\", nach einem Schiffbruch auf einer unbewohnten Insel und muss sich der rauen Umgebung anpassen. Dabei baut er allmählich Beziehungen zu den Tieren der Insel auf und wird zum Adoptivelternteil eines verwaisten Gänsekükens.",
+    cover: "https://musicart.xboxlive.com/7/25ef6d00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/6wg69l9rfcba"
+  },
+  {
+    titel: "Kraven the Hunter",
+    jahr: 2024,
+    hochgeladenAm: "2025-04-28",
+    beschreibung: "Kraven the Hunter ist die actiongeladene Entstehungsgeschichte eines der ikonischsten Bösewichte von Marvel. Aaron Taylor-Johnson spielt Kraven, einen Mann, dessen komplexe Beziehung zu seinem skrupellosen Vater Nikolai Kravinoff (Russell Crowe) ihn auf einen brutalen Rachefeldzug führt, der ihn nicht nur zum größten, sondern auch zum gefürchtetsten Jäger der Welt macht.",
+    cover: "https://musicart.xboxlive.com/7/17036e00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/ei2kk2fvr6of"
+  },
+  {
+    titel: "Dune",
+    jahr: 2021,
+    hochgeladenAm: "2025-04-28",
+    beschreibung: "„Dune“ erzählt von Paul Atreides, einem jungen Mann, der zu Höherem bestimmt ist und der sich zum gefährlichsten Planeten des Universums begibt, um die Zukunft seines Volkes zu sichern.",
+    cover: "https://musicart.xboxlive.com/7/f3f05100-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/v032z3os5ec6"
+  },
+  {
+    titel: "Dune: Part Two",
+    jahr: 2024,
+    hochgeladenAm: "2025-04-28",
+    beschreibung: "Die mythische Reise von Paul Artreides, der gemeinsam mit Chani und den Fremen kämpft, um eine schreckliche Zukunft zu verhindern, die nur er vorhersehen kann.",
+    cover: "https://musicart.xboxlive.com/7/249f6a00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/w2h67akg0ncg"
+  },
+  {
+    titel: "Cinderellas Curse – Eine blutrote Nacht",
+    jahr: 2024,
+    hochgeladenAm: "2025-04-28",
+    beschreibung: "Aschenputtel beschwört ihre gute Fee aus einem alten, in Fleisch gebundenen Buch, um sich an ihren bösen Stiefschwestern und ihrer Stiefmutter zu rächen, die sie täglich misshandeln.",
+    cover: "https://musicart.xboxlive.com/7/6f326b00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/jtjrcfeizx4s"
+  },
+  {
+    titel: "Mickey 17",
+    jahr: 2025,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Der Oscar-prämierte Autor und Regisseur von „Parasite“, Bong Joon Ho, präsentiert sein nächstes bahnbrechendes Kinoerlebnis: Mickey 17. Der Held wider willen, Mickey Barnes (Robert Pattinson), befindet sich in einer misslichen Lage. Denn sein Arbeitgeber verlangt vollen Einsatz im Job. Für seinen Lebensunterhalt soll Mickey nicht weniger als ... sterben.",
+    cover: "https://musicart.xboxlive.com/7/690c6e00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/tzz2xbjjgquv"
+  },
+  {
+    titel: "Mufasa – Der König der Löwen",
+    jahr: 2024,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Erlebe die epische Geschichte des außergewöhnlichen Aufstiegs des geliebten Königs des Geweihten Landes. Der verwaiste Mufasa ist verloren und allein, bis er auf Taka, den Erben einer königlichen Blutlinie, trifft. Dies ist der Beginn einer sagenhaften Reise, welche die Verbundenheit der beiden auf die Probe stellt als sie sich einem tödlichen Feind gegenübersehen.",
+    cover: "https://musicart.xboxlive.com/7/94026e00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/ul06g4kt13rz"
+  },
+  {
+    titel: "Captain America: Brave New World",
+    jahr: 2025,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Als er die Rolle des Captain America übernimmt, findet sich Sam Wilson bald inmitten eines internationalen Konflikts wieder. In einem Wettlauf gegen die Zeit muss Sam ein hinterhältiges, globales Komplott aufdecken, bevor der wahre Drahtzieher die gesamte Welt rot sehen lässt. WARNUNG: Einige Sequenzen enthalten Blitzlicht-Effekte, die sich auf lichtempfindliche Zuschauer auswirken können.",
+    cover: "https://musicart.xboxlive.com/7/3d0c6e00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/pwtup6twkunn"
+  },
+  {
+    titel: "Deadpool & Wolverine",
+    jahr: 2024,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Die Marvel Studios präsentieren ihren bisher größten Fehler. Seine Tage als Deadpool liegen hinter ihm, ein lustloser Wade Wilson schuftet im zivilen Leben. Doch als seine Heimat bedroht wird, zieht er widerwillig los, um Wolverine zu überzeugen ... was zur Hölle, einfach anschauen! WARNUNG: Einige Sequenzen enthalten Blitzlicht-Effekte, die sich auf lichtempfindliche Zuschauer auswirken können.",
+    cover: "https://musicart.xboxlive.com/7/7e206d00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/v5zmpvaxj3r7"
+  },
+  {
+    titel: "Phantastische Tierwesen und wo sie zu finden sind",
+    jahr: 2016,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Magizoologe Newt Scamanders Zauberwesen werden 1926 in New York unbeabsichtigt freigelassen, wo die Zauberer gefährdet sind, gegenüber No-Majs enttarnt zu werden, die sie töten wollen.",
+    cover: "https://musicart.xboxlive.com/7/6b3b3c00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/el809ncrir1u"
+  },
+  {
+    titel: "Phantastische Tierwesen: Grindelwalds Verbrechen",
+    jahr: 2018,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Professor Dumbledore beruft Newt Scamander für den Kampf gegen den Dunklen Zauberer Grindelwald ein, dessen Plan, die Muggelwelt zu unterwerfen, die Zauberwelt zu spalten droht.",
+    cover: "https://musicart.xboxlive.com/7/f1ed5000-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/mqmw2zf8e0g5"
+  },
+  {
+    titel: "Phantastische Tierwesen: Dumbledores Geheimnisse",
+    jahr: 2022,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Dumbledore beauftragt Newt Scamander damit, eine Gruppe Zauberer, Hexen und einen tapferen Muggel-Bäcker auf einer gefährlichen Mission anzuführen, um Grindelwald aufzuhalten.",
+    cover: "https://musicart.xboxlive.com/7/a0575e00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/m5ndmnoxj7j3"
+  },
+  {
+    titel: "Deadpool",
+    jahr: 2016,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Die Geschichte von Wade Wilson, der das Alter Ego Deadpool annimmt.",
+    cover: "https://musicart.xboxlive.com/7/3fd52800-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/43ywqd5se6lg"
+  },
+              {
+    titel: "IF: Imaginäre Freunde",
+    jahr: 2024,
+    hochgeladenAm: "2025-04-29",
+    beschreibung: "Ein Mädchen, das imaginäre Freunde sehen kann, geht auf eine magische Reise, um diese sogenannten IFs mit ihren Kindern zusammenzubringen. Ein Abenteuer, das man glauben muss, um es zu sehen - perfekt für die ganze Familie.",
+    cover: "https://musicart.xboxlive.com/7/f2656b00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/7fo5nqk9uo9a"
+  },
+  {
+    titel: "Panda Plan",
+    jahr: 2024,
+    hochgeladenAm: "2025-04-29",
+    beschreibung: "Nachdem der legendäre Kung-Fu-Star Jackie Chan einen Zoopanda adoptiert hat, plant ein internationaler Verbrecherring die Entführung seines pelzigen Freundes. Chan muss sich mit seinem Agenten und dem Pfleger des Pandas zusammentun, um die Bösewichte auf Schritt und Tritt auszutricksen – und auszutricksen.",
+    cover: "https://musicart.xboxlive.com/7/e0fd6d00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/zoql14ut78ri"
+  },
+  {
+    titel: "Deadpool 2",
+    jahr: 2018,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Die Fortsetzung des ersten Teils.",
+    cover: "https://musicart.xboxlive.com/7/19ba5000-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/20teynm34h8r"
+  },
+  {
+    titel: "Smile",
+    jahr: 2022,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Nachdem Dr. Rose Cotter (Sosie Bacon) Zeugin eines bizarren, traumatischen Patientenvorfalls geworden ist, erlebt sie schreckliche Visionen. Als die Grenzen zwischen Realität und Realität verschwimmen und Albträume verschwimmen, Rose muss sich ihrer beunruhigenden Vergangenheit stellen, um ihrer erschreckenden neuen Realität zu entkommen.",
+    cover: "https://musicart.xboxlive.com/7/fa866200-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/v137l98tvsyj"
+  },
+  {
+    titel: "Smile 2 - Siehst Du Es Auch?",
+    jahr: 2024,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Kurz vor ihrer Welttournee erlebt die globale Popsensation Skye Riley (Naomi Scott) zunehmend beängstigende und unerklärliche Ereignisse. Skye muss sich ihrer dunklen Vergangenheit stellen bevor ihr Leben vollends außer Kontrolle gerät.",
+    cover: "https://musicart.xboxlive.com/7/7bf56d00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/ob5bxga7afa6"
+  },
+  {
+    titel: "Alles steht Kopf 2",
+    jahr: 2024,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Disney und Pixars „Alles steht Kopf 2“ kehrt in den Kopf des frischgebackenen Teenagers Riley zurück, gerade als die Kommandozentrale umgebaut wird, um Platz für etwas völlig Unerwartetes zu schaffen: neue Emotionen! Freude, Kummer, Wut, Angst und Ekel sind sich nicht sicher, wie sie sich fühlen sollen, als Zweifel und ihre Freunde plötzlich auftauchen.",
+    cover: "https://musicart.xboxlive.com/7/de476c00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/f10suq1jhtrs"
+  },
+  {
+    titel: "Alles steht Kopf",
+    jahr: 2015,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Großwerden kann eine ganz schöne Herausforderung sein – auch für Riley, die aus ihrem Leben im Mittleren Westen gerissen wird, als ihr Vater einen Neustart in San Francisco wagt. Wie wir alle wird Riley von ihren Gefühlen gesteuert – Freude, Angst, Wut, Ekel und Kummer. Die Gefühle leben in der Kommandozentrale in Rileys Kopf. Dort stehen sie ihr im Alltag mit Rat und Tat zur Seite.",
+    cover: "https://musicart.xboxlive.com/7/dffd1d00-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/x95145lezzxt"
+  },
+  {
+    titel: "Der König der Löwen",
+    jahr: 1994,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Begleite Simba, ein Löwenbaby, das es kaum erwarten kann, endlich König zu werden, auf eine außergewöhnliche Reise. Großartiges Meisterwerk über das Erwachsenwerden und den ewigen Kreis des Lebens.",
+    cover: "https://musicart.xboxlive.com/7/7f1b3600-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/wymv6w0cw1dz"
+  },
+  {
+    titel: "Der König der Löwen 2 − Simbas Königreich",
+    jahr: 1998,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Dieses letzte Kapitel der „König der Löwen“-Sammlung wird alle begeistern! Kiara, Simbas eigensinnige Tochter, ist auf der Suche nach Abenteuern abseits väterlicher Fürsorge und begibt sich auf die Suche nach ihrem Platz im ewigen Kreis.",
+    cover: "https://musicart.xboxlive.com/7/251e3600-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/g7xyk2tryrob"
+  },
+  {
+    titel: "Der König der Löwen 3 − Hakuna Matata",
+    jahr: 2004,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "In diesem herrlichen Comedy-Abenteuer reisen Sie in die Vergangenheit zurück, lange bevor Simbas Geschichte ihren Anfang nahm. Timon und Pumbaa erzählen aus ihrer Sicht, was wirklich hinter den Kulissen der Ereignisse von „König der Löwen“ geschah.",
+    cover: "https://musicart.xboxlive.com/7/281e3600-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/hcikkq07ydgd"
+  },
+  {
+    titel: "Harry Potter und die Kammer des Schreckens",
+    jahr: 2002,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Fliegende Autos, gemeingefährliche Bäume und die Warnung eines mysteriösen Hauselfen - so beginnt für Hary Potter das zweite Schuljahr in der faszinierenden Welt der Zauberei. Dieses Jahr in Hogwarts trifft Harry auf sprechende Spinnen und schimpfende Briefe, und wegen seiner besonderen Fähigkeit, mit Schlangen zu sprechen, wenden sich sogar seine Freunde von ihm ab. Der Aufenhalt in Hogwarts ist voller Abenteuer und Gefahren.",
+    cover: "https://musicart.xboxlive.com/7/09e15000-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/679v341zkwgs"
+  },
+  {
+    titel: "Harry Potter und der Gefangene von Askaban",
+    jahr: 2004,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Während die abscheuliche Tante Magda über den Nachthimmel schwebt, kehrt Harry nach Hogwarts zurück, um sein drittes Ausbildungsjahr zu beginnen. Eine haarsträubende Busreise im Fahrenden Ritter bringt ihn zur Winkelgasse, wo er erfährt, dass der flüchtige Sträfling Sirius Black hinter ihm her ist. So beginnt das neue Schuljahr.",
+    cover: "https://musicart.xboxlive.com/7/12e15000-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/bzt8echkh7a6"
+  },
+  {
+    titel: "Harry Potter und der Feuerkelch",
+    jahr: 2005,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Das große Abenteuer beginnt, als der Feuerkelch Harry Potters Namen freigibt und Harry damit Teilnehmer eines gefährlichen Wettbewerbs unter drei ruhmreichen Zauberschulen wird - des Trimagischen Turniers. Wer aber könnte Harrys Namen in den Feuerkelch geworfen haben? Jetzt muss er einen gefährlichen Drachen bezwingen, mit gespenstischen Wasserdämonen kämpfen und einem verzauberten Labyrinth entkommen.",
+    cover: "https://musicart.xboxlive.com/7/1be15000-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/5hnxu5ck3cgj"
+  },
+  {
+    titel: " Harry Potter und der Orden des Phönix",
+    jahr: 2007,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Lord Voldemort ist zurückgekehrt. Harry, Ron, Hermine bilden ausgewählte Schüler, um sie auf bevorstehenden Krieg in ihrer Welt vorzubereiten.",
+    cover: "https://musicart.xboxlive.com/7/23e15000-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/z1e99cgks2dm"
+  },
+  {
+    titel: "Harry Potter und der Halbblutprinz",
+    jahr: 2009,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Voldemorts Rückkehr werden Todesser aggressiv und nicht nur Muggel-Welt, sondern auch Welt Zauberer ins-sogar in Hogwarts ist man nicht mehr so sicher wie früher.",
+    cover: "https://musicart.xboxlive.com/7/2be15000-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/feomqxpq8wtq"
+  },
+  {
+    titel: "Harry Potter und die Heiligtümer des Todes: Teil 1",
+    jahr: 2010,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Harry, Ron und Hermine übernehmen gefährliche Aufgabe, Geheimnis von Voldemorts Unsterblichkeit aufzuspüren und zu zerstören: Horkruxe.",
+    cover: "https://musicart.xboxlive.com/7/33e15000-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/lvtnckcth52j"
+  },
+  {
+    titel: "Harry Potter und die Heiligtümer des Todes: Teil 2",
+    jahr: 2011,
+    hochgeladenAm: "2025-04-26",
+    beschreibung: "Im großen Finale weitet sich der Kampf Gut gegen Böse in der Welt der Zauberer zu einem regelrechten Krieg aus. Niemals stand derart viel auf dem Spiel - niemand ist mehr sicher.",
+    cover: "https://musicart.xboxlive.com/7/3ee15000-0000-0000-0000-000000000002/504/image.jpg",
+    iframe: "https://supervideo.cc/e/67f2q8d8r6wi"
+  }
+  ];
+
+        const latestFilmsContainer = document.getElementById('latest-films');
+        const popularFilmsContainer = document.getElementById('popular-films');
+        const searchInput = document.querySelector('.search-input');
+        const searchResults = document.querySelector('.search-results');
+        const filmDetailOverlay = document.querySelector('.film-detail-overlay');
+        const filmDetailClose = document.querySelector('.film-detail-close');
+        const cookieBanner = document.querySelector('.cookie-banner');
+        const cookieAccept = document.querySelector('.cookie-accept');
+
+        const sortedByDate = [...filme].sort((a, b) => new Date(b.hochgeladenAm) - new Date(a.hochgeladenAm));
+
+        const randomized = [...filme].sort(() => Math.random() - 0.5);
+
+        function createFilmCard(film) {
+            const card = document.createElement('div');
+            card.classList.add('film-card');
+            card.innerHTML = `
+                <img src="${film.cover}" alt="${film.titel}">
+                <div class="film-info">
+                    <div class="film-title">${film.titel}</div>
+                    <div class="film-year">${film.jahr}</div>
+                </div>
+            `;
+            card.addEventListener('click', () => openFilmDetail(film));
+            return card;
+        }
+
+        sortedByDate.slice(0, 4).forEach(film => {
+            latestFilmsContainer.appendChild(createFilmCard(film));
+        });
+
+        randomized.slice(0, 8).forEach(film => {
+            popularFilmsContainer.appendChild(createFilmCard(film));
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            if (searchTerm.length < 2) {
+                searchResults.classList.remove('active');
+                return;
+            }
+
+            const matchedFilms = filme.filter(film => 
+                film.titel.toLowerCase().includes(searchTerm) || 
+                film.beschreibung.toLowerCase().includes(searchTerm)
+            );
+
+            searchResults.innerHTML = '';
+            
+            if (matchedFilms.length > 0) {
+                matchedFilms.forEach(film => {
+                    const resultItem = document.createElement('div');
+                    resultItem.classList.add('search-result-item');
+                    resultItem.textContent = film.titel;
+                    resultItem.addEventListener('click', () => {
+                        openFilmDetail(film);
+                        searchResults.classList.remove('active');
+                        searchInput.value = '';
+                    });
+                    searchResults.appendChild(resultItem);
+                });
+                searchResults.classList.add('active');
+            } else {
+                searchResults.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                searchResults.classList.remove('active');
+            }
+        });
+
+        function openFilmDetail(film) {
+            const coverImg = filmDetailOverlay.querySelector('.film-detail-cover');
+            const title = filmDetailOverlay.querySelector('.film-detail-title');
+            const year = filmDetailOverlay.querySelector('.film-detail-year');
+            const upload = filmDetailOverlay.querySelector('.film-detail-upload');
+            const description = filmDetailOverlay.querySelector('.film-detail-description');
+            const player = filmDetailOverlay.querySelector('.film-detail-player');
+
+            coverImg.src = film.cover;
+            coverImg.alt = film.titel;
+            title.textContent = film.titel;
+            year.textContent = `Jahr: ${film.jahr}`;
+
+            const uploadDate = new Date(film.hochgeladenAm);
+            const formattedDate = new Intl.DateTimeFormat('de-DE', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            }).format(uploadDate);
+            upload.textContent = `Hochgeladen: ${formattedDate}`;
+            
+            description.textContent = film.beschreibung;
+player.innerHTML = `
+    <iframe id="videoFrame" src="${film.iframe}" 
+        title="Filmplayer für ${film.titel}"
+        sandbox="allow-scripts allow-same-origin allow-presentation" 
+        allowfullscreen 
+        style="width: 100%; height: 100%; border: none; border-radius: 12px;">
+    </iframe>
+`;
+
+const iframe = document.getElementById('videoFrame');
+const loader = document.getElementById('loader');
+const popupNotice = document.getElementById('popupNotice');
+
+loader.style.display = 'block';
+
+iframe.onload = () => {
+    loader.style.display = 'none';
+    try {
+        iframe.contentWindow.open = function() {
+            popupNotice.style.display = 'block';
+            console.warn('Popup-Versuch wurde geblockt!');
+            return null;
+        };
+    } catch (e) {
+        console.warn('Cross-Origin-Schutz: window.open konnte nicht überschrieben werden.');
+    }
+};
+
+            filmDetailOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        filmDetailClose.addEventListener('click', closeFilmDetail);
+        filmDetailOverlay.addEventListener('click', (e) => {
+            if (e.target === filmDetailOverlay) {
+                closeFilmDetail();
+            }
+        });
+
+        function closeFilmDetail() {
+            filmDetailOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            const player = filmDetailOverlay.querySelector('.film-detail-player');
+            player.innerHTML = '';
+        }
+
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        filmDetailOverlay.addEventListener('touchstart', (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+        }, false);
+
+        filmDetailOverlay.addEventListener('touchend', (e) => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            const swipeDistance = touchEndY - touchStartY;
+            if (swipeDistance > 100) {
+                closeFilmDetail();
+            }
+        }
+
+        if (!localStorage.getItem('cookiesAccepted')) {
+            cookieBanner.style.display = 'block';
+        }
+
+        cookieAccept.addEventListener('click', () => {
+            localStorage.setItem('cookiesAccepted', 'true');
+            cookieBanner.style.display = 'none';
+        });
+
+        const mobileSearchToggle = document.querySelector('.mobile-search-toggle');
+        const mobileSearchContainer = document.querySelector('.mobile-search-container');
+
+        if (mobileSearchToggle) {
+            mobileSearchToggle.addEventListener('click', () =>{
+    mobileSearchContainer.classList.toggle('active');
+});
+
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.mobile-search-container') && 
+        !e.target.closest('.mobile-search-toggle')) {
+        mobileSearchContainer.classList.remove('active');
+    }
+});
+
+const mobileSearchInput = mobileSearchContainer.querySelector('.search-input');
+mobileSearchInput.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+
+    const allFilmCards = document.querySelectorAll('.film-card');
+    
+    allFilmCards.forEach(card => {
+        const title = card.querySelector('.film-title').textContent.toLowerCase();
+        if (searchTerm.length > 1 && title.includes(searchTerm)) {
+            card.style.display = 'block';
+        } else if (searchTerm.length > 1) {
+            card.style.display = 'none';
+        } else {
+            card.style.display = 'block';
+        }
+    });
+});
+}
+
+if ('IntersectionObserver' in window) {
+    const lazyImages = document.querySelectorAll('img');
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src || img.src;
+                observer.unobserve(img);
+            }
+        });
+    });
+
+    lazyImages.forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
+const mainElement = document.querySelector('main');
+let gradientPosition = 0;
+
+function animateGradient() {
+    gradientPosition = (gradientPosition + 0.2) % 360;
+    const gradient = `radial-gradient(circle at ${50 + Math.sin(gradientPosition * Math.PI / 180) * 10}% ${50 + Math.cos(gradientPosition * Math.PI / 180) * 10}%, rgba(10, 132, 255, 0.03), transparent 60%)`;
+    mainElement.style.backgroundImage = gradient;
+    requestAnimationFrame(animateGradient);
+}
+
+animateGradient();
+    </script>
+<footer>
+    © 2025 Filmfrei – Alle Rechte vorbehalten
+  </footer>
+</body>
+</html>
