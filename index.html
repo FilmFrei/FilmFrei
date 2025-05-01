@@ -1,5 +1,381 @@
 <!doctypehtml><html lang="de"><meta charset="UTF-8"><meta content="width=device-width,initial-scale=1"name="viewport"><title>Filmfrei: Filme genießen – ganz ohne Werbung</title><link href="https://cdn.plyr.io/3.7.8/plyr.css"rel="stylesheet"><script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script><script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}body{background-color:#121212;color:#f5f5f5;overflow-x:hidden;padding-top:70px}header{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;padding:20px 40px;background-color:rgba(18,18,18,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100;border-bottom:1px solid rgba(255,255,255,.05)}.logo-container{display:flex;align-items:center;gap:15px}.logo{width:40px;height:40px;background-color:#0a84ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;box-shadow:0 0 10px rgba(10,132,255,.3);transition:all .3s ease}.logo:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(10,132,255,.5)}.brand-name{font-size:24px;font-weight:600;letter-spacing:-.5px}.search-container{position:relative;max-width:300px;width:100%}.search-input{width:100%;padding:10px 40px 10px 15px;border-radius:20px;border:none;background-color:#1e1e1e;color:#f5f5f5;font-size:16px;transition:all .3s ease}.search-input:focus{outline:0;background-color:#2a2a2a;box-shadow:0 0 0 2px rgba(10,132,255,.5)}.search-icon{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:#999;pointer-events:none}.search-results{position:absolute;top:50px;width:100%;background-color:#1a1a1a;border-radius:12px;max-height:0;overflow:hidden;transition:max-height .3s ease;box-shadow:0 5px 20px rgba(0,0,0,.3);z-index:200}.search-results.active{max-height:300px;overflow-y:auto}.search-result-item{padding:12px 15px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05)}.search-result-item:hover{background-color:#2a2a2a}main{padding:40px}.section-title{font-size:22px;font-weight:600;margin-bottom:20px;color:#f5f5f5}.film-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:25px;margin-bottom:40px}.film-card{position:relative;border-radius:12px;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;cursor:pointer;aspect-ratio:2/3;background-color:#1a1a1a}.film-card:hover{transform:scale(1.03) translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.4)}.film-card img{width:100%;height:100%;object-fit:cover;transition:opacity .3s ease}.film-info{position:absolute;bottom:0;left:0;width:100%;padding:60px 15px 15px;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);opacity:0;transition:opacity .3s ease}.film-card:hover .film-info{opacity:1}.film-title{font-size:16px;font-weight:500;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.film-year{font-size:14px;color:#bbb}.film-detail-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}.film-detail-overlay.active{opacity:1;visibility:visible}.film-detail-container{display:flex;max-width:1200px;width:90%;background-color:#1a1a1a;border-radius:15px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.5);transform:translateY(30px);opacity:0;transition:transform .4s ease,opacity .4s ease}.film-detail-overlay.active .film-detail-container{transform:translateY(0);opacity:1}.film-detail-left{flex:1;padding:30px}.film-detail-cover{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.3)}.film-detail-info{margin-top:20px}.film-detail-title{font-size:24px;font-weight:600;margin-bottom:10px}.film-detail-meta{display:flex;margin-bottom:15px;color:#bbb;font-size:14px}.film-detail-upload,.film-detail-year{margin-right:20px}.film-detail-description{line-height:1.6;color:#ddd}.film-detail-right{flex:2;position:relative}.film-detail-player{width:100%;height:100%;background-color:#000}.film-player-iframe{width:100%;height:100%;border:none}.film-detail-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;background-color:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:1010;transition:background-color .3s ease}.film-detail-close:hover{background-color:rgba(255,255,255,.2)}.film-detail-close:after,.film-detail-close:before{content:'';position:absolute;width:18px;height:2px;background-color:#fff}.film-detail-close:before{transform:rotate(45deg)}.film-detail-close:after{transform:rotate(-45deg)}.cookie-banner{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);width:90%;max-width:400px;background-color:#1e1e1e;border-radius:12px;padding:20px;box-shadow:0 5px 20px rgba(0,0,0,.4);z-index:900;display:none}.cookie-title{font-size:18px;font-weight:600;margin-bottom:10px}.cookie-text{font-size:14px;line-height:1.5;margin-bottom:15px;color:#ddd}.cookie-actions{display:flex;justify-content:space-between}.cookie-accept{padding:10px 20px;border-radius:20px;border:none;background-color:#0a84ff;color:#fff;font-weight:500;cursor:pointer;transition:background-color .3s ease}.cookie-accept:hover{background-color:#0071e3}.cookie-more{color:#999;text-decoration:none;font-size:14px;align-self:center}.cookie-more:hover{text-decoration:underline}@media (max-width:1024px){.film-detail-container{flex-direction:column;max-height:90vh;overflow-y:auto}.film-detail-left{display:flex;flex-direction:row;padding:20px}.film-detail-cover{width:40%;max-width:200px}.film-detail-info{margin-top:0;margin-left:20px;flex:1}.film-detail-right{height:400px}}@media (max-width:768px){header{padding:15px 20px}main{padding:20px}.film-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:15px}.film-detail-left{flex-direction:column}.film-detail-cover{width:100%;max-width:none}.film-detail-info{margin-left:0;margin-top:20px}.film-detail-right{height:300px}}@media (max-width:480px){.search-container{display:none}.mobile-search-toggle{display:block;font-size:20px;color:#f5f5f5;cursor:pointer}.mobile-search-container{position:fixed;top:0;left:0;width:100%;padding:15px;background-color:#1a1a1a;z-index:150;display:none}.mobile-search-container.active{display:block}.film-detail-overlay{align-items:flex-end}.film-detail-container{width:100%;height:90%;border-radius:15px 15px 0 0}}.loader{border:8px solid #333;border-top:8px solid #fff;border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;margin:30px auto;display:none}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}#popupNotice{margin-top:20px;color:orange;font-size:14px;display:none;text-align:center}.alert{margin:20px auto;max-width:700px;background-color:#3a1a1a;color:#fff1f1;padding:15px 20px;border-radius:10px;font-size:14px;box-shadow:0 4px 10px rgba(0,0,0,.3);position:relative;text-align:center}.closebtn{position:absolute;right:15px;top:12px;font-size:20px;cursor:pointer;color:#fff;font-weight:700}</style><div class="alert"> <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> <center> <strong>Liebe FilmFrei-User,</strong><br> Wenn Filmcover nicht angezeigt werden, liegt das **nicht an euren DNS-Einstellungen**, sondern entweder an **Google Chrome** oder an **Adblockern** wie <strong>uBlock Origin</strong> oder <strong>uBlock Origin Lite</strong> – diese blockieren manchmal externe Bildquellen.<br> <strong>Schon gewusst?</strong> Unsere Seite läuft **auch ohne Adblocker** einwandfrei – wir zeigen **keine Werbung**. 😉<br> <strong>Danke für euer Vertrauen – euer FilmFrei-Team</strong></center></div><header><div class="logo-container"><div class="logo">F</div><div class="brand-name">Filmfrei</div></div><div class="search-container"><input class="search-input"placeholder="Film suchen..."><div class="search-icon"><svg fill="none"height="16"stroke="currentColor"stroke-linecap="round"stroke-linejoin="round"stroke-width="2"viewBox="0 0 24 24"width="16"xmlns="http://www.w3.org/2000/svg"><circle cx="11"cy="11"r="8"></circle><line x1="21"x2="16.65"y1="21"y2="16.65"></line></svg></div><div class="search-results"></div></div><div class="mobile-search-toggle"style="display:none"><svg fill="none"height="24"stroke="currentColor"stroke-linecap="round"stroke-linejoin="round"stroke-width="2"viewBox="0 0 24 24"width="24"xmlns="http://www.w3.org/2000/svg"><circle cx="11"cy="11"r="8"></circle><line x1="21"x2="16.65"y1="21"y2="16.65"></line></svg></div></header><main><section><h2 class="section-title">Neueste Filme</h2><div class="film-grid"id="latest-films"></div></section><section><h2 class="section-title">Alle Filme</h2><div class="film-grid"id="film-liste"></div></section></main><div class="film-detail-overlay"><div class="film-detail-close"></div><div class="film-detail-container"><div class="film-detail-left"><img alt=""class="film-detail-cover"src=""><div class="film-detail-info"><h3 class="film-detail-title"></h3><div class="film-detail-meta"><span class="film-detail-year"></span> <span class="film-detail-upload"></span></div><p class="film-detail-description"></div></div><div class="film-detail-right"><div class="loader"id="loader"></div><div id="popupNotice">🚫 Popup-Versuch wurde blockiert!</div><div class="film-detail-player"></div></div></div></div><div class="cookie-banner"><div class="cookie-title">Cookies gefällig?</div><div class="cookie-text">Diese Seite verwendet Cookies, um dein Erlebnis zu verbessern.</div><div class="cookie-actions"><button class="cookie-accept">Verstanden</button> <a class="cookie-more"href="https://filmfrei.github.io/FilmFrei-Datenschutz/">Mehr erfahren</a></div></div><script>const filme = 
             [
+                          {
+    titel: "Johnny English",
+    jahr: 2003,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Ein größenwahnsinniger Bösewicht bedroht die Monarchie – Zeit für Johnny English, den (nicht ganz so perfekten) Geheimagenten mit Charme, Chaos und Chuzpe.",
+    cover: "https://filmpalast.to/files/movies/450/johnny-english.jpg",
+    iframe: "https://voe.sx/e/5utse8i3xggd"
+  },
+  {
+    titel: "Johnny English - Man lebt nur dreimal",
+    jahr: 2018,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Als ein Hacker alle Agenten enttarnt, wird Johnny English reaktiviert – ausgerechnet er, der keine Ahnung von Technik hat. Mit alten Methoden und viel Chaos rettet er erneut Großbritannien.",
+    cover: "https://filmpalast.to/files/movies/450/johnny-english-man-lebt-nur-dreimal.jpg",
+    iframe: "https://voe.sx/e/4pt6q3erbh86"
+  },
+  {
+    titel: "Johnny English - Jetzt erst recht",
+    jahr: 2011,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Nach einem Rückzug in die Berge wird Johnny English für eine neue Mission zurückgeholt – er soll den chinesischen Premier retten und einen Krieg verhindern. Mit Kampfkunst und Chaos geht’s los!",
+    cover: "https://filmpalast.to/files/movies/450/johnny-english-jetzt-erst-recht.jpg",
+    iframe: "https://voe.sx/e/pwo8o06uaxus"
+  },
+  {
+    titel: "Jurassic World",
+    jahr: 2015,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "20 Jahre nach dem Chaos auf Isla Nublar öffnet der Dino-Park wieder – mit einem neuen, genetisch erschaffenen Super-Dino. Doch der bricht aus und das Grauen beginnt von vorn.",
+    cover: "https://filmpalast.to/files/movies/450/jurassic-world.jpg",
+    iframe: "https://voe.sx/e/qqz25cf1enaf"
+  },
+  {
+    titel: "Jurassic World 2: Das gefallene Königreich",
+    jahr: 2018,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Ein Vulkan droht die Isla Nublar zu zerstören – Owen und Claire kehren zurück, um die Dinos zu retten. Doch hinter der Mission steckt mehr als nur Tierschutz.",
+    cover: "https://filmpalast.to/files/movies/450/jurassic-world-2-das-gefallene-konigreich.jpg",
+    iframe: "https://voe.sx/e/yso8oesqi1zy"
+  },
+  {
+    titel: "Jurassic World: Ein neues Zeitalter",
+    jahr: 2022,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Dinos und Menschen teilen sich nun die Welt – doch das fragile Gleichgewicht droht zu kippen. Owen, Claire und alte Bekannte kämpfen ums Überleben und die Zukunft des Planeten.",
+    cover: "https://filmpalast.to/files/movies/450/jurassic-world-ein-neues-zeitalter.jpg",
+    iframe: "https://voe.sx/e/zpsyw2ecq1nk"
+  },
+  {
+    titel: "LEGO Jurassic Park: The Unofficial Retelling",
+    jahr: 2024,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Dr. Ian Malcolm blickt zurück auf das Dino-Chaos im Freizeitpark – erzählt mit jeder Menge Witz, Action und 65 Millionen LEGO-Steinen.",
+    cover: "https://filmpalast.to/files/movies/450/lego-jurassic-park-the-unofficial-retelling.jpg",
+    iframe: "https://voe.sx/e/dgezphbdzynu"
+  },
+  {
+    titel: "Jurassic Park III",
+    jahr: 2001,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Dr. Grant kehrt widerwillig auf eine zweite Dino-Insel zurück – angeblich für eine Rettungsmission. Doch bald wird klar: Hier jagen nicht nur sie, sondern vor allem die Saurier.",
+    cover: "https://filmpalast.to/files/movies/450/jurassic-park-iii.jpg",
+    iframe: "https://voe.sx/e/3fk6syonlg7v"
+  },
+  {
+    titel: "Vergessene Welt: Jurassic Park",
+    jahr: 1997,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Auf Insel Sorna sollen Dinos erforscht werden – doch als Jäger auftauchen, bricht Chaos aus. Bald werden die Jäger zu Gejagten, und das Abenteuer endet mitten in San Diego.",
+    cover: "https://filmpalast.to/files/movies/450/vergessene-welt-jurassic-park.jpg",
+    iframe: "https://voe.sx/e/16f4n9x6q263"
+  },
+  {
+    titel: "Jurassic Park",
+    jahr: 1993,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Ein Besuch im Jurassic Park wird zum Albtraum, als der Strom ausfällt und die Dinos ausbrechen. Jetzt beginnt ein gnadenloser Überlebenskampf.",
+    cover: "https://filmpalast.to/files/movies/450/jurassic-park.jpg",
+    iframe: "https://voe.sx/e/zrjn5bpn6aum"
+  },
+  {
+    titel: "Planet B",
+    jahr: 2024,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Nach einem Anschlag erwacht Julia in PLANET B – einem digitalen Albtraum, aus dem es kein Entkommen zu geben scheint. Während sie um ihr Leben kämpft, kommt Journalistin Nour der Wahrheit näher.",
+    cover: "https://filmpalast.to/files/movies/450/planet-b.jpg",
+    iframe: "https://voe.sx/e/66rtwarssnsl"
+  },
+  {
+    titel: "Exterritorial",
+    jahr: 2025,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Als ihr Sohn im US-Konsulat verschwindet, startet Ex-Soldatin Sara eine gnadenlose Suche – und deckt dabei eine tödliche Verschwörung auf.",
+    cover: "https://filmpalast.to/files/movies/450/exterritorial.jpg",
+    iframe: "https://voe.sx/e/skugqkigyjw8"
+  },
+  {
+    titel: "The Portable Door",
+    jahr: 2023,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Paul tritt einen neuen Bürojob an – und landet mitten in einer magischen Firma voller Geheimnisse. Gemeinsam mit Sophie und einem Zauberhandtuch deckt er dunkle Machenschaften auf.",
+    cover: "https://filmpalast.to/files/movies/450/the-portable-door.jpg",
+    iframe: "https://voe.sx/e/3xzdlwcntzin"
+  },
+  {
+    titel: "American Zombieland - Angriff der Fettarsch-Zombies",
+    jahr: 2020,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Ein Möchtegern-Regisseur träumt vom großen Durchbruch – doch statt Hollywood klopft das Grauen an. Sein Leben wird zum echten Horrorfilm.",
+    cover: "https://filmpalast.to/files/movies/450/american-zombieland-angriff-der-fettarsch-zombies.jpg",
+    iframe: "https://voe.sx/e/vxfxvi0gqvds"
+  },
+  {
+    titel: "Zombieland 2 Doppelt hält besser",
+    jahr: 2019,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Die Zombiejäger-Truppe lebt im Weißen Haus – bis Little Rock abhaut. Auf der Suche nach ihr treffen sie auf neue Mutanten-Zombies, schräge Überlebende und jede Menge Chaos.",
+    cover: "https://filmpalast.to/files/movies/450/zombieland-2-doppelt-halt-besser.jpg",
+    iframe: "https://voe.sx/e/8kr4etyb1ouk"
+  },
+  {
+    titel: "Zombieland",
+    jahr: 2009,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Columbus überlebt die Zombie-Apokalypse mit strengen Regeln – bis er auf den schießwütigen Tallahassee trifft. Gemeinsam kämpfen sie sich durch ein chaotisches Amerika voller Untoter, Betrügerinnen und Freizeitpark-Action.",
+    cover: "https://filmpalast.to/files/movies/450/zombieland.jpg",
+    iframe: "https://voe.sx/e/df4qucmsyhpe"
+  },
+  {
+    titel: "Die Tribute von Panem - Catching Fire",
+    jahr: 2013,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Katniss und Peeta sollen nach ihrem Sieg als Liebespaar fürs Kapitol posieren – doch in den Distrikten wächst die Rebellion. Um sie loszuwerden, zwingt Snow sie erneut in die Arena.",
+    cover: "https://filmpalast.to/files/movies/450/die-tribute-von-panem-catching-fire.jpg",
+    iframe: "https://voe.sx/e/y0s7gbdayc5z"
+  },
+  {
+    titel: "Die Tribute von Panem The Hunger Games",
+    jahr: 2012,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Um ihre Schwester zu schützen, meldet sich Katniss freiwillig für die tödlichen Hungerspiele. In der Arena kämpft sie ums Überleben – und gegen ein System, das keine Gnade kennt.",
+    cover: "https://filmpalast.to/files/movies/450/die-tribute-von-panem-the-hunger-games.jpg",
+    iframe: "https://voe.sx/e/8wceyvudlhpc"
+  },
+  {
+    titel: "Die Tribute von Panem - Mockingjay Teil 2",
+    jahr: 2015,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Katniss führt die Rebellion nach Panem – ihr Ziel: das Kapitol stürzen und Präsident Snow besiegen. Doch der finale Kampf fordert mehr als jede Hungerspiel-Arena zuvor.",
+    cover: "https://filmpalast.to/files/movies/450/die-tribute-von-panem-mockingjay-teil-2.jpg",
+    iframe: "https://voe.sx/e/kiw64qcq1i7p"
+  },
+  {
+    titel: "Die Tribute von Panem - Mockingjay: Teil 1",
+    jahr: 2014,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Nach der Zerstörung von Distrikt 12 wird Katniss zur Symbolfigur des Widerstands. Im Untergrund von Distrikt 13 ringt sie mit ihrer Rolle – bis Peetas Leben alles verändert.",
+    cover: "https://filmpalast.to/files/movies/450/die-tribute-von-panem-mockingjay-teil-1.jpg",
+    iframe: "https://voe.sx/e/mz02wx7n3pc2"
+  },
+  {
+    titel: "Die Tribute von Panem: Das Lied von Vogel und Schlange",
+    jahr: 2023,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Jahre vor Katniss wird Coriolanus Snow Mentor im Hungerspiel – ausgerechnet für Lucy aus Distrikt 12. Zwischen Pflicht, Macht und verbotenen Gefühlen steht alles auf dem Spiel.",
+    cover: "https://filmpalast.to/files/movies/450/die-tribute-von-panem-das-lied-von-vogel-und-schlange.jpg",
+    iframe: "https://voe.sx/e/x2mosqh1zvlq"
+  },
+  {
+    titel: "Manta Manta - Zwoter Teil",
+    jahr: 2023,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "30 Jahre nach „Manta, Manta“ muss Bertie zurück auf die Rennstrecke, um sein Grundstück zu retten. Mit altem Opel, neuem Kampfgeist und jeder Menge Nostalgie geht’s zurück ins Rennen.",
+    cover: "https://filmpalast.to/files/movies/450/manta-manta-zwoter-teil.jpg",
+    iframe: "https://voe.sx/e/gs3iccvkhjkd"
+  },
+  {
+    titel: "Manta Manta",
+    jahr: 1991,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Bertie setzt beim Rennen alles aufs Spiel – Auto, Liebe und Stolz. Als der Kolben schlappmacht, wird ausgerechnet Klausi zum unerwarteten Helden auf vier Rädern.",
+    cover: "https://filmpalast.to/files/movies/450/manta-manta.jpg",
+    iframe: "https://voe.sx/e/xmo9lciwf6qu"
+  },
+  {
+    titel: "Baymax - Riesiges Robowabohu",
+    jahr: 2014,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Teenager Hiro schließt Freundschaft mit dem sanften Roboter Baymax – und stellt mit ihm und seinen Freunden ein Superhelden-Team auf, um San Fransokyo vor einer Bedrohung zu retten.",
+    cover: "https://filmpalast.to/files/movies/450/baymax-riesiges-robowabohu.jpg",
+    iframe: "https://voe.sx/e/lyasaa8tujzq"
+  },
+  {
+    titel: "Ich - Einfach Unverbesserlich",
+    jahr: 2010,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Superschurke Gru will den Mond stehlen – doch drei Waisenmädchen wirbeln seinen Plan durcheinander und bringen sein Herz zum Schmelzen.",
+    cover: "https://filmpalast.to/files/movies/450/ich-einfach-unverbesserlich.jpg",
+    iframe: "https://voe.sx/e/wcdszmpgeqrv"
+  },
+  {
+    titel: "Ich - Einfach Unverbesserlich 2",
+    jahr: 2013,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Gru lebt friedlich mit seinen Töchtern – bis ein neuer Superschurke auftaucht. Mit Agentin Lucy und den Minions zieht er los, um die Welt zu retten… und verliebt sich dabei.",
+    cover: "https://filmpalast.to/files/movies/450/ich-einfach-unverbesserlich-2.jpg",
+    iframe: "https://voe.sx/e/z5vnoo84hbc6"
+  },
+  {
+    titel: "Ich - Einfach unverbesserlich 4",
+    jahr: 2024,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Gru und Lucy kämpfen nun als Familie gegen das Böse – mit vereinten Kräften, Chaos, Herz und natürlich den Minions an ihrer Seite.",
+    cover: "https://filmpalast.to/files/movies/450/ich-einfach-unverbesserlich-4.jpg",
+    iframe: "https://voe.sx/e/xa9p6fywfpdd"
+  },
+  {
+    titel: "Ich - Einfach unverbesserlich 3",
+    jahr: 2017,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Gru jagt den schrillen Superschurken Balthazar Bratt – und trifft dabei auf seinen erfolgreichen Zwillingsbruder Dru. Gemeinsam müssen sie sich zusammenraufen, um die Welt zu retten.",
+    cover: "https://filmpalast.to/files/movies/450/ich-einfach-unverbesserlich-3.jpg",
+    iframe: "https://voe.sx/e/pzp1kcqk5lxn"
+  },
+  {
+    titel: "Minions",
+    jahr: 2015,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Seit Anbeginn der Zeit suchen die Minions einen Superschurken zum Dienen – doch ihre tollpatschige Art bringt jeden Boss zu Fall. Chaos ist vorprogrammiert!",
+    cover: "https://filmpalast.to/files/movies/450/minions.jpg",
+    iframe: "https://voe.sx/e/lorwtl4td68i"
+  },
+  {
+    titel: "Minions & More 2",
+    jahr: 2022,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Eine bunte Sammlung lustiger Minions-Kurzfilme – darunter „Phil’s Dance Party“ und „Binky Nelson Unpacified“ – voller Chaos, Charme und Lacher.",
+    cover: "https://filmpalast.to/files/movies/450/minions-more-2.jpg",
+    iframe: "https://voe.sx/e/kckqzdr8mtox"
+  },
+  {
+    titel: "Minions & More 1",
+    jahr: 2022,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Lustige Kurzfilme aus dem „Ich – Einfach unverbesserlich“-Universum zeigen die chaotischen Abenteuer der Minions – kurz, witzig und typisch gelb!",
+    cover: "https://filmpalast.to/files/movies/450/minions-more-1.jpg",
+    iframe: "https://voe.sx/e/fonu0arq2j3f"
+  },
+  {
+    titel: "Minions 2 - Auf der Suche nach dem Mini-Boss",
+    jahr: 2022,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Der 12-jährige Gru will ein echter Superschurke werden – und klaut den Vicious 6 ein mächtiges Artefakt. Nun ist er auf der Flucht, unterstützt von seinen chaotischen Minions.",
+    cover: "https://filmpalast.to/files/movies/450/minions-2-auf-der-suche-nach-dem-mini-boss.jpg",
+    iframe: "https://voe.sx/e/okr5ruip8r3x"
+  },
+  {
+    titel: "Venom",
+    jahr: 2018,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Reporter Eddie Brock deckt finstere Experimente auf – und wird selbst von einem Alien-Symbionten befallen. Gemeinsam werden sie zu Venom, einem mächtigen Antihelden.",
+    cover: "https://filmpalast.to/files/movies/450/venom.jpg",
+    iframe: "https://voe.sx/e/kavy817x5iz8"
+  },
+  {
+    titel: "Venom 2: Let There Be Carnage",
+    jahr: 2021,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Eddie und Venom kämpfen mit ihrem Alltag – bis Serienkiller Cletus Kasady zu Carnage wird und ein blutiges Chaos entfesselt. Jetzt müssen sie gemeinsam den Wahnsinn stoppen.",
+    cover: "https://filmpalast.to/files/movies/450/venom-2-let-there-be-carnage.jpg",
+    iframe: "https://voe.sx/e/tar9lefb2zy3"
+  },
+  {
+    titel: "Venom 3: The Last Dance (BALD)",
+    jahr: 2024,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Eddie und Venom werden zu Gejagten – vom Militär und von außerirdischen Kreaturen, die ihren Schöpfer Knull befreien wollen. Der Kampf ums Überleben wird zum Kampf um die ganze Welt.",
+    cover: "https://filmpalast.to/files/movies/450/venom-3-the-last-dance.jpg",
+    iframe: "https://voe.sx/e/xjdcrueduaok"
+  },
+  {
+    titel: "Five Nights at Freddys",
+    jahr: 2023,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Nachtschicht in einer alten Pizzeria klingt harmlos – doch bald merkt Mike, dass die animatronischen Maskottchen nachts zum Leben erwachen. Und sie sind tödlich.",
+    cover: "https://filmpalast.to/files/movies/450/five-nights-at-freddys.jpg",
+    iframe: "https://voe.sx/e/fhqbjiynmdrs"
+  },
+  {
+    titel: "Hardcore",
+    jahr: 2016,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Ohne Erinnerung, aber voller Kampfpower jagt Cyborg Henry durch Moskau, um seine entführte Frau zu retten – und legt sich dabei mit einem wahnsinnigen Superschurken und dessen Armee an.",
+    cover: "https://filmpalast.to/files/movies/450/hardcore.jpg",
+    iframe: "https://voe.sx/e/budc3989njsm"
+  },
+  {
+    titel: "The Popes Exorcist",
+    jahr: 2023,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Pater Amorth, Exorzist des Papstes, stößt bei einem Jungen auf das „pure Böse“. Der Dämon fordert ihn persönlich heraus – und verbirgt ein dunkles Geheimnis mit Verbindung zur Kirche.",
+    cover: "https://filmpalast.to/files/movies/450/the-popes-exorcist.jpg",
+    iframe: "https://voe.sx/e/0hgjyjatbmlg"
+  },
+  {
+    titel: "Ted",
+    jahr: 2012,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Seit Kindertagen ist der lebendige Teddybär Ted Johns bester Freund – doch Freundin Lori will endlich erwachsen werden. John muss sich entscheiden: Kumpel oder Liebe?",
+    cover: "https://filmpalast.to/files/movies/450/ted.jpg",
+    iframe: "https://voe.sx/e/j9dn2c9s8hid"
+  },
+  {
+    titel: "Ted 2",
+    jahr: 2015,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Ted will Vater werden – doch der Staat erkennt ihn nicht als Person an. Mit John und Anwältin Samantha kämpft er vor Gericht um sein Recht auf Familie.",
+    cover: "https://filmpalast.to/files/movies/450/ted-2.jpg",
+    iframe: "https://voe.sx/e/2b9w7n8qid6i"
+  },
+  {
+    titel: "Bad Boys 2",
+    jahr: 2003,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Als ein Drogenbaron Miamis Drogenmarkt übernimmt und Marcus’ Schwester entführt, greifen Mike und Marcus persönlich ein – mit Kugeln, Sprüchen und jeder Menge Action.",
+    cover: "https://filmpalast.to/files/movies/450/bad-boys-2.jpg",
+    iframe: "https://voe.sx/e/5p2z9foj2jck"
+  },
+  {
+    titel: "Bad Boys for Life",
+    jahr: 2020,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Marcus will in Rente, doch als Mike Ziel eines Anschlags wird, starten die beiden Cops ihre nächste Mission – gegen einen tödlichen Feind mit düsterer Vergangenheit.",
+    cover: "https://filmpalast.to/files/movies/450/bad-boys-for-life.jpg",
+    iframe: "https://voe.sx/e/hd0am72jsfsp"
+  },
+  {
+    titel: "Harte Jungs - Bad Boys",
+    jahr: 1995,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Mike und Marcus jagen einen Gangster, der Heroin aus dem Polizeirevier geklaut hat. Mit einer mutigen Zeugin als Lockvogel liefern sie sich einen explosiven Showdown.",
+    cover: "https://filmpalast.to/files/movies/450/harte-jungs-bad-boys.jpg",
+    iframe: "https://voe.sx/e/t2v5q560hjdi"
+  },
+  {
+    titel: "Unknown User",
+    jahr: 2014,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Ein Jahr nach Lauras Selbstmord taucht ihr Account im Videochat auf – und zwingt ihre Freunde, die Wahrheit zu enthüllen. Wer lügt oder geht, stirbt.",
+    cover: "https://filmpalast.to/files/movies/450/unknown-user.jpg",
+    iframe: "https://voe.sx/e/khszd4g08r4a"
+  },
+  {
+    titel: "Pixels",
+    jahr: 2015,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Pixelige Aliens greifen mit 80er-Videospiel-Figuren an – nur ein paar Ex-Arcade-Champions können die Welt retten. Jetzt heißt es: Game on!",
+    cover: "https://filmpalast.to/files/movies/450/pixels.jpg",
+    iframe: "https://voe.sx/e/ue2l9rroqm7c"
+  },
+  {
+    titel: "Ein Mann namens Otto",
+    jahr: 2023,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Der griesgrämige Witwer Otto hat mit dem Leben abgeschlossen – bis Nachbarin Marisol mit Herz und Humor neuen Sinn in seinen Alltag bringt.",
+    cover: "https://filmpalast.to/files/movies/450/ein-mann-namens-otto.jpg",
+    iframe: "https://voe.sx/e/smv3rhtpbn62"
+  },
+  {
+    titel: "Er ist wieder da",
+    jahr: 2015,
+    hochgeladenAm: "2025-05-01",
+    beschreibung: "Adolf Hitler erwacht im modernen Berlin – und wird aus Versehen zum TV-Star. Eine bitterböse Satire über Medien, Macht und das Vergessen.",
+    cover: "https://filmpalast.to/files/movies/450/er-ist-wieder-da.jpg",
+    iframe: "https://voe.sx/e/6rvke2diiei2"
+  },
               {
     titel: "Imaginary",
     jahr: 2024,
