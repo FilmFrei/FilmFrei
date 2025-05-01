@@ -511,9 +511,53 @@
     display: none;
     text-align: center;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        .alert {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #0A84FF;
+    color: white;
+    padding: 15px;
+    z-index: 9999;
+    text-align: center;
+    font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.closebtn {
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
 </style>
 </head>
 <body>
+    <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+  <center>
+    <strong>Liebe FilmFrei-User,</strong><br>
+    Wenn es zu Anzeigeproblemen bei den Filmcovern kommt, bitte die DNS-Einstellungen des Browsers ändern.<br>
+    Es wurde festgestellt, dass Google Chrome manche Cover blockiert. Wir arbeiten an einer Lösung.<br>
+    <strong>Vielen Dank für euer Verständnis – Euer FilmFrei-Team</strong>
+  </center>
+</div>
     <header>
         <div class="logo-container">
             <div class="logo">F</div>
