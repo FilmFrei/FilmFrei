@@ -1,6 +1,679 @@
 <!doctypehtml><html lang="de"><meta charset="UTF-8"><meta content="width=device-width,initial-scale=1"name="viewport"><title>Filmfrei: Filme genießen – ganz ohne Werbung</title><link href="https://cdn.plyr.io/3.7.8/plyr.css"rel="stylesheet"><script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script><script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}body{background-color:#121212;color:#f5f5f5;overflow-x:hidden;padding-top:70px}header{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;padding:20px 40px;background-color:rgba(18,18,18,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100;border-bottom:1px solid rgba(255,255,255,.05)}.logo-container{display:flex;align-items:center;gap:15px}.logo{width:40px;height:40px;background-color:#0a84ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;box-shadow:0 0 10px rgba(10,132,255,.3);transition:all .3s ease}.logo:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(10,132,255,.5)}.brand-name{font-size:24px;font-weight:600;letter-spacing:-.5px}.search-container{position:relative;max-width:300px;width:100%}.search-input{width:100%;padding:10px 40px 10px 15px;border-radius:20px;border:none;background-color:#1e1e1e;color:#f5f5f5;font-size:16px;transition:all .3s ease}.search-input:focus{outline:0;background-color:#2a2a2a;box-shadow:0 0 0 2px rgba(10,132,255,.5)}.search-icon{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:#999;pointer-events:none}.search-results{position:absolute;top:50px;width:100%;background-color:#1a1a1a;border-radius:12px;max-height:0;overflow:hidden;transition:max-height .3s ease;box-shadow:0 5px 20px rgba(0,0,0,.3);z-index:200}.search-results.active{max-height:300px;overflow-y:auto}.search-result-item{padding:12px 15px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05)}.search-result-item:hover{background-color:#2a2a2a}main{padding:40px}.section-title{font-size:22px;font-weight:600;margin-bottom:20px;color:#f5f5f5}.film-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:25px;margin-bottom:40px}.film-card{position:relative;border-radius:12px;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;cursor:pointer;aspect-ratio:2/3;background-color:#1a1a1a}.film-card:hover{transform:scale(1.03) translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.4)}.film-card img{width:100%;height:100%;object-fit:cover;transition:opacity .3s ease}.film-info{position:absolute;bottom:0;left:0;width:100%;padding:60px 15px 15px;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);opacity:0;transition:opacity .3s ease}.film-card:hover .film-info{opacity:1}.film-title{font-size:16px;font-weight:500;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.film-year{font-size:14px;color:#bbb}.film-detail-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}.film-detail-overlay.active{opacity:1;visibility:visible}.film-detail-container{display:flex;max-width:1200px;width:90%;background-color:#1a1a1a;border-radius:15px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.5);transform:translateY(30px);opacity:0;transition:transform .4s ease,opacity .4s ease}.film-detail-overlay.active .film-detail-container{transform:translateY(0);opacity:1}.film-detail-left{flex:1;padding:30px}.film-detail-cover{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.3)}.film-detail-info{margin-top:20px}.film-detail-title{font-size:24px;font-weight:600;margin-bottom:10px}.film-detail-meta{display:flex;margin-bottom:15px;color:#bbb;font-size:14px}.film-detail-upload,.film-detail-year{margin-right:20px}.film-detail-description{line-height:1.6;color:#ddd}.film-detail-right{flex:2;position:relative}.film-detail-player{width:100%;height:100%;background-color:#000}.film-player-iframe{width:100%;height:100%;border:none}.film-detail-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;background-color:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:1010;transition:background-color .3s ease}.film-detail-close:hover{background-color:rgba(255,255,255,.2)}.film-detail-close:after,.film-detail-close:before{content:'';position:absolute;width:18px;height:2px;background-color:#fff}.film-detail-close:before{transform:rotate(45deg)}.film-detail-close:after{transform:rotate(-45deg)}.cookie-banner{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);width:90%;max-width:400px;background-color:#1e1e1e;border-radius:12px;padding:20px;box-shadow:0 5px 20px rgba(0,0,0,.4);z-index:900;display:none}.cookie-title{font-size:18px;font-weight:600;margin-bottom:10px}.cookie-text{font-size:14px;line-height:1.5;margin-bottom:15px;color:#ddd}.cookie-actions{display:flex;justify-content:space-between}.cookie-accept{padding:10px 20px;border-radius:20px;border:none;background-color:#0a84ff;color:#fff;font-weight:500;cursor:pointer;transition:background-color .3s ease}.cookie-accept:hover{background-color:#0071e3}.cookie-more{color:#999;text-decoration:none;font-size:14px;align-self:center}.cookie-more:hover{text-decoration:underline}@media (max-width:1024px){.film-detail-container{flex-direction:column;max-height:90vh;overflow-y:auto}.film-detail-left{display:flex;flex-direction:row;padding:20px}.film-detail-cover{width:40%;max-width:200px}.film-detail-info{margin-top:0;margin-left:20px;flex:1}.film-detail-right{height:400px}}@media (max-width:768px){header{padding:15px 20px}main{padding:20px}.film-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:15px}.film-detail-left{flex-direction:column}.film-detail-cover{width:100%;max-width:none}.film-detail-info{margin-left:0;margin-top:20px}.film-detail-right{height:300px}}@media (max-width:480px){.search-container{display:none}.mobile-search-toggle{display:block;font-size:20px;color:#f5f5f5;cursor:pointer}.mobile-search-container{position:fixed;top:0;left:0;width:100%;padding:15px;background-color:#1a1a1a;z-index:150;display:none}.mobile-search-container.active{display:block}.film-detail-overlay{align-items:flex-end}.film-detail-container{width:100%;height:90%;border-radius:15px 15px 0 0}}.loader{border:8px solid #333;border-top:8px solid #fff;border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;margin:30px auto;display:none}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}#popupNotice{margin-top:20px;color:orange;font-size:14px;display:none;text-align:center}.alert{margin:20px auto;max-width:700px;background-color:#3a1a1a;color:#fff1f1;padding:15px 20px;border-radius:10px;font-size:14px;box-shadow:0 4px 10px rgba(0,0,0,.3);position:relative;text-align:center}.closebtn{position:absolute;right:15px;top:12px;font-size:20px;cursor:pointer;color:#fff;font-weight:700}</style><div class="alert"> <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> <center> <strong>Liebe FilmFrei-User,</strong><br> Wenn Filmcover nicht angezeigt werden, liegt das **nicht an euren DNS-Einstellungen**, sondern entweder an **Google Chrome** oder an **Adblockern** wie <strong>uBlock Origin</strong> oder <strong>uBlock Origin Lite</strong> – diese blockieren manchmal externe Bildquellen.<br> <strong>Schon gewusst?</strong> Unsere Seite läuft **auch ohne Adblocker** einwandfrei – wir zeigen **keine Werbung**. 😉<br> <strong>Danke für euer Vertrauen – euer FilmFrei-Team</strong></center></div><header><div class="logo-container"><div class="logo">F</div><div class="brand-name">Filmfrei</div></div><div class="search-container"><input class="search-input"placeholder="Film suchen..."><div class="search-icon"><svg fill="none"height="16"stroke="currentColor"stroke-linecap="round"stroke-linejoin="round"stroke-width="2"viewBox="0 0 24 24"width="16"xmlns="http://www.w3.org/2000/svg"><circle cx="11"cy="11"r="8"></circle><line x1="21"x2="16.65"y1="21"y2="16.65"></line></svg></div><div class="search-results"></div></div><div class="mobile-search-toggle"style="display:none"><svg fill="none"height="24"stroke="currentColor"stroke-linecap="round"stroke-linejoin="round"stroke-width="2"viewBox="0 0 24 24"width="24"xmlns="http://www.w3.org/2000/svg"><circle cx="11"cy="11"r="8"></circle><line x1="21"x2="16.65"y1="21"y2="16.65"></line></svg></div></header><main><section><h2 class="section-title">Neueste Filme</h2><div class="film-grid"id="latest-films"></div></section><section><h2 class="section-title">Alle Filme</h2><div class="film-grid"id="film-liste"></div></section></main><div class="film-detail-overlay"><div class="film-detail-close"></div><div class="film-detail-container"><div class="film-detail-left"><img alt=""class="film-detail-cover"src=""><div class="film-detail-info"><h3 class="film-detail-title"></h3><div class="film-detail-meta"><span class="film-detail-year"></span> <span class="film-detail-upload"></span></div><p class="film-detail-description"></div></div><div class="film-detail-right"><div class="loader"id="loader"></div><div id="popupNotice">🚫 Popup-Versuch wurde blockiert!</div><div class="film-detail-player"></div></div></div></div><div class="cookie-banner"><div class="cookie-title">Cookies gefällig?</div><div class="cookie-text">Diese Seite verwendet Cookies, um dein Erlebnis zu verbessern.</div><div class="cookie-actions"><button class="cookie-accept">Verstanden</button> <a class="cookie-more"href="https://filmfrei.github.io/FilmFrei-Datenschutz/">Mehr erfahren</a></div></div><script>const filme = 
             [
                         {
+  "titel": "Unten am Fluss",
+  "jahr": 1978,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Von einer dunklen Vorahnung des seherisch begabten Fiver getrieben, begibt sich ein Teil einer Kaninchensippe auf große Wanderschaft. Dort müssen die Nager Abenteuer mit Raubtieren, Menschen und ihrer eigenen Spezies erleben, bevor sie in Watership Down ein neues Zuhause finden.",
+  "cover": "https://filmpalast.to/files/movies/450/unten-am-fluss.jpg",
+  "iframe": "https://voe.sx/e/54cwk9ietgvi"
+},
+{
+  "titel": "Die Brüder Menendez",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Lyle und Erik Menendez, wegen Mordes an ihren Eltern zu lebenslanger Haft verurteilt, erzählen in dieser Doku die Wahrheit über das schockierende Verbrechen und seine Folgen.",
+  "cover": "https://filmpalast.to/files/movies/450/die-bruder-menendez.jpg",
+  "iframe": "https://voe.sx/e/gzjcb9ggbibb"
+},
+{
+  "titel": "Big Mäck: Gangster und Gold",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Ein Mann wird unschuldig für einen Raubüberfall verurteilt und verbringt neun Jahre im Knast. Jahrzehnte später wird er erneut verdächtigt. Ist er auch dieses Mal frei von Schuld?",
+  "cover": "https://filmpalast.to/files/movies/450/big-mack-gangster-und-gold.jpg",
+  "iframe": "https://voe.sx/e/orr305k8hltr"
+},
+{
+  "titel": "Untold: Crimes and Penalties",
+  "jahr": 2021,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Die Hockey-Mafia lässt grüßen: Das ebenso gewaltbereite wie begabte Team wurde von einem Mann mit Mafia-Beziehungen gekauft und von seinem 17-jährigen Sohn geleitet.",
+  "cover": "https://filmpalast.to/files/movies/450/untold-crimes-and-penalties.jpg",
+  "iframe": "https://voe.sx/e/65x2ksoq0kgg"
+},
+{
+  "titel": "Der Mörder Meiner Tochter",
+  "jahr": 2022,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "In dieser True-Crime-Doku versucht ein Vater jahrzehntelang vergeblich, den Mörder seiner Tochter zu überführen, bis er irgendwann drastische Maßnahmen ergreift.",
+  "cover": "https://filmpalast.to/files/movies/450/der-morder-meiner-tochter.jpg",
+  "iframe": "https://voe.sx/e/mrpn9h12q8y2"
+},
+{
+  "titel": "Für Immer",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Eva und Dieter haben fast sieben Jahrzehnte miteinander verbracht hat und blicken auf ein Leben voller Liebe und\r\nZusammenhalt zurück. Sie haben eine Familie gegründet, ein Zuhause aufgebaut und unzählige Erinnerungen miteinander\r\ngeteilt.",
+  "cover": "https://filmpalast.to/files/movies/450/fur-immer.jpg",
+  "iframe": "https://voe.sx/e/kydughwk3tqk"
+},
+{
+  "titel": "Zahnfee auf Bewährung",
+  "jahr": 2010,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Hockeyspieler Derek Thompson hat sich mit seiner brutalen Spielart schon längst einen Namen gemacht: Als \"Zahnfee\" ist er bekannt dafür, seinen Gegnern gern einen Zahn auszuschlagen.",
+  "cover": "https://filmpalast.to/files/movies/450/zahnfee-auf-bewahrung.jpg",
+  "iframe": "https://voe.sx/e/7941vabvcpz0"
+},
+{
+  "titel": "Beware The Slenderman",
+  "jahr": 2016,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Dokumentation über die realen Gewalttaten, die vom Internet-Meme zum fiktiven Slender Man inspiriert wurden.",
+  "cover": "https://filmpalast.to/files/movies/450/beware-the-slenderman.jpg",
+  "iframe": "https://voe.sx/e/urgzqtl8qspx"
+},
+{
+  "titel": "Checker Tobi und die Reise zu den fliegenden Flüssen",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Checker Tobi ist wieder unterwegs! Nachdem er eine geheime Schatzkiste erhalten hat, macht er sich auf die Suche nach dem Schlüssel, um sie zu öffnen. Die einzige Person, die den Schlüssel haben kann, ist seine beste Freundin Marina.",
+  "cover": "https://filmpalast.to/files/movies/450/checker-tobi-und-die-reise-zu-den-fliegenden-flussen.jpg",
+  "iframe": "https://voe.sx/e/mew57l0mgmlq"
+},
+{
+  "titel": "Zoomania",
+  "jahr": 2016,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Zoomania, eine gigantische Stadt voller Möglichkeiten: Hier leben die unterschiedlichsten Tierarten Seite an Seite, sei es in Sahara-Wolkenkratzern oder Iglu-Appartements. Für jede Vorliebe findet sich der passende Wohnraum.",
+  "cover": "https://filmpalast.to/files/movies/450/zoomania.jpg",
+  "iframe": "https://voe.sx/e/y8bul3g1zmwt"
+},
+{
+  "titel": "Red Notice",
+  "jahr": 2021,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Ein Profiler des FBI auf der Jagd nach dem meistgesuchten Kunsträuber macht ihn sich zum Partner, um eine Verbrecherin zu schnappen, die immer einen Schritt voraus ist.",
+  "cover": "https://filmpalast.to/files/movies/450/red-notice.jpg",
+  "iframe": "https://voe.sx/e/69kktjlkz414"
+},
+{
+  "titel": "Toy Story That Time Forgot",
+  "jahr": 2014,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "In TOY STORY – MÖGEN DIE SPIELE BEGINNEN landet die Truppe nicht wie gewohnt in Bonnies Zimmer, sondern außerhalb! Als die Freunde plötzlich von einer Gruppe cooler Action-Figuren angegriffen werden, spitzt sich die Lage zu! Jetzt ist die Dinosaurier-Dame Trixie ihre letzte Hoffnung …",
+  "cover": "https://filmpalast.to/files/movies/450/toy-story-that-time-forgot.jpg",
+  "iframe": "https://voe.sx/e/nc3jacnadske"
+},
+{
+  "titel": "Toy Story 2",
+  "jahr": 1999,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Als Woody von einem fiesen Sammler entführt wird macht sich die Puppen-Clique auf, ihren Freund zu befreien - aber schon auf die andere Straßenseite zu gelangen, gestaltet sich schwierig, ganz zu schweigen von den lauernden Gefahren im Spielzeugladen gegenüber: Doppelgänger stellen sich Buzz Lightye.",
+  "cover": "https://filmpalast.to/files/movies/450/toy-story-2.jpg",
+  "iframe": "https://voe.sx/e/udzcwti82rsb"
+},
+{
+  "titel": "Toy Story of Terror",
+  "jahr": 2013,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Die Spielzeuge um Woody und Buzz wollen eigentlich nur einen lustigen Ausflug unternehmen. Das ändert sich jedoch, als sie zu einem Motel am Straßenrand gelangen. Eines der Spielzeuge geht verloren und der Rest muss unheimliche Vorkommnisse lösen, um nicht das gleiche Schicksal zu erleiden.",
+  "cover": "https://filmpalast.to/files/movies/450/toy-story-of-terror.jpg",
+  "iframe": "https://voe.sx/e/c6voihsadooe"
+},
+{
+  "titel": "A Toy Story - Alles hört auf kein Kommando",
+  "jahr": 2019,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Mittlerweile ist Andy aus dem Alter raus, in dem er noch mit seinen Spielzeugen spielt. Also hat er den Cowboy Woody und den Space-Ranger Buzz Lightyear an seine kleine Freundin Bonnie weitergereicht, damit sie fortan ihre Fantasie mit ihnen ausleben kann.",
+  "cover": "https://filmpalast.to/files/movies/450/a-toy-story-alles-hort-auf-kein-kommando.jpg",
+  "iframe": "https://voe.sx/e/krbniclexf62"
+},
+{
+  "titel": "Toy Story",
+  "jahr": 1995,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Als Andys Lieblingspuppe hat Woody im Kinderzimmer das Sagen. Kaum ist der Junge nicht da, erwacht die Cowboy-Figur zum Leben, und mit ihm auch all das andere Spielzeug um ihn herum. Aufgeregt debattiert man über Andys bevorstehenden Geburtstag.",
+  "cover": "https://filmpalast.to/files/movies/450/toy-story.jpg",
+  "iframe": "https://voe.sx/e/lzsxxtrxzjkj"
+},
+{
+  "titel": "Toy Story 3",
+  "jahr": 2010,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Der Moment des Abschieds ist gekommen: Andy ist den Kinderschuhen entwachsen und macht sich bereit, aufs College zu gehen. Für sein stets getreues Spielzeug hat er keine Verwendung mehr. Andys Mutter spendet die Spielsachen der Kindertagesstätte Sunnyside.",
+  "cover": "https://filmpalast.to/files/movies/450/toy-story-3.jpg",
+  "iframe": "https://voe.sx/e/c79uwvsj2ltw"
+},
+{
+  "titel": "Inferno",
+  "jahr": 2016,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Der Schweizer Milliardär und Wissenschaftler Bertrand Zobrist (Ben Foster) meint, die Erde sei so überbevölkert, dass es schon bald keine Hoffnung mehr gibt, die katastrophalen Folgen dieser Fehlentwicklung noch einmal umzukehren.",
+  "cover": "https://filmpalast.to/files/movies/450/inferno.jpg",
+  "iframe": "https://voe.sx/e/a6ht4kzce1ta"
+},
+{
+  "titel": "Die Verlegerin",
+  "jahr": 2017,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "In den 1970er Jahren übernimmt Katharine „Kay“ Graham (Meryl Streep) das Unternehmen ihrer Familie – die Washington Post – und wird so zur ersten Zeitungsverlegerin der USA.",
+  "cover": "https://filmpalast.to/files/movies/450/die-verlegerin.jpg",
+  "iframe": "https://voe.sx/e/qz6igipvwu3t"
+},
+{
+  "titel": "Catch me if you can",
+  "jahr": 2002,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Frank Abagnale jr. (Leonardo DiCaprio) geht auf die High School. Und er ist Arzt, Rechtsanwalt, Physiker oder Co-Pilot für staatliche Airlines, je nachdem, was die Situation gerade erfordert.",
+  "cover": "https://filmpalast.to/files/movies/450/catch-me-if-you-can.jpg",
+  "iframe": "https://voe.sx/e/fsbdt98pau3g"
+},
+{
+  "titel": "The Green Mile",
+  "jahr": 1999,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Die grüne Meile, die ihren Namen dem limonenfarbenen Boden zu verdanken hat, führt die Insassen der Todeszellen im Cold Mountain Gefängnis direkt zum elektrischen Stuhl.",
+  "cover": "https://filmpalast.to/files/movies/450/the-green-mile.jpg",
+  "iframe": "https://voe.sx/e/mkib2emo14pj"
+},
+{
+  "titel": "Voll abgezockt",
+  "jahr": 2013,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Buchhalter Sandy Patterson fällt aus allen Wolken, als plötzlich seine Konten gesperrt sind und er kurz darauf verhaftet wird. Auf der Wache stellt sich alsbald heraus, dass der Haftbefehl einer Frau in Florida gilt.",
+  "cover": "https://filmpalast.to/files/movies/450/voll-abgezockt.jpg",
+  "iframe": "https://voe.sx/e/qsox9eqpw57k"
+},
+{
+  "titel": "Spy - Susan Cooper Undercover",
+  "jahr": 2015,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Susan Cooper (Melissa McCarthy) ist eine bescheidene, an den Schreibtisch gebundene CIA-Analystin. Auch wenn sie damit für die eigentliche Planung der gefährlichen Missionen des Geheimdienstes verantwortlich ist, ernten eher die Agenten im Feldeinsatz die Lorbeeren für erfolgreiche Aufträge.",
+  "cover": "https://filmpalast.to/files/movies/450/spy-susan-cooper-undercover.jpg",
+  "iframe": "https://voe.sx/e/kkjicmdoenrk"
+},
+{
+  "titel": "St. Vincent",
+  "jahr": 2014,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Vincent, verwitweter Vietnamveteran im Ruhestand, verbringt seine Tage mit seiner Perserkatze, reichlich Whiskey, Glücksspiel und der russischen Prostituierten Darka. Da steht eines Tages die neue, alleinerziehende Nachbarin Maggie vor seiner Tür.",
+  "cover": "https://filmpalast.to/files/movies/450/st-vincent.jpg",
+  "iframe": "https://voe.sx/e/efi4ybvivwxo"
+},
+{
+  "titel": "Santa Clause - Eine schöne Bescherung",
+  "jahr": 1994,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Der geschiedene Werbekaufmann Scott Calvin und Sohn Charlie glauben nicht an den Weihnachtsmann. Da poltert am Heiligabend Santa Clause durch den Kamin und überreicht dem Papa seine Visitenkarte.",
+  "cover": "https://filmpalast.to/files/movies/450/santa-clause-eine-schone-bescherung.jpg",
+  "iframe": "https://voe.sx/e/r3cdommumh4r"
+},
+{
+  "titel": "Santa Clause 2 - Eine noch schönere Bescherung",
+  "jahr": 2002,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Seit acht Jahren spielt Scott Calvin (Tim Allen) zur allseitigen Begeisterung den Weihnachtsmann für die gesamte Menschheit.",
+  "cover": "https://filmpalast.to/files/movies/450/santa-clause-2-eine-noch-schonere-bescherung.jpg",
+  "iframe": "https://voe.sx/e/v4fum5u2qtou"
+},
+{
+  "titel": "Santa Clause 3 - Eine frostige Bescherung",
+  "jahr": 2006,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Während Santa Clause alias Scott Calvin (Tim Allen) an der Seite seiner Frau Carol (Elizabeth Mitchell) der Geburt von Nachwuchs im Hause Weihnachtsmann entgegen fiebert, brauen sich dunkle Wolken über dem Nordpol zusammen.",
+  "cover": "https://filmpalast.to/files/movies/450/santa-clause-3-eine-frostige-bescherung.jpg",
+  "iframe": "https://voe.sx/e/o3g6hs4u8y3j"
+},
+{
+  "titel": "Es war einmal ein Deadpool",
+  "jahr": 2018,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Weihnachtsversion von „Deadpool 2“. Damit auch Kinder in den Genuss seines Abenteuers kommen können, hat sich Deadpool (Ryan Reynolds) etwas ganz Besonderes einfallen lassen.",
+  "cover": "https://filmpalast.to/files/movies/450/es-war-einmal-ein-deadpool.jpg",
+  "iframe": "https://voe.sx/e/wgi1v4c1aj3s"
+},
+{
+  "titel": "The Banshees of Inisherin",
+  "jahr": 2022,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Der gutherzige, wenn auch nicht allzu helle Pádraic Súilleabháin (Colin Farrell) lebt im Jahr 1923 auf Inisherin, einer kleinen Insel vor der irischen Küste in der Galwaybucht.",
+  "cover": "https://filmpalast.to/files/movies/450/the-banshees-of-inisherin.jpg",
+  "iframe": "https://voe.sx/e/bsqj2r67s2p4"
+},
+{
+  "titel": "Insidious: The Last Key",
+  "jahr": 2018,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Parapsychologin Elise Rainier (Lin Shaye) wohnt mittlerweile mit den zwei Geisterjägern Specs (Leigh Whannell) und Tucker (Angus Sampson) zusammen. Gemeinsam sind sie die Firma Spectral Sightings, die auf das Austreiben von Dämonen spezialisiert ist, die aus einer Parallelwelt angreifen.",
+  "cover": "https://filmpalast.to/files/movies/450/insidious-the-last-key.jpg",
+  "iframe": "https://voe.sx/e/6do41v56ee8f"
+},
+{
+  "titel": "Insidious: Chapter 2",
+  "jahr": 2013,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Nachdem Familie Lambert es geschafft hat, ihren Sohn Dalton (Ty Simpkins) aus den Klauen von Geistern und Dämonen zu befreien, verlässt sie den Ort des Geschehens und sucht Zuflucht bei Großmutter Lorraine (Barbara Hershey).",
+  "cover": "https://filmpalast.to/files/movies/450/insidious-chapter-2.jpg",
+  "iframe": "https://voe.sx/e/jkoa33h6tmqb"
+},
+{
+  "titel": "Insidious: Chapter 3 - Jede Geschichte hat einen Anfang",
+  "jahr": 2015,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Eine Teenagerin (Stefanie Scott) wird von Geistern verfolgt. Um ihr aus der Misere zu helfen, muss das Medium Elise Rainier (Lin Shaye) in Kontakt mit den Toten treten.\r\n\r\nDritter Teil des Geister-Schockers “Insidious”, dessen Handlung noch vor dem ersten angesiedelt sein wird.",
+  "cover": "https://filmpalast.to/files/movies/450/insidious-chapter-3-jede-geschichte-hat-einen-anfang.jpg",
+  "iframe": "https://voe.sx/e/l7misrjoi9ok"
+},
+{
+  "titel": "The Gray Man",
+  "jahr": 2022,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Als ein Top-Agent der CIA Geheimnisse der Agentur enthüllt, löst er damit eine weltweite mörderische Verfolgungsjagd aus, die von einem Spion im Alleingang befohlen wird.",
+  "cover": "https://filmpalast.to/files/movies/450/the-gray-man.jpg",
+  "iframe": "https://voe.sx/e/qa1rpnfaci2m"
+},
+{
+  "titel": "Curse of Chucky",
+  "jahr": 2013,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Die querschnittgelähmte Nica lebt mit ihrer überprotektiven Mutter in einer gewaltigen neuenglischen Villa am Rande der Staat. Eines Tages steht ein Paket unbekannter Herkunft vor der Tür, und in dem Paket liegt eine hässliche rothaarige Puppe.",
+  "cover": "https://filmpalast.to/files/movies/450/curse-of-chucky.jpg",
+  "iframe": "https://voe.sx/e/esdbg4twraxw"
+},
+{
+  "titel": "Chucky 3",
+  "jahr": 1991,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Jahre, nachdem die Puppe Chucky zwei Familien ins Unglück stürzte, kommt ein Industrieller auf die Idee, das Monster wieder in Produktion zu geben.",
+  "cover": "https://filmpalast.to/files/movies/450/chucky-3.jpg",
+  "iframe": "https://voe.sx/e/8vb4f4pzh03g"
+},
+{
+  "titel": "Chuckys Baby",
+  "jahr": 2004,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Eben erst von seinem einst verschollenen, geschlechtslosen und deshalb Identitäts-mäßig verwirrten Sprössling Glen/Glenda von den Toten erweckt, gibt es auch schon Ärger zwischen Psycho-Gnom Chucky und dem Nachwuchs. Der will nämlich so gar nicht in die Psychopathen-Fußstapfen seines Vaters treten.",
+  "cover": "https://filmpalast.to/files/movies/450/chuckys-baby.jpg",
+  "iframe": "https://voe.sx/e/qawwpxb301cq"
+},
+{
+  "titel": "Chucky 2 - Die Mörderpuppe ist zurück",
+  "jahr": 1990,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Die vom Geist eines Serienkillers besessene Puppe Chucky wird in den Labors der Puppenfabrik wieder zusammengesetzt. Kaum wiederhergestellt läuft die Puppe erneut Amok. Ziel der Mordlust: Der kleine Andy, in dessen Körper der Killer gerne schlüpfen würde.",
+  "cover": "https://filmpalast.to/files/movies/450/chucky-2-die-morderpuppe-ist-zuruck.jpg",
+  "iframe": "https://voe.sx/e/v4fi4bmwu5ix"
+},
+{
+  "titel": "Chucky und seine Braut",
+  "jahr": 1998,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Zehn Jahre, nachdem der Geist des Serienkillers Chucky in den Körper einer Spielzeugpuppe fuhr, befreit dessen immer noch treu ergebene Freundin Tiffany das Beweisstück aus Polizeikatakomben.",
+  "cover": "https://filmpalast.to/files/movies/450/chucky-und-seine-braut.jpg",
+  "iframe": "https://voe.sx/e/jgpq77rva88r"
+},
+{
+  "titel": "Chucky - Die Mörderpuppe",
+  "jahr": 1988,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Schwerverletzt versteckt sich der geisteskranke Massenmörder Charles Lee Ray auf seiner Flucht in einem Spielwarengeschäft und überträgt im Sterben seine Seele auf die Kinderpuppe \"Chucky\". Genau diese Puppe bekommt der kleine Andy zum Geburtstag geschenkt.",
+  "cover": "https://filmpalast.to/files/movies/450/chucky-die-morderpuppe.jpg",
+  "iframe": "https://voe.sx/e/pb99lq2wl2ib"
+},
+{
+  "titel": "Menace II Society",
+  "jahr": 1993,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Caine wächst in South Central L.A. bei seinen Großeltern auf. Der Junge, dessen Eltern an Drogen zugrunde gingen, ist hin- und hergerissen zwischen einem behüteten Leben bei seiner vernünftigen Freundin Ronnie und dem nihilistischen Gangleben seiner Freunde.",
+  "cover": "https://filmpalast.to/files/movies/450/menace-ii-society.jpg",
+  "iframe": "https://voe.sx/e/ozpjobr94aau"
+},
+{
+  "titel": "Das Morgan Projekt",
+  "jahr": 2016,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Risikomanagerin Lee Weathers (Kate Mara) wird zu einer abgelegenen und streng geheimen Forschungsstation geschickt, um einen schrecklichen Vorfall zu untersuchen und zu bewerten. Dort angekommen erfährt sie, dass ein scheinbar unschuldiger „Mensch“ dafür verantwortlich ist: Morgan (Anya Taylor-Joy).",
+  "cover": "https://filmpalast.to/files/movies/450/das-morgan-projekt.jpg",
+  "iframe": "https://voe.sx/e/it9l95g755jh"
+},
+{
+  "titel": "Arena",
+  "jahr": 2011,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "David hat den Unfalltod seiner Freundin nicht verwunden, fühlt sich schuldig, und ergibt sich dem Alkohol in üblen Kaschemmen.",
+  "cover": "https://filmpalast.to/files/movies/450/arena.jpg",
+  "iframe": "https://voe.sx/e/wvynejlvol68"
+},
+{
+  "titel": "Honest Thief",
+  "jahr": 2020,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Ein Bankräuber will sich stellen, um nach dem Gefängnisaufenthalt ein normales Leben führen zu können. Doch er stellt fest, dass diejenigen, die ihn einbuchten wollen, korrupter sind als er selbst...",
+  "cover": "https://filmpalast.to/files/movies/450/honest-thief.jpg",
+  "iframe": "https://voe.sx/e/sc8gwf19jztm"
+},
+{
+  "titel": "Split",
+  "jahr": 2017,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Für die eigensinnige und achtsame Casey (Anya Taylor-Joy) und ihre zwei Freundinnen Claire (Haley Lu Richardson) und Marcia (Jessica Sula) wird das Leben zur Hölle, als sie eines Tages von einem unheimlichen Mann entführt werden.",
+  "cover": "https://filmpalast.to/files/movies/450/split-2016.jpg",
+  "iframe": "https://voe.sx/e/micq7osaaq7p"
+},
+{
+  "titel": "Ballon",
+  "jahr": 2018,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Die Familien Strelzyk und Wetzel leben in der DDR und wollen weg.",
+  "cover": "https://filmpalast.to/files/movies/450/ballon.jpg",
+  "iframe": "https://voe.sx/e/dzxkpkf9j8pu"
+},
+{
+  "titel": "Lakeview Terrace",
+  "jahr": 2008,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Lakeview Terrace ist eine angesehene Nachbarschaft in den Hügeln von Los Angeles, wo Yuppie Chris (Patrick Wilson) mit seiner schwarzen Frau Lisa (Kerry Washington) hinzieht. Leider wohnen sie neben dem verwitweten afroamerikanischen Polizisten Abel Turner (Samuel L.",
+  "cover": "https://filmpalast.to/files/movies/450/lakeview-terrace.jpg",
+  "iframe": "https://voe.sx/e/b39c2khc3qmb"
+},
+{
+  "titel": "Pig",
+  "jahr": 2021,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Rob hat sich aus der Zivilisation zurückgezogen. Er lebt allein in den Wäldern von Oregon und beschafft sich als Trüffeljäger alles Nötige zum Leben.",
+  "cover": "https://filmpalast.to/files/movies/450/pig.jpg",
+  "iframe": "https://voe.sx/e/d0dzpbrvi9sa"
+},
+{
+  "titel": "Red Lights",
+  "jahr": 2012,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "In abgeklärter Routine und mit messerscharfem Verstand entlarven die Psychologin Dr. Margeret Matheson und ihr ambitionierter Assistent Tom Buckley seit Jahren vermeintliche paranormale Phänomene - Geistererscheinungen, übersinnliche Fähigkeiten - als Täuschung und Betrug.",
+  "cover": "https://filmpalast.to/files/movies/450/red-lights.jpg",
+  "iframe": "https://voe.sx/e/8q3kenrwrcuw"
+},
+{
+  "titel": "Higher Learning - Die Rebellen",
+  "jahr": 1995,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "An der Universität suchen drei Studenten nach ihrer eigenen Identität: Während der Afroamerikaner Malik glaubt, nur als Sportstar eine Chance zu haben, wird das sensible Landei Remy von allen gemieden, während die die naive Kristen von den am Campus schwelenden Rassenproblemen nichts mitzubekommen s.",
+  "cover": "https://filmpalast.to/files/movies/450/higher-learning-die-rebellen.jpg",
+  "iframe": "https://voe.sx/e/8dtbfu59xs71"
+},
+{
+  "titel": "Casino",
+  "jahr": 1995,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Sam \"Ace\" Rothstein sorgt dafür, daß in den Casinos von Las Vegas alles gut läuft. Das heißt: die Politiker müssen geschmiert werden, die Spieler dürfen nicht zu viel gewinnen, und die eigenen Kassen werden immer wieder um einige Millionen erleichtert.",
+  "cover": "https://filmpalast.to/files/movies/450/casino.jpg",
+  "iframe": "https://voe.sx/e/uptsk727zdet"
+},
+{
+  "titel": "Fresh",
+  "jahr": 2022,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Noa (Daisy Edgar-Jones) lernt den verführerischen Steve (Sebastian Stan) in einem Lebensmittelladen kennen und ergreift angesichts ihrer Frustration mit Dating-Apps die Chance und gibt ihm ihre Nummer.",
+  "cover": "https://filmpalast.to/files/movies/450/fresh-2022.jpg",
+  "iframe": "https://voe.sx/e/hk3bk7pzkpvt"
+},
+{
+  "titel": "Motel Room 13",
+  "jahr": 2014,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Killer Jack arbeitet als Handlanger für den ebenso mächtigen wie gefürchteten Gangsterboss Dragna. Für seinen neuesten Auftrag soll er eine Tasche unbekannten Inhalts abholen und in einem provinziellen Motel an Dragna übergeben.",
+  "cover": "https://filmpalast.to/files/movies/450/motel-room-13.jpg",
+  "iframe": "https://voe.sx/e/k59qc1zm4viu"
+},
+{
+  "titel": "Operation: Raqqa - Im Schatten des IS",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "2017 im syrischen Raqqa, nahe der irakischen Grenze: Die sich selbst Islamischer Staat (auch genannt IS, ISIS oder DAESH) nennende Dschihadisten-Miliz beherrscht die Stadt und die umliegenden Gebiete.",
+  "cover": "https://filmpalast.to/files/movies/450/operation-raqqa-im-schatten-des-is.jpg",
+  "iframe": "https://voe.sx/e/fbqo5lfjqwbq"
+},
+{
+  "titel": "Austin Powers in Goldständer",
+  "jahr": 2002,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Keine Gefängnismauer vermag Dr. Evil bzw. seine Chargen Mini-Me, Fat Bastard, Number Two und Frau Farbissina lange zu halten. Nur drei Jahre, nachdem sie von Austin Powers geschnappt wurden, brechen sie aus, um sofort auf den unterschiedlichsten Wegen Unheil zu häufen.",
+  "cover": "https://filmpalast.to/files/movies/450/austin-powers-in-goldstander.jpg",
+  "iframe": "https://voe.sx/e/0f4rwymodk9q"
+},
+{
+  "titel": "The Christmas Chronicles",
+  "jahr": 2018,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Die beiden Geschwister Kate und Teddy Pierce (Judah Lewis und Darby Camp) wollen beweisen, dass es den Weihnachtsmann (Kurt Russell) wirklich gibt, indem sie ihn mit einer Kamera aufnehmen. Nachdem sie die Ankunft des Weihnachtsmanns abwarten, schleichen sie sich zu seinem Schlitten.",
+  "cover": "https://filmpalast.to/files/movies/450/the-christmas-chronicles.jpg",
+  "iframe": "https://voe.sx/e/6kzx6t7y5ero"
+},
+{
+  "titel": "The Christmas Chronicles: Teil 2",
+  "jahr": 2020,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Als rebellische Teenagerin sieht Kate Pierce überraschend den Weihnachtsmann wieder, denn ein rätselhafter Unruhestifter will das Weihnachtsfest für immer auslöschen.",
+  "cover": "https://filmpalast.to/files/movies/450/the-christmas-chronicles-teil-2.jpg",
+  "iframe": "https://voe.sx/e/quqyw9wkf35k"
+},
+{
+  "titel": "Exile - Die Angst in dir",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Kurz vor seiner Entlassung aus dem Gefängnis erhält Ted Evans eine Drohung von dem Mann, dessen Familie er bei einem Unfall getötet hat. Um seine eigene Familie zu schützen, verbannt sich Ted selbst, führt ein zurückgezogenes Leben und distanziert sich von den Menschen, die er liebt.",
+  "cover": "https://filmpalast.to/files/movies/450/exile-die-angst-in-dir.jpg",
+  "iframe": "https://voe.sx/e/afc3deaewoan"
+},
+{
+  "titel": "Stirb langsam - Ein guter Tag zum Sterben",
+  "jahr": 2013,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Alles beim Alten bei dem alten Haudegen John McClane: Diesmal reist der mit allen Wassern gewaschene New Yorker Cop als Tourist nach Moskau, wo er sich mit seinem mittlerweile erwachsenen Sohn Jack treffen will.",
+  "cover": "https://filmpalast.to/files/movies/450/stirb-langsam-ein-guter-tag-zum-sterben.jpg",
+  "iframe": "https://voe.sx/e/d5v47xxpigsa"
+},
+{
+  "titel": "Stirb langsam 4.0",
+  "jahr": 2007,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Eine neue Art von Terrorismus bedroht von Washington, D.C. aus die USA. Die brandgefährliche Organisation des genialen Kriminellen Greg (Timothy Olyphant) plant zum Unabhängigkeitstag am 4.",
+  "cover": "https://filmpalast.to/files/movies/450/stirb-langsam-40.jpg",
+  "iframe": "https://voe.sx/e/d2don3vhstna"
+},
+{
+  "titel": "Stirb langsam - Jetzt erst recht",
+  "jahr": 1995,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Der New Yorker Polizist John McClane (Bruce Willis) muss sich mit einer neuen Situation befassen. Denn diesmal ist er nicht der Jäger, sondern der Gejagte. Der Superverbrecher Simon (Jeremy Irons als unvergesslicher Mega-Fiesling) hat den Cop für ein teuflisches Katz-und-Maus-Spiel auserkoren.",
+  "cover": "https://filmpalast.to/files/movies/450/stirb-langsam-jetzt-erst-recht.jpg",
+  "iframe": "https://voe.sx/e/diveaavdc2dj"
+},
+{
+  "titel": "Stirb Langsam 2",
+  "jahr": 1990,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Colonel Stuart hat mit einem Terrorkommando eine Kapelle auf dem Flughafengelände des Dulles Airport von Washingthon besetzt und die Stromversorgung unter seine Kontrolle gebracht.",
+  "cover": "https://filmpalast.to/files/movies/450/stirb-langsam-2.jpg",
+  "iframe": "https://voe.sx/e/mzidbcogke48"
+},
+{
+  "titel": "Stirb langsam",
+  "jahr": 1988,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Der New Yorker Polizist John McClane fährt zum Weihnachtsfest nach Kalifornien, um sich dort mit seiner Frau, die bei einem japanischen Konzern Karriere gemacht hat, zu versöhnen.",
+  "cover": "https://filmpalast.to/files/movies/450/stirb-langsam.jpg",
+  "iframe": "https://voe.sx/e/6ue9lmaqsncx"
+},
+{
+  "titel": "Elemental",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Die Geschichte des 27. Animationsfilms von Pixar basiert auf den vier Elementen Wasser, Erde, Luft und Feuer. In einer Großstadt leben die zu Figuren gewordene Elemente gemeinsam. Zwei von ihnen sind Ember (Stimme im Original: Leah Lewis) und Wade (Mamoudou Athie).",
+  "cover": "https://filmpalast.to/files/movies/450/elemental.jpg",
+  "iframe": "https://voe.sx/e/2qxx66y57lmc"
+},
+{
+  "titel": "Der König der Löwen 2 - Simbas Königreich",
+  "jahr": 1998,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Simbas Tochter Kiara ist etwas eigenwillig und gerät ganz nach ihrem Vater. Auf der Suche nach Abenteuern entkommt sie ihren Babysittern Timon und Pumbaa und gelangt ins schreckliche Schattenland. Sie lernt den frechen Kovu kennen und freundet sich mit ihm an.",
+  "cover": "https://filmpalast.to/files/movies/450/der-konig-der-lowen-2-simbas-konigreich.jpg",
+  "iframe": "https://voe.sx/e/aib6jh9fj82c"
+},
+{
+  "titel": "Der König der Löwen",
+  "jahr": 1994,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Löwenkönig Mufasa stellt den Tieren seinen Sohn Simba als kommenden Nachfolger vor. Simbas böser Onkel ist davon wenig angetan: Im Verbund mit den Hyänen tötet er Mufasa und schiebt Simba die Schuld in die Schuhe.",
+  "cover": "https://filmpalast.to/files/movies/450/der-konig-der-lowen.jpg",
+  "iframe": "https://voe.sx/e/gr4xa6xit5mn"
+},
+{
+  "titel": "Magic Camp",
+  "jahr": 2020,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Andy Tuckerman (Adam DeVine) kehrt auf Drängen seines einstigen Mentors und Zauber-Camp-Besitzers Roy Preston (Jeffrey Tambor) als Ratgeber in das Camp seiner Jugend zurück und hofft, damit seine Karriere wieder in Schwung bringen zu können.",
+  "cover": "https://filmpalast.to/files/movies/450/magic-camp.jpg",
+  "iframe": "https://voe.sx/e/qxugcx8bf5jc"
+},
+{
+  "titel": "Und Morgen seid ihr Tot",
+  "jahr": 2021,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Als sich das Schweizer Paar Daniela Widmer und David Och auf einer Reise durch Pakistan befinden, werden sie entführt und ins 500 Kilometer entfernte Waziristan verschleppt, wo sie den Taliban übergeben werden.",
+  "cover": "https://filmpalast.to/files/movies/450/und-morgen-seid-ihr-tot.jpg",
+  "iframe": "https://voe.sx/e/yc1tnb5yzwwr"
+},
+{
+  "titel": "Cowboy-Melodie",
+  "jahr": 1965,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Lonnie Beale (Elvis Presley), ein singender Rodeoreiter, wird von der Besitzerin einer Schönheitsfarm als Mitarbeiter angestellt. Alle Damen im Hause sind sofort Feuer und Flamme für ihn, bis auf Pam (Jocelyn Lane), mit der er einfach nicht warm wird.",
+  "cover": "https://filmpalast.to/files/movies/450/cowboy-melodie.jpg",
+  "iframe": "https://voe.sx/e/b2vhi1t0c8sm"
+},
+{
+  "titel": "Nur nicht Millionär sein",
+  "jahr": 1967,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Millionärssohn Scott Heyward ist es leid, immer nur wegen seines Vermögens geliebt zu werden, und beneidet den sorglosen Tom, der in einem Hotel einen Job als Wasserskilehrer annehmen will. Tom wiederum findet Scotts Leben reizvoller, weshalb die Beiden Rollen tauschen.",
+  "cover": "https://filmpalast.to/files/movies/450/nur-nicht-millionar-sein.jpg",
+  "iframe": "https://voe.sx/e/3s816bur15d9"
+},
+{
+  "titel": "Blaues Hawaii",
+  "jahr": 1961,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Chad Gates wird aus der Armee entlassen und soll daheim auf Hawaii einen Posten auf der Farm des elterlichen Ananas-Imperiums antreten. Doch Chad pfeift auf familiäre Protektion und nimmt lieber eine Stelle als Fremdenführer in einem Touristik-Unternehmen an.",
+  "cover": "https://filmpalast.to/files/movies/450/blaues-hawaii.jpg",
+  "iframe": "https://voe.sx/e/hi0leuseywt3"
+},
+{
+  "titel": "Verrückt nach Mary",
+  "jahr": 1998,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Der schüchterne Ted liebt Mary, ein wunderschönes Geschöpf, nach dem sich alle Highschool-Boys verzehren. Sein Glück: Mary steht auf ihn. Sein Pech: Gleich beim ersten Date klemmt Ted sich sein bestes Stück im Reißverschluß ein. 15 Jahre später. Ted begehrt Mary immer noch.",
+  "cover": "https://filmpalast.to/files/movies/450/verruckt-nach-mary.jpg",
+  "iframe": "https://voe.sx/e/iaf86we1b0ba"
+},
+{
+  "titel": "Bullyparade: Der Film",
+  "jahr": 2017,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Zwei Zwickauer reisen zurück in die Zone. Häuptling Winnetou wünscht sich einen Stammhalter. Das Kaiserpaar Sissi und Franz bezieht eine mysteriöse Immobilie. Lutz und Löffler mischen die Börse auf. Ein Planet voller schöner Frauen bringt Captain Kork, Mr. Spuck und Schrotty in große Verlegenheit.",
+  "cover": "https://filmpalast.to/files/movies/450/bullyparade-der-film.jpg",
+  "iframe": "https://voe.sx/e/om911zvgnviv"
+},
+{
+  "titel": "Hui Buh das Schlossgespenst",
+  "jahr": 2006,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Hui Buh treibt als einziges behördlich zugelassenes Gespenst sein Unwesen auf Schloss Burgeck. Leider gibt es weit und breit keinen Menschen, der sich vor ihm erschreckt, nicht einmal der alte Schlossverwalter. Dann aber taucht König Julius, der 111. auf und bringt Leben in die spinnenverwebte Bude.",
+  "cover": "https://filmpalast.to/files/movies/450/hui-buh-das-schlossgespenst.jpg",
+  "iframe": "https://voe.sx/e/q9xw2m8m5pfj"
+},
+{
+  "titel": "Der Boandlkramer und die ewige Liebe",
+  "jahr": 2021,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Der Boandlkramer oder anders gesagt, der Tod (Michael Bully Herbig), hat sich in Gefi (Hannah Herzsprung) verliebt, doch die Angebetete für sich zu gewinnen, ist leichter gesagt als getan. So bietet ihm der Teufel (Hape Kerkeling) seine Unterstützung an, um das Herz der Frau für sich zu gewinnen.",
+  "cover": "https://filmpalast.to/files/movies/450/der-boandlkramer-und-die-ewige-liebe.jpg",
+  "iframe": "https://voe.sx/e/8zzq4nynia1i"
+},
+{
+  "titel": "Birdsong - Gesang vom großen Feuer",
+  "jahr": 2012,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Frankreich, 1910: Vier Jahre vor Ausbruch des Ersten Weltkrieges lernt der junge Engländer Stephen Wraysford während seiner Ausbildung bei Fabrikbesitzer René Azaire dessen junge Frau Isabelle kennen und lieben. Eine verbotene Affäre, die nicht von Dauer ist.",
+  "cover": "https://filmpalast.to/files/movies/450/birdsong-gesang-vom-grosen-feuer.jpg",
+  "iframe": "https://voe.sx/e/etid6yojq119"
+},
+{
+  "titel": "Brothers",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Ein geläuterter Krimineller (Josh Brolin) versucht, sich zu bessern, doch dieses Vorhaben entgleist, als er sich mit seinem Zwillingsbruder (Peter Dinklage), der seine geistige Gesundheit auf die Probe stellt, auf einem Roadtrip trifft, um den Coup seines Lebens zu landen.",
+  "cover": "https://filmpalast.to/files/movies/450/brothers-2024.jpg",
+  "iframe": "https://voe.sx/e/izuckeumxjwe"
+},
+{
+  "titel": "Incoming",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Die erste Woche an der High School. Die Party des Jahres. Was kann schon schiefgehen, wenn sich vier Jungs im Teenageralter in eine Nacht voller Chaos und Exzesse stürzen?",
+  "cover": "https://filmpalast.to/files/movies/450/incoming-2024.jpg",
+  "iframe": "https://voe.sx/e/dhntybgmiww1"
+},
+{
+  "titel": "Die Schöne und das Biest",
+  "jahr": 2014,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "1810: Ein Händler (André Dussollier) steht nach dem Untergang seiner Schiffe vor dem finanziellen Ruin, weswegen er sich mit seinen sechs Kindern aufs Land zurückzieht.",
+  "cover": "https://filmpalast.to/files/movies/450/die-schone-und-das-biest.jpg",
+  "iframe": "https://voe.sx/e/yh6y5rehhn23"
+},
+{
+  "titel": "Die Schöne und das Biest",
+  "jahr": 2017,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Weil der arrogante und oberflächliche Prinz Adam (Dan Stevens) in einer kalten Winternacht einer alten Bettlerin kein Obdach gewährt, wird er von der wunderschönen Zauberin, als die sich die Bettlerin in Wirklichkeit entpuppt, in ein hässliches Biest verwandelt.",
+  "cover": "https://filmpalast.to/files/movies/450/die-schone-und-das-biest-2017.jpg",
+  "iframe": "https://voe.sx/e/zljjdyau7ypj"
+},
+{
+  "titel": "Nightmare Before Christmas",
+  "jahr": 1994,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Das spindeldürre Gerippe Jack Skellington ist der Star von Halloweentown, wo sich ein ganzes Batallion von Geistern und Monstern das ganze Jahr über auf das nächste Halloween vorbereitet.",
+  "cover": "https://filmpalast.to/files/movies/450/nightmare-before-christmas.jpg",
+  "iframe": "https://voe.sx/e/eubriq9dwt0m"
+},
+{
+  "titel": "Mary Poppins",
+  "jahr": 1964,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "London, 1910: Das Leben der Banks-Kinder Jane und Michael nimmt eine Wende, als ihr neues Kindermädchen Mary Poppins mit einem Regenschirm buchstäblich vom Himmel herabschwebt.",
+  "cover": "https://filmpalast.to/files/movies/450/mary-poppins-1964.jpg",
+  "iframe": "https://voe.sx/e/1ffpft6tt5e1"
+},
+{
+  "titel": "Olaf Jagger",
+  "jahr": 2022,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Olaf Schubert deckt eines der bestgehu?tetsten Geheimnisse der DDR auf, das ausgerechnet etwas mit seiner Mutter zu tun hat: Kann es wirklich sein, dass Rocklegende Mick Jagger sein Vater ist? Durch einen Zufall erfährt der Komiker, dass seine Mutter in den 1960ern eine flüchtige Affäre mit dem Fron.",
+  "cover": "https://filmpalast.to/files/movies/450/olaf-jagger.jpg",
+  "iframe": "https://voe.sx/e/qkmxs7p5mpwt"
+},
+{
+  "titel": "Tim Burton's Corpse Bride - Hochzeit mit einer Leiche",
+  "jahr": 2005,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Im 19. Jahrhundert soll der Kaufmannssohn Victor Van Dort die junge Victoria Erverglot, Tochter aus verarmtem Adel, zweckehelichen. Die Van Dorts versprechen sich von der Vereinigung gesellschaftlichen Aufstieg, die Everglots ihrerseits spekulieren vor allem auf vollere Kassen.",
+  "cover": "https://filmpalast.to/files/movies/450/tim-burtons-corpse-bride-hochzeit-mit-einer-leiche.jpg",
+  "iframe": "https://voe.sx/e/fc1ogstxudvv"
+},
+{
+  "titel": "Edward mit den Scherenhänden",
+  "jahr": 1990,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Eines Tages beschließt die \"Avon\"-Beraterin Peg, ihr Verkaufsglück im Schloß hoch über einer gepflegt-amerikanischen Reihenhaussiedlung zu versuchen.",
+  "cover": "https://filmpalast.to/files/movies/450/edward-mit-den-scherenhanden.jpg",
+  "iframe": "https://voe.sx/e/r431p0xs4e8p"
+},
+
+                        {
   "titel": "Traumschiff Surprise - Periode 1",
   "jahr": 2004,
   "hochgeladenAm": "2025-05-02",
