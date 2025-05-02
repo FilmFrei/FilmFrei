@@ -1,6 +1,94 @@
 <!doctypehtml><html lang="de"><meta charset="UTF-8"><meta content="width=device-width,initial-scale=1"name="viewport"><title>Filmfrei: Filme genießen – ganz ohne Werbung</title><link href="https://cdn.plyr.io/3.7.8/plyr.css"rel="stylesheet"><script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script><script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}body{background-color:#121212;color:#f5f5f5;overflow-x:hidden;padding-top:70px}header{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;padding:20px 40px;background-color:rgba(18,18,18,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100;border-bottom:1px solid rgba(255,255,255,.05)}.logo-container{display:flex;align-items:center;gap:15px}.logo{width:40px;height:40px;background-color:#0a84ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;box-shadow:0 0 10px rgba(10,132,255,.3);transition:all .3s ease}.logo:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(10,132,255,.5)}.brand-name{font-size:24px;font-weight:600;letter-spacing:-.5px}.search-container{position:relative;max-width:300px;width:100%}.search-input{width:100%;padding:10px 40px 10px 15px;border-radius:20px;border:none;background-color:#1e1e1e;color:#f5f5f5;font-size:16px;transition:all .3s ease}.search-input:focus{outline:0;background-color:#2a2a2a;box-shadow:0 0 0 2px rgba(10,132,255,.5)}.search-icon{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:#999;pointer-events:none}.search-results{position:absolute;top:50px;width:100%;background-color:#1a1a1a;border-radius:12px;max-height:0;overflow:hidden;transition:max-height .3s ease;box-shadow:0 5px 20px rgba(0,0,0,.3);z-index:200}.search-results.active{max-height:300px;overflow-y:auto}.search-result-item{padding:12px 15px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05)}.search-result-item:hover{background-color:#2a2a2a}main{padding:40px}.section-title{font-size:22px;font-weight:600;margin-bottom:20px;color:#f5f5f5}.film-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:25px;margin-bottom:40px}.film-card{position:relative;border-radius:12px;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;cursor:pointer;aspect-ratio:2/3;background-color:#1a1a1a}.film-card:hover{transform:scale(1.03) translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.4)}.film-card img{width:100%;height:100%;object-fit:cover;transition:opacity .3s ease}.film-info{position:absolute;bottom:0;left:0;width:100%;padding:60px 15px 15px;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);opacity:0;transition:opacity .3s ease}.film-card:hover .film-info{opacity:1}.film-title{font-size:16px;font-weight:500;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.film-year{font-size:14px;color:#bbb}.film-detail-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}.film-detail-overlay.active{opacity:1;visibility:visible}.film-detail-container{display:flex;max-width:1200px;width:90%;background-color:#1a1a1a;border-radius:15px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.5);transform:translateY(30px);opacity:0;transition:transform .4s ease,opacity .4s ease}.film-detail-overlay.active .film-detail-container{transform:translateY(0);opacity:1}.film-detail-left{flex:1;padding:30px}.film-detail-cover{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.3)}.film-detail-info{margin-top:20px}.film-detail-title{font-size:24px;font-weight:600;margin-bottom:10px}.film-detail-meta{display:flex;margin-bottom:15px;color:#bbb;font-size:14px}.film-detail-upload,.film-detail-year{margin-right:20px}.film-detail-description{line-height:1.6;color:#ddd}.film-detail-right{flex:2;position:relative}.film-detail-player{width:100%;height:100%;background-color:#000}.film-player-iframe{width:100%;height:100%;border:none}.film-detail-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;background-color:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:1010;transition:background-color .3s ease}.film-detail-close:hover{background-color:rgba(255,255,255,.2)}.film-detail-close:after,.film-detail-close:before{content:'';position:absolute;width:18px;height:2px;background-color:#fff}.film-detail-close:before{transform:rotate(45deg)}.film-detail-close:after{transform:rotate(-45deg)}.cookie-banner{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);width:90%;max-width:400px;background-color:#1e1e1e;border-radius:12px;padding:20px;box-shadow:0 5px 20px rgba(0,0,0,.4);z-index:900;display:none}.cookie-title{font-size:18px;font-weight:600;margin-bottom:10px}.cookie-text{font-size:14px;line-height:1.5;margin-bottom:15px;color:#ddd}.cookie-actions{display:flex;justify-content:space-between}.cookie-accept{padding:10px 20px;border-radius:20px;border:none;background-color:#0a84ff;color:#fff;font-weight:500;cursor:pointer;transition:background-color .3s ease}.cookie-accept:hover{background-color:#0071e3}.cookie-more{color:#999;text-decoration:none;font-size:14px;align-self:center}.cookie-more:hover{text-decoration:underline}@media (max-width:1024px){.film-detail-container{flex-direction:column;max-height:90vh;overflow-y:auto}.film-detail-left{display:flex;flex-direction:row;padding:20px}.film-detail-cover{width:40%;max-width:200px}.film-detail-info{margin-top:0;margin-left:20px;flex:1}.film-detail-right{height:400px}}@media (max-width:768px){header{padding:15px 20px}main{padding:20px}.film-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:15px}.film-detail-left{flex-direction:column}.film-detail-cover{width:100%;max-width:none}.film-detail-info{margin-left:0;margin-top:20px}.film-detail-right{height:300px}}@media (max-width:480px){.search-container{display:none}.mobile-search-toggle{display:block;font-size:20px;color:#f5f5f5;cursor:pointer}.mobile-search-container{position:fixed;top:0;left:0;width:100%;padding:15px;background-color:#1a1a1a;z-index:150;display:none}.mobile-search-container.active{display:block}.film-detail-overlay{align-items:flex-end}.film-detail-container{width:100%;height:90%;border-radius:15px 15px 0 0}}.loader{border:8px solid #333;border-top:8px solid #fff;border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;margin:30px auto;display:none}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}#popupNotice{margin-top:20px;color:orange;font-size:14px;display:none;text-align:center}.alert{margin:20px auto;max-width:700px;background-color:#3a1a1a;color:#fff1f1;padding:15px 20px;border-radius:10px;font-size:14px;box-shadow:0 4px 10px rgba(0,0,0,.3);position:relative;text-align:center}.closebtn{position:absolute;right:15px;top:12px;font-size:20px;cursor:pointer;color:#fff;font-weight:700}</style><div class="alert"> <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> <center> <strong>Liebe FilmFrei-User,</strong><br> Wenn Filmcover nicht angezeigt werden, liegt das **nicht an euren DNS-Einstellungen**, sondern entweder an **Google Chrome** oder an **Adblockern** wie <strong>uBlock Origin</strong> oder <strong>uBlock Origin Lite</strong> – diese blockieren manchmal externe Bildquellen.<br> <strong>Schon gewusst?</strong> Unsere Seite läuft **auch ohne Adblocker** einwandfrei – wir zeigen **keine Werbung**. 😉<br> <strong>Danke für euer Vertrauen – euer FilmFrei-Team</strong></center></div><header><div class="logo-container"><div class="logo">F</div><div class="brand-name">Filmfrei</div></div><div class="search-container"><input class="search-input"placeholder="Film suchen..."><div class="search-icon"><svg fill="none"height="16"stroke="currentColor"stroke-linecap="round"stroke-linejoin="round"stroke-width="2"viewBox="0 0 24 24"width="16"xmlns="http://www.w3.org/2000/svg"><circle cx="11"cy="11"r="8"></circle><line x1="21"x2="16.65"y1="21"y2="16.65"></line></svg></div><div class="search-results"></div></div><div class="mobile-search-toggle"style="display:none"><svg fill="none"height="24"stroke="currentColor"stroke-linecap="round"stroke-linejoin="round"stroke-width="2"viewBox="0 0 24 24"width="24"xmlns="http://www.w3.org/2000/svg"><circle cx="11"cy="11"r="8"></circle><line x1="21"x2="16.65"y1="21"y2="16.65"></line></svg></div></header><main><section><h2 class="section-title">Neueste Filme</h2><div class="film-grid"id="latest-films"></div></section><section><h2 class="section-title">Alle Filme</h2><div class="film-grid"id="film-liste"></div></section></main><div class="film-detail-overlay"><div class="film-detail-close"></div><div class="film-detail-container"><div class="film-detail-left"><img alt=""class="film-detail-cover"src=""><div class="film-detail-info"><h3 class="film-detail-title"></h3><div class="film-detail-meta"><span class="film-detail-year"></span> <span class="film-detail-upload"></span></div><p class="film-detail-description"></div></div><div class="film-detail-right"><div class="loader"id="loader"></div><div id="popupNotice">🚫 Popup-Versuch wurde blockiert!</div><div class="film-detail-player"></div></div></div></div><div class="cookie-banner"><div class="cookie-title">Cookies gefällig?</div><div class="cookie-text">Diese Seite verwendet Cookies, um dein Erlebnis zu verbessern.</div><div class="cookie-actions"><button class="cookie-accept">Verstanden</button> <a class="cookie-more"href="https://filmfrei.github.io/FilmFrei-Datenschutz/">Mehr erfahren</a></div></div><script>const filme = 
             [
-                          {
+ {
+    titel: "Der Pinguin meines Lebens",
+    jahr: 2024,
+    hochgeladenAm: "2025-05-02",
+    beschreibung: "Ein grantiger Lehrer rettet einen Pinguin – und bekommt mit Juan Salvador einen treuen Freund, der nicht nur sein Leben, sondern auch das seiner Schüler verändert.",
+    cover: "https://filmpalast.to/files/movies/450/der-pinguin-meines-lebens.jpg",
+    iframe: "https://voe.sx/e/udp2wbo9jrb3"
+  },
+  {
+    titel: "Voilà, Papa - Der fast perfekte Schwiegersohn",
+    jahr: 2024,
+    hochgeladenAm: "2025-05-02",
+    beschreibung: "Psychologe Olivier will seinen nervigen Patienten loswerden – doch der taucht ein Jahr später als neuer Freund seiner Tochter wieder auf. Chaos garantiert!",
+    cover: "https://filmpalast.to/files/movies/450/voila-papa-der-fast-perfekte-schwiegersohn.jpg",
+    iframe: "https://voe.sx/e/qpsdv4oqyniw"
+  },
+  {
+    titel: "The Lair",
+    jahr: 2022,
+    hochgeladenAm: "2025-05-02",
+    beschreibung: "Kampfpilotin Kate stürzt in Afghanistan ab und entdeckt einen geheimen Bunker mit tödlichen Kreaturen – als diese ausbrechen, beginnt ein Kampf ums nackte Überleben.",
+    cover: "https://filmpalast.to/files/movies/450/the-lair.jpg",
+    iframe: "https://voe.sx/e/6rfddjnt19ye"
+  },
+  {
+    titel: "The Blackout",
+    jahr: 2019,
+    hochgeladenAm: "2025-05-02",
+    beschreibung: "Ein globaler Blackout löscht fast die ganze Menschheit aus – nur ein Militärposten in Russland bleibt verschont. Dort beginnt der Kampf gegen eine unbekannte Bedrohung.",
+    cover: "https://filmpalast.to/files/movies/450/the-blackout-2019.jpg",
+    iframe: "https://voe.sx/e/cpdowrmxybda"
+  },
+  {
+    titel: "Das Bourne Ultimatum",
+    jahr: 2007,
+    hochgeladenAm: "2025-05-02",
+    beschreibung: "Geheimagent Jason Bourne jagt durch mehrere Städte, um endlich die Wahrheit über seine Vergangenheit zu erfahren – gehetzt von Killern und Behörden weltweit.",
+    cover: "https://filmpalast.to/files/movies/450/das-bourne-ultimatum.jpg",
+    iframe: "https://voe.sx/e/8fg7uh7jdhk0"
+  },
+  {
+    titel: "The Devils Hand",
+    jahr: 2014,
+    hochgeladenAm: "2025-05-02",
+    beschreibung: "18 Jahre nach einem vereitelten Ritual verschwinden Jugendliche spurlos – und Mary hat düstere Visionen. Ist die Prophezeiung vom Drommelkind wahr geworden?",
+    cover: "https://filmpalast.to/files/movies/450/the-devils-hand.jpg",
+    iframe: "https://voe.sx/e/ealdeeqpnrzy"
+  },
+  {
+    titel: "Runner, Runner",
+    jahr: 2013,
+    hochgeladenAm: "2025-05-02",
+    beschreibung: "Mathestudent Richie verliert beim Online-Poker alles – und landet bei einem dubiosen Pokerboss in Costa Rica. Der schnelle Reichtum hat jedoch einen hohen Preis.",
+    cover: "https://filmpalast.to/files/movies/450/runner-runner.jpg",
+    iframe: "https://voe.sx/e/ii1ijgwyjdwl"
+  },
+  {
+    titel: "Der Knochenmann",
+    jahr: 2009,
+    hochgeladenAm: "2025-05-02",
+    beschreibung: "Brenner landet in einer Grillstation, wo menschliche Überreste im Hendl auftauchen – und stolpert zwischen Mord, Backhendl und einer charmanten Köchin in seinen nächsten Fall.",
+    cover: "https://filmpalast.to/files/movies/450/der-knochenmann.jpg",
+    iframe: "https://voe.sx/e/ar1u95lywbr6"
+  },
+  {
+    titel: "Ambulance",
+    jahr: 2022,
+    hochgeladenAm: "2025-05-02",
+    beschreibung: "Ein missglückter Bankraub zwingt zwei Brüder zur Flucht im Rettungswagen – mit einem verletzten Cop und einer Sanitäterin an Bord beginnt eine gnadenlose Verfolgungsjagd durch L.A.",
+    cover: "https://filmpalast.to/files/movies/450/ambulance-2022.jpg",
+    iframe: "https://voe.sx/e/k8gkr163167v"
+  },
+  {
+    titel: "Havoc",
+    jahr: 2025,
+    hochgeladenAm: "2025-05-02",
+    beschreibung: "Ein Cop gerät nach einem schiefgelaufenen Drogenraub in einen Sumpf aus Korruption und Gewalt – und setzt alles daran, den entführten Sohn eines Politikers zu retten.",
+    cover: "https://filmpalast.to/files/movies/450/havoc-2025.jpg",
+    iframe: "https://voe.sx/e/n4gzlod3clud"
+  },
+  {
+    titel: "Fluch aus der Tiefe",
+    jahr: 2025,
+    hochgeladenAm: "2025-05-02",
+    beschreibung: "Nach einem Unfall in Tokio verändert sich Hannahs Sohn auf unheimliche Weise – und bald wird die Familie von finsteren Yokai-Dämonen heimgesucht.",
+    cover: "https://filmpalast.to/files/movies/450/fluch-aus-der-tiefe.jpg",
+    iframe: "https://voe.sx/e/5s0pktbalpyh"
+  },
+  {
     titel: "Wanted",
     jahr: 2008,
     hochgeladenAm: "2025-05-01",
