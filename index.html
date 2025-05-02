@@ -1,5 +1,437 @@
 <!doctypehtml><html lang="de"><meta charset="UTF-8"><meta content="width=device-width,initial-scale=1"name="viewport"><title>Filmfrei: Filme genießen – ganz ohne Werbung</title><link href="https://cdn.plyr.io/3.7.8/plyr.css"rel="stylesheet"><script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script><script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}body{background-color:#121212;color:#f5f5f5;overflow-x:hidden;padding-top:70px}header{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;padding:20px 40px;background-color:rgba(18,18,18,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100;border-bottom:1px solid rgba(255,255,255,.05)}.logo-container{display:flex;align-items:center;gap:15px}.logo{width:40px;height:40px;background-color:#0a84ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;box-shadow:0 0 10px rgba(10,132,255,.3);transition:all .3s ease}.logo:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(10,132,255,.5)}.brand-name{font-size:24px;font-weight:600;letter-spacing:-.5px}.search-container{position:relative;max-width:300px;width:100%}.search-input{width:100%;padding:10px 40px 10px 15px;border-radius:20px;border:none;background-color:#1e1e1e;color:#f5f5f5;font-size:16px;transition:all .3s ease}.search-input:focus{outline:0;background-color:#2a2a2a;box-shadow:0 0 0 2px rgba(10,132,255,.5)}.search-icon{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:#999;pointer-events:none}.search-results{position:absolute;top:50px;width:100%;background-color:#1a1a1a;border-radius:12px;max-height:0;overflow:hidden;transition:max-height .3s ease;box-shadow:0 5px 20px rgba(0,0,0,.3);z-index:200}.search-results.active{max-height:300px;overflow-y:auto}.search-result-item{padding:12px 15px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05)}.search-result-item:hover{background-color:#2a2a2a}main{padding:40px}.section-title{font-size:22px;font-weight:600;margin-bottom:20px;color:#f5f5f5}.film-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:25px;margin-bottom:40px}.film-card{position:relative;border-radius:12px;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;cursor:pointer;aspect-ratio:2/3;background-color:#1a1a1a}.film-card:hover{transform:scale(1.03) translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.4)}.film-card img{width:100%;height:100%;object-fit:cover;transition:opacity .3s ease}.film-info{position:absolute;bottom:0;left:0;width:100%;padding:60px 15px 15px;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);opacity:0;transition:opacity .3s ease}.film-card:hover .film-info{opacity:1}.film-title{font-size:16px;font-weight:500;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.film-year{font-size:14px;color:#bbb}.film-detail-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}.film-detail-overlay.active{opacity:1;visibility:visible}.film-detail-container{display:flex;max-width:1200px;width:90%;background-color:#1a1a1a;border-radius:15px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.5);transform:translateY(30px);opacity:0;transition:transform .4s ease,opacity .4s ease}.film-detail-overlay.active .film-detail-container{transform:translateY(0);opacity:1}.film-detail-left{flex:1;padding:30px}.film-detail-cover{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.3)}.film-detail-info{margin-top:20px}.film-detail-title{font-size:24px;font-weight:600;margin-bottom:10px}.film-detail-meta{display:flex;margin-bottom:15px;color:#bbb;font-size:14px}.film-detail-upload,.film-detail-year{margin-right:20px}.film-detail-description{line-height:1.6;color:#ddd}.film-detail-right{flex:2;position:relative}.film-detail-player{width:100%;height:100%;background-color:#000}.film-player-iframe{width:100%;height:100%;border:none}.film-detail-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;background-color:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:1010;transition:background-color .3s ease}.film-detail-close:hover{background-color:rgba(255,255,255,.2)}.film-detail-close:after,.film-detail-close:before{content:'';position:absolute;width:18px;height:2px;background-color:#fff}.film-detail-close:before{transform:rotate(45deg)}.film-detail-close:after{transform:rotate(-45deg)}.cookie-banner{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);width:90%;max-width:400px;background-color:#1e1e1e;border-radius:12px;padding:20px;box-shadow:0 5px 20px rgba(0,0,0,.4);z-index:900;display:none}.cookie-title{font-size:18px;font-weight:600;margin-bottom:10px}.cookie-text{font-size:14px;line-height:1.5;margin-bottom:15px;color:#ddd}.cookie-actions{display:flex;justify-content:space-between}.cookie-accept{padding:10px 20px;border-radius:20px;border:none;background-color:#0a84ff;color:#fff;font-weight:500;cursor:pointer;transition:background-color .3s ease}.cookie-accept:hover{background-color:#0071e3}.cookie-more{color:#999;text-decoration:none;font-size:14px;align-self:center}.cookie-more:hover{text-decoration:underline}@media (max-width:1024px){.film-detail-container{flex-direction:column;max-height:90vh;overflow-y:auto}.film-detail-left{display:flex;flex-direction:row;padding:20px}.film-detail-cover{width:40%;max-width:200px}.film-detail-info{margin-top:0;margin-left:20px;flex:1}.film-detail-right{height:400px}}@media (max-width:768px){header{padding:15px 20px}main{padding:20px}.film-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:15px}.film-detail-left{flex-direction:column}.film-detail-cover{width:100%;max-width:none}.film-detail-info{margin-left:0;margin-top:20px}.film-detail-right{height:300px}}@media (max-width:480px){.search-container{display:none}.mobile-search-toggle{display:block;font-size:20px;color:#f5f5f5;cursor:pointer}.mobile-search-container{position:fixed;top:0;left:0;width:100%;padding:15px;background-color:#1a1a1a;z-index:150;display:none}.mobile-search-container.active{display:block}.film-detail-overlay{align-items:flex-end}.film-detail-container{width:100%;height:90%;border-radius:15px 15px 0 0}}.loader{border:8px solid #333;border-top:8px solid #fff;border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;margin:30px auto;display:none}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}#popupNotice{margin-top:20px;color:orange;font-size:14px;display:none;text-align:center}.alert{margin:20px auto;max-width:700px;background-color:#3a1a1a;color:#fff1f1;padding:15px 20px;border-radius:10px;font-size:14px;box-shadow:0 4px 10px rgba(0,0,0,.3);position:relative;text-align:center}.closebtn{position:absolute;right:15px;top:12px;font-size:20px;cursor:pointer;color:#fff;font-weight:700}</style><div class="alert"> <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> <center> <strong>Liebe FilmFrei-User,</strong><br> Wenn Filmcover nicht angezeigt werden, liegt das **nicht an euren DNS-Einstellungen**, sondern entweder an **Google Chrome** oder an **Adblockern** wie <strong>uBlock Origin</strong> oder <strong>uBlock Origin Lite</strong> – diese blockieren manchmal externe Bildquellen.<br> <strong>Schon gewusst?</strong> Unsere Seite läuft **auch ohne Adblocker** einwandfrei – wir zeigen **keine Werbung**. 😉<br> <strong>Danke für euer Vertrauen – euer FilmFrei-Team</strong></center></div><header><div class="logo-container"><div class="logo">F</div><div class="brand-name">Filmfrei</div></div><div class="search-container"><input class="search-input"placeholder="Film suchen..."><div class="search-icon"><svg fill="none"height="16"stroke="currentColor"stroke-linecap="round"stroke-linejoin="round"stroke-width="2"viewBox="0 0 24 24"width="16"xmlns="http://www.w3.org/2000/svg"><circle cx="11"cy="11"r="8"></circle><line x1="21"x2="16.65"y1="21"y2="16.65"></line></svg></div><div class="search-results"></div></div><div class="mobile-search-toggle"style="display:none"><svg fill="none"height="24"stroke="currentColor"stroke-linecap="round"stroke-linejoin="round"stroke-width="2"viewBox="0 0 24 24"width="24"xmlns="http://www.w3.org/2000/svg"><circle cx="11"cy="11"r="8"></circle><line x1="21"x2="16.65"y1="21"y2="16.65"></line></svg></div></header><main><section><h2 class="section-title">Neueste Filme</h2><div class="film-grid"id="latest-films"></div></section><section><h2 class="section-title">Alle Filme</h2><div class="film-grid"id="film-liste"></div></section></main><div class="film-detail-overlay"><div class="film-detail-close"></div><div class="film-detail-container"><div class="film-detail-left"><img alt=""class="film-detail-cover"src=""><div class="film-detail-info"><h3 class="film-detail-title"></h3><div class="film-detail-meta"><span class="film-detail-year"></span> <span class="film-detail-upload"></span></div><p class="film-detail-description"></div></div><div class="film-detail-right"><div class="loader"id="loader"></div><div id="popupNotice">🚫 Popup-Versuch wurde blockiert!</div><div class="film-detail-player"></div></div></div></div><div class="cookie-banner"><div class="cookie-title">Cookies gefällig?</div><div class="cookie-text">Diese Seite verwendet Cookies, um dein Erlebnis zu verbessern.</div><div class="cookie-actions"><button class="cookie-accept">Verstanden</button> <a class="cookie-more"href="https://filmfrei.github.io/FilmFrei-Datenschutz/">Mehr erfahren</a></div></div><script>const filme = 
             [
+                        {
+  "titel": "Emily the Criminal",
+  "jahr": 2022,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "In ihrer Verzweiflung nimmt Emily (Aubrey Plaza) einen zwielichtigen Job an, bei dem sie mit gestohlenen Kreditkarten Waren kauft, die ihr ein charismatischer Mittelsmann namens Youcef (Theo Rossi) liefert.",
+  "cover": "https://filmpalast.to/files/movies/450/emily-the-criminal.jpg",
+  "iframe": "https://voe.sx/e/e4xk9qzbkmal"
+},
+{
+  "titel": "Snowden",
+  "jahr": 2016,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Edward Snowden (Joseph Gordon-Levitt) arbeitet als Computer-Profi für einen Subunternehmer der NSA. Doch weder seine langjährige Freundin Lindsay Mills (Shailene Woodley) noch sein Kollege (Keith Stanfield) ahnen, wohin Snowden geht, als er von einem Tag auf den anderen verschwindet.",
+  "cover": "https://filmpalast.to/files/movies/450/snowden.jpg",
+  "iframe": "https://voe.sx/e/mzccbcys68qq"
+},
+{
+  "titel": "Feste & Freunde - Ein Hoch auf uns",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Silvester zusammen mit den besten Freunden zu feiern, klingt doch eigentlich nach einer runden Sache. Doch so einfach ist das für Ellen nicht. Denn in der Silvesternacht auf 2020 ist sie auf der Party bei ihren besten Freunden.",
+  "cover": "https://filmpalast.to/files/movies/450/feste-freunde-ein-hoch-auf-uns.jpg",
+  "iframe": "https://voe.sx/e/gjf4irdsihmz"
+},
+{
+  "titel": "Cop Land",
+  "jahr": 1997,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Polizist Freddy Heflin hat einen anspruchslosen Job in dem New Yorker Vorort Garrison, dem Wohnort vieler Mitglieder des New York Police Department. Dort hat Ray Donlan das Sagen, ein Gesetzeshüter, der schwunghafte Geschäfte mit der Mafia macht.",
+  "cover": "https://filmpalast.to/files/movies/450/cop-land.jpg",
+  "iframe": "https://voe.sx/e/vmo7jqbubuet"
+},
+{
+  "titel": "Shelter - Auf den Strassen von New York",
+  "jahr": 2015,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Zwei Menschen, deren Herkunft nicht unterschiedlicher sein könnte, teilen sich ein gemeinsames Schicksal. Die heroinsüchtige Hannah (J. Connelly) ist US-Amerikanerin und stammt aus einem gut bürgerlichen Haus. Der traumatisierte Tahir (A.",
+  "cover": "https://filmpalast.to/files/movies/450/shelter-auf-den-strassen-von-new-york.jpg",
+  "iframe": "https://voe.sx/e/lnd1v2gavwwc"
+},
+{
+  "titel": "Die Saat des heiligen Feigenbaums",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Gerade nachdem Iman zum Untersuchungsrichter am Revolutionsgericht in Teheran befördert wird, bricht eine Protestwelle über das Land herein, nachdem eine junge Frau getötet wurde. Und als die Demonstrationen immer mehr zunehmen, muss Iman sich entscheiden.",
+  "cover": "https://filmpalast.to/files/movies/450/die-saat-des-heiligen-feigenbaums.jpg",
+  "iframe": "https://voe.sx/e/ewmdjqgrakl8"
+},
+{
+  "titel": "17 Again",
+  "jahr": 2009,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "In der Abschlussklasse von 1989 war Mike O'Donnell der coolste Basketballstar an seiner Schule. 20 Jahre später ist aus ihm ein Loser geworden: Mike lebt von seiner Frau Scarlett getrennt, seine Teenie-Kids verachten ihn.",
+  "cover": "https://filmpalast.to/files/movies/450/17-again.jpg",
+  "iframe": "https://voe.sx/e/tsq4e2mahglz"
+},
+{
+  "titel": "Triangle - Die Angst kommt in Wellen",
+  "jahr": 2009,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Als Jess, gespielt von Melissa George, auf ihrem Weg zum Hafen eine Möwe anfährt, kann sie noch nicht ahnen, dass diese das Omen eines weitaus schlimmeren Übels sein wird. Wenig später setzt sie mit ihren Freunden das Segel.",
+  "cover": "https://filmpalast.to/files/movies/450/triangle-die-angst-kommt-in-wellen.jpg",
+  "iframe": "https://voe.sx/e/0b5mbwht5q0u"
+},
+{
+  "titel": "Insidious: The Red Door",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Zehn Jahre nach den Ereignissen von „Insidious 4: The Last Key“ macht sich Josh Lambert (Patrick Wilson) auf den Weg nach Osten, um dort seinen inzwischen zum Teenager herangewachsenen Sohn Dalton (Ty Simpkins) an einer fast schon romantisch anmutenden, mit Efeu bewachsenen Universität abzusetzen.",
+  "cover": "https://filmpalast.to/files/movies/450/insidious-the-red-door.jpg",
+  "iframe": "https://voe.sx/e/bshnwpv1t0bz"
+},
+{
+  "titel": "Bahubali 2 The Conclusion",
+  "jahr": 2017,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Die Kalakeyas sind besiegt, Amarendra Baahubali bereitet sich auf die Rolle als künftiger König vor. Doch der Beginn seiner Herrschaft steht unter keinem guten Stern. Oberbefehlshaber Bhallaladeva will einen Keil zwischen Amarendra und Königin Mutter Sivagami treiben.",
+  "cover": "https://filmpalast.to/files/movies/450/bahubali-2-the-conclusion.jpg",
+  "iframe": "https://voe.sx/e/btdahsf8ibbk"
+},
+{
+  "titel": "Bahubali: The Beginning",
+  "jahr": 2015,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Als kleines Baby im Fluss ausgesetzt, wächst Shivudu gut behütet bei seiner neuen Familie auf. Aus ihm wird ein junger, starker Mann mit ungeahnten Fähigkeiten.",
+  "cover": "https://filmpalast.to/files/movies/450/bahubali-the-beginning.jpg",
+  "iframe": "https://voe.sx/e/gfzsvger7pdg"
+},
+{
+  "titel": "Riddick - Überleben ist seine Rache",
+  "jahr": 2013,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Der zurückgelassene Riddick (Vin Diesel) findet sich auf einem sonnenverbrannten Planeten wieder, auf dem sämtliches Leben ausgestorben zu sein scheint. Doch schon bald muss er sein Leben gegen unerbittliche Aliens verteidigen.",
+  "cover": "https://filmpalast.to/files/movies/450/riddick-uberleben-ist-seine-rache.jpg",
+  "iframe": "https://voe.sx/e/mnckhtcvgmhn"
+},
+{
+  "titel": "Feinde - Hostiles",
+  "jahr": 2018,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Im Jahr 1892 nimmt der hochgeachtete Armee-Offizier Joseph J.",
+  "cover": "https://filmpalast.to/files/movies/450/feinde-hostiles.jpg",
+  "iframe": "https://voe.sx/e/ch2sickmiisz"
+},
+{
+  "titel": "The Beekeeper",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Mr. Clay (Jason Statham) hat sich auf den ersten Blick ganz der Imkerei verschrieben. Doch als seine Nachbarin bei einer Telefon-Abzocke um ihr ganzes Erspartes erleichtert wird und sich daraufhin das Leben nimmt, müssen seine Bienen zurückstehen. Denn nun ist einzig und allein die Rache sein Fokus.",
+  "cover": "https://filmpalast.to/files/movies/450/the-beekeeper.jpg",
+  "iframe": "https://voe.sx/e/46gblxp0beci"
+},
+{
+  "titel": "Passengers",
+  "jahr": 2016,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Ein Raumschiff transportiert Tausende von Menschen quer durchs Weltall. Es befindet sich auf einer Jahrzehnte andauernden Reise zu einer Kolonie auf einem fernen Planeten.",
+  "cover": "https://filmpalast.to/files/movies/450/passengers.jpg",
+  "iframe": "https://voe.sx/e/c70jk09bq1vl"
+},
+{
+  "titel": "Prey",
+  "jahr": 2022,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "„Prey“ spielt vor 300 Jahren im Volk der Comanchen und erzählt die Geschichte einer jungen Frau, Naru, einer wilden und talentierten Kriegerin. Sie wuchs im Schatten einiger der legendärsten Jäger der Great Plains auf. Als ihr Lager bedroht wird, macht sie sich auf den Weg, um ihr Volk zu schützen.",
+  "cover": "https://filmpalast.to/files/movies/450/prey-2022.jpg",
+  "iframe": "https://voe.sx/e/ew6jcw0ixxtp"
+},
+{
+  "titel": "American Beauty",
+  "jahr": 1999,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Dem ausgebrannten Normalbürger Lester Burnham knallt eine Sicherung durch, als er die lolitahafte Freundin seiner missmutigen Tochter Jane kennen lernt. Sexuell frustriert setzt er sich eine Affäre mit dem Teenie-Traum in den Kopf.",
+  "cover": "https://filmpalast.to/files/movies/450/american-beauty.jpg",
+  "iframe": "https://voe.sx/e/6hw0hz5q836m"
+},
+{
+  "titel": "Ein Jackpot zum Sterben",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Das harmlose Prinzip von Lotto wird in der Actionkomödie Grand Death Lotto zum tödlichen Spiel für alle Beteiligten. Wer in der dystopischen Zukunft von L.A.s Lottosystem den Jackpot gewinnt, muss diesen buchstäblich mit seinem Leben verteidigen.",
+  "cover": "https://filmpalast.to/files/movies/450/ein-jackpot-zum-sterben.jpg",
+  "iframe": "https://voe.sx/e/gx8pg5ktzusx"
+},
+{
+  "titel": "100 Streets",
+  "jahr": 2017,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Drei außergewöhnliche Geschichten, die sich alle innerhalb einer Quadratmeile in London abspielen.",
+  "cover": "https://filmpalast.to/files/movies/450/100-streets.jpg",
+  "iframe": "https://voe.sx/e/tzuty9wdacqi"
+},
+{
+  "titel": "David Attenborough: Mein Leben auf dem Planeten",
+  "jahr": 2020,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Ein Tierfilmer reflektiert über sein Leben, die Evolution des Lebens auf Erden, das Verschwinden unberührter Orte in der Natur und seine Vision für die Zukunft.",
+  "cover": "https://filmpalast.to/files/movies/450/david-attenborough-mein-leben-auf-dem-planeten.jpg",
+  "iframe": "https://voe.sx/e/csondlxs2nja"
+},
+{
+  "titel": "5 Pounds of Pressure",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "INach 16 Jahren Knast wegen Mordes kehrt Adam in sein altes Viertel zurück und begibt sich auf den steinigen Weg der Vergebung gegenüber seinem Sohn, der ohne ihn aufgewachsen ist, während der verbitterte, unberechenbare Bruder des Jugendlichen, den er getötet hat, im Hintergrund lauert.",
+  "cover": "https://filmpalast.to/files/movies/450/5-pounds-of-pressure.jpg",
+  "iframe": "https://voe.sx/e/lmv49o3gxqtm"
+},
+{
+  "titel": "Fear",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Eine Gruppe von Freunden trifft sich in den Tahoe Mountains, um in der \"Historic Strawberry Lodge\" zu übernachten. Als sich die Wahrheit über die historische Lodge langsam vor ihnen auftut, verwandelt sich der Trip in einen Albtraum.",
+  "cover": "https://filmpalast.to/files/movies/450/fear.jpg",
+  "iframe": "https://voe.sx/e/cmbbgdchqaqk"
+},
+{
+  "titel": "Uncaged - Das Biest in dir",
+  "jahr": 2017,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Jack ist Schlafwandler. Gleich mehrere Nächte hintereinander wacht der Teenager in den Wäldern der Umgebung auf, ohne zu wissen, wie er dorthin gelangt ist.",
+  "cover": "https://filmpalast.to/files/movies/450/uncaged-das-biest-in-dir.jpg",
+  "iframe": "https://voe.sx/e/apr80diodz7a"
+},
+{
+  "titel": "Im Netz der Spinne",
+  "jahr": 2001,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Megan, die Tochter eines US-Senators, wird vor der Nase des Secret Service von ihrem Lehrer entführt. Dr. Alex Cross nimmt zusammen mit Agentin Jezzie Flannigan, die für die Sicherheit des Mädchens verantwortlich war, die Ermittlungen auf.",
+  "cover": "https://filmpalast.to/files/movies/450/im-netz-der-spinne.jpg",
+  "iframe": "https://voe.sx/e/6i58pw59hgd6"
+},
+{
+  "titel": "Tombstone",
+  "jahr": 1993,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Die Westernlegende Wyatt Earp kommt mit seinen Brüdern nach Tombstone, um sich zur Ruhe zu setzen. Doch das friedliche Dasein als Spielsalonbesitzer wird mit der Ankunft der Cowboys unter Führung von Curly Bill und Johnny Ringo jäh unterbrochen.",
+  "cover": "https://filmpalast.to/files/movies/450/tombstone.jpg",
+  "iframe": "https://voe.sx/e/jd357uq44q2d"
+},
+{
+  "titel": "Don't Move",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Eine trauernde Frau begegnet in einem abgelegenen Wald einem Mörder, der ihr ein lähmendes Mittel injiziert. Als ihr Körper langsam versagt, beginnt ihr Überlebenskampf.",
+  "cover": "https://filmpalast.to/files/movies/450/dont-move-2024.jpg",
+  "iframe": "https://voe.sx/e/jlqwey79376a"
+},
+{
+  "titel": "Krabat",
+  "jahr": 2008,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Kurz nach dem Dreißigjährigen Krieg folgt der 14-jährige Bettlerjunge Krabat (David Kross) der Stimme aus seinem Traum und fängt in einer geheimnisvollen Mühle im Koselbruch beim Meister (Christian Redl) als Lehrling an.",
+  "cover": "https://filmpalast.to/files/movies/450/krabat.jpg",
+  "iframe": "https://voe.sx/e/6ke1pyzs0djr"
+},
+{
+  "titel": "The Last Redemption - Der Kampf um den Thron",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Diana, eine Geächtete im magischen Reich Brea, schließt sich mit ihren Brüdern zusammen, um eine unschuldige Prinzessin aus den Fängen des gerissenen Lord Roland zu retten. Sie begeben sich auf eine epische Suche, um dem vom Krieg zerrissenen Land Frieden zu bringen.",
+  "cover": "https://filmpalast.to/files/movies/450/the-last-redemption-der-kampf-um-den-thron.jpg",
+  "iframe": "https://voe.sx/e/72jjnjko55zy"
+},
+{
+  "titel": "Die Heinzels 2 - Neue Mützen, neue Mission",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Über Heinzelmädchen Helvi (Stimme: Jella Haase) lässt sich viel sagen, aber nicht, dass es ihr an Mut und Abenteuerlust mangeln würde. Helvi liebt es einfach, sich in der Welt der Menschen herumzutreiben, obwohl ihr das gar nicht erlaubt ist.",
+  "cover": "https://filmpalast.to/files/movies/450/die-heinzels-2-neue-mutzen-neue-mission.jpg",
+  "iframe": "https://voe.sx/e/ktee4gngrbeo"
+},
+{
+  "titel": "Watchmen: Chapter I",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "In einer alternativen, von Superhelden geprägten Weltgeschichte wurden die einst gefeierten \"kostümierten Abenteurer\" von einer vom Vigilantismus enttäuschten Gesellschaft verbannt.",
+  "cover": "https://filmpalast.to/files/movies/450/watchmen-chapter-i.jpg",
+  "iframe": "https://voe.sx/e/gzwpniks534k"
+},
+{
+  "titel": "Watchmen: Chapter II",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "In einem alternativen Amerika des Jahres 1985 sind maskierte Superhelden fester Bestandteil der Gesellschaft. Als ein ehemaliger Held brutal in seiner Wohnung ermordet wird, beginnt der als Rorschach (Stimme im Original: Titus Welliver) bekannte maskierte Ordnungshüter Nachforschungen anzustellen.",
+  "cover": "https://filmpalast.to/files/movies/450/watchmen-chapter-ii.jpg",
+  "iframe": "https://voe.sx/e/ypuy4i4eoeab"
+},
+{
+  "titel": "iHostage",
+  "jahr": 2025,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Als ein bewaffneter Mann einen Apple Store im Herzen Amsterdams betritt, steht die Polizei vor einer heiklen Aufgabe, die Pattsituation zu lösen. Basierend auf wahren Begebenheiten.",
+  "cover": "https://filmpalast.to/files/movies/450/ihostage.jpg",
+  "iframe": "https://voe.sx/e/ik1iwd5efqf6"
+},
+{
+  "titel": "Sechs Richtige - Glück ist nichts für Anfänger",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Eine Sache scheint klar: Nach einem Millionengewinn im Lotto bleibt kein Leben unverändert. Doch dafür muss man das Geld auch erstmal in den Händen halten. Für Paul wird das ziemlich knapp.",
+  "cover": "https://filmpalast.to/files/movies/450/sechs-richtige-gluck-ist-nichts-fur-anfanger.jpg",
+  "iframe": "https://voe.sx/e/rwohny1hxa8m"
+},
+{
+  "titel": "The Unheard",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Chloe (Lachlan Watson) unterzieht sich einem seltenen experimentellen Eingriff, um ihr Gehör zurückzuerlangen. Die Behandlung scheint erfolgreich, doch bald plagen sie verstörende Halluzinationen.",
+  "cover": "https://filmpalast.to/files/movies/450/the-unheard.jpg",
+  "iframe": "https://voe.sx/e/twafsurjtg08"
+},
+{
+  "titel": "Mickeys Mouse Trap",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Es ist Alex‘ 21. Geburtstag und sie sitzt in der Spätschicht in der Spielhalle fest, also beschließen ihre Freunde, sie mit einer Party zu überraschen, aber ein als Mickey Maus verkleideter Killer spielt ein blutiges Spiel mit ihnen, in welchem sie ums Überleben kämpfen müssen.",
+  "cover": "https://filmpalast.to/files/movies/450/mickeys-mouse-trap.jpg",
+  "iframe": "https://voe.sx/e/pmxrvunyydr3"
+},
+{
+  "titel": "All Souls - Undercover and nowhere to run",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Die junge, alleinerziehende River wird gezwungen für die Polizei als Informantin zu arbeiten, um den Vater ihres Kindes – einen berüchtigten Drogenbaron - auszuspionieren. Als jedoch ein Undercover-Einsatz schiefgeht, kämpft sie ums Überleben und muss auf der Flucht auch ihre Tochter beschützen.",
+  "cover": "https://filmpalast.to/files/movies/450/all-souls-undercover-and-nowhere-to-run.jpg",
+  "iframe": "https://voe.sx/e/dl07jszamzrf"
+},
+{
+  "titel": "Prophezeiung Liebe",
+  "jahr": 2025,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Die erfolglose Fotografin Pia erhält eine Vorhersage: Die wahre Liebe erwartet sie in ihren nächsten fünf Dates. Während die Hochzeit ihrer Schwester näher rückt und ihre Familie eifrig verkuppelt, taucht plötzlich ihr Ex wieder auf – und stürzt ihr Liebesleben ins Chaos.",
+  "cover": "https://filmpalast.to/files/movies/450/prophezeiung-liebe.jpg",
+  "iframe": "https://voe.sx/e/uqeeodmxvpef"
+},
+{
+  "titel": "God of Pain",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Ein Mann wacht auf der Straße auf, ohne zu wissen, wo er ist oder wie er dorthin kam. Er muss sich bald seinen inneren Dämonen stellen. Im Jahr 2046 hat die Gesellschaft einen Pakt mit Algea, der uralten Gottheit des Schmerzes, geschlossen, um menschliches Leid zu kontrollieren.",
+  "cover": "https://filmpalast.to/files/movies/450/god-of-pain.jpg",
+  "iframe": "https://voe.sx/e/i94tyoh8yoxt"
+},
+{
+  "titel": "Karate Kid",
+  "jahr": 2010,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Der zwölfjährige Dre Parker aus Detroit ist alles andere als erfreut, als seine alleinerziehende Mutter eine einmalige berufliche Chance ergreift und mit dem Sohnemann nach China zieht. Als er sich in der Schule in die hübsche Mei Ying verliebt, macht er sich seinen Klassenkameraden Cheng zum Feind.",
+  "cover": "https://filmpalast.to/files/movies/450/karate-kid.jpg",
+  "iframe": "https://voe.sx/e/fgknywt7w05p"
+},
+{
+  "titel": "Karate Kid",
+  "jahr": 1984,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Nachdem er mit seiner Mutter von New Jersey nach Los Angeles umgezogen ist, hat der junge Daniel Schwierigkeiten, sich in der neuen Umgebung zurechtzufinden. Hoffnung verspricht die süße Ali, auf die Daniel ein Auge wirft.",
+  "cover": "https://filmpalast.to/files/movies/450/karate-kid-1984.jpg",
+  "iframe": "https://voe.sx/e/enrqn8gfzk65"
+},
+{
+  "titel": "Karate Kid 2 - Entscheidung in Okinawa",
+  "jahr": 1986,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Daniel begleitet seinen Lehrmeister Miyagi nach Japan, weil dieser die Nachricht erhalten hat, dass sein Vater im Sterben liegt.",
+  "cover": "https://filmpalast.to/files/movies/450/karate-kid-2-entscheidung-in-okinawa.jpg",
+  "iframe": "https://voe.sx/e/edfsclyrbs1s"
+},
+{
+  "titel": "Karate Kid 3 - Die letzte Entscheidung",
+  "jahr": 1989,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Daniel LaRusso und Mr. Miyagi planen nach ihrer Rückkehr aus Okinawa die Eröffnung eines Bonsaigeschäftes. Die Freunde ahnen nicht, daß ihr alter Gegner Kreese inzwischen mächtige Unterstützung durch den Karatemeister und Geschäftsmann Terry Silver erhalten hat.",
+  "cover": "https://filmpalast.to/files/movies/450/karate-kid-3-die-letzte-entscheidung.jpg",
+  "iframe": "https://voe.sx/e/gdejlkxgrbud"
+},
+{
+  "titel": "Karate Kid 4 - Die nächste Generation",
+  "jahr": 1994,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Während sich die überforderte Oma vom Erziehungsstreß erholt, kümmert sich der weise Mr. Myagi um die verwaiste, stets mürrische Julie. Nach anfänglicher Ablehnung beginnt das 17jährige Problemkind, sich für die fernöstlichen Philosophien des Karate-Lehrers zu interessieren.",
+  "cover": "https://filmpalast.to/files/movies/450/karate-kid-4-die-nachste-generation.jpg",
+  "iframe": "https://voe.sx/e/zqunpfymfusy"
+},
+{
+  "titel": "I, the Executioner",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Detective Seo ist ein herausragender Polizist – auch wenn er nicht immer nach Vorschrift handelt. In seinem neuen Fall müssen sich Seo und sein Team mit einem mysteriösen Killer auseinandersetzen, der systematisch Verbrecher hinrichtet, die nicht angemessen für ihre Verbrechen bestraft wurden.",
+  "cover": "https://filmpalast.to/files/movies/450/i-the-executioner.jpg",
+  "iframe": "https://voe.sx/e/sv6odjthogop"
+},
+{
+  "titel": "Tarantula",
+  "jahr": 1955,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "In einem Kaff in der Wüste Arizonas wird der Arzt Matt Hastings mit der Leiche eines Wissenschaftlers konfrontiert, die abnormes Wachstum einzelner Körperteile aufweist.",
+  "cover": "https://filmpalast.to/files/movies/450/tarantula.jpg",
+  "iframe": "https://voe.sx/e/4hc0g8adyixh"
+},
+{
+  "titel": "Landesverräter",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Schweiz, 1942: In der Hoffnung, in Deutschland ein großer Sänger zu werden, verkauft der arme Vagabund Ernst Schrämli (Dimitri Krebs) Schweizer Militärinformationen an den Nazi-Geheimagenten August Schmid (Fabian Hinrichs).",
+  "cover": "https://filmpalast.to/files/movies/450/landesverrater.jpg",
+  "iframe": "https://voe.sx/e/y6v9myrfvzwa"
+},
+{
+  "titel": "The Nightman",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Eine junge schwangere Frau findet heraus, dass ihr perfekter Freund ein gefährlicher Schlafwandler sein könnte, als sie von seltsamen Verschwinden und Morden in der Region erfährt.",
+  "cover": "https://filmpalast.to/files/movies/450/the-nightman.jpg",
+  "iframe": "https://voe.sx/e/qsmyf7tfkptw"
+},
+{
+  "titel": "Mo",
+  "jahr": 2019,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Mo und ihre beste Freundin Vera werden bei einer Prüfung von Ursu, dem härtesten Professor der Universität, beim Schummeln erwischt . Nachdem sie ihn um eine zweite Chance gebeten hat , lädt der Professor sie zu sich nach Hause ein. Hier müssen die Studenten eine unerwartete Prüfung bestehen.",
+  "cover": "https://filmpalast.to/files/movies/450/mo-2019.jpg",
+  "iframe": "https://voe.sx/e/qpwae2mkuast"
+},
+{
+  "titel": "Tierische Detektive - Drei Kids und ihr größter Fall",
+  "jahr": 2025,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Als in ihrer Nachbarschaft zuletzt immer mehr Haustiere auf mysteriöse Weise verschwinden, schließen sich der mutige Gabe Miller (Peyton Jackson), die tatkräftig entschlossene Olivia (Gabriella Terrero) und der außergewöhnlich intelligente Jayden Winfield (Joseph Y.",
+  "cover": "https://filmpalast.to/files/movies/450/tierische-detektive-drei-kids-und-ihr-groster-fall.jpg",
+  "iframe": "https://voe.sx/e/bgqliisjeo1d"
+},
+{
+  "titel": "Bone Cold - Ghost Sniper",
+  "jahr": 2022,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Die beiden Elite-Scharfschützen Jon Bryant und Marco Miller werden auf eine geheime Mission, um einen Separatisten auszuschalten.",
+  "cover": "https://filmpalast.to/files/movies/450/bone-cold-ghost-sniper.jpg",
+  "iframe": "https://voe.sx/e/z91ctuklsahc"
+},
+{
+  "titel": "Operation White Christmas",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Enis (Rauand Taleb), der Besitzer der letzten Videothek in Kärnten, steht vor einem finanziellen Desaster. Seine Schulden häufen sich an, und die Zukunft seiner geliebten Videothek sieht düster aus.",
+  "cover": "https://filmpalast.to/files/movies/450/operation-white-christmas.jpg",
+  "iframe": "https://voe.sx/e/iuf34b4mrgju"
+},
+{
+  "titel": "Voll auf die Nüsse",
+  "jahr": 2004,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Um die Übernahme seines Ladens durch die Fitness-Kette \"Globo Gym\" durch den skrupellosen White Goodman (Ben Stiller) zu vereiteln, muss Kraftstudiounternehmer Peter (Vince Vaughn) 50.000 Dollar Bankschulden berappen. Zufällig kann man beim Völkerball-Turnier in Las Vegas genau diese Summe gewinnen.",
+  "cover": "https://filmpalast.to/files/movies/450/voll-auf-die-nusse.jpg",
+  "iframe": "https://voe.sx/e/nxwpg6pfirhr"
+},
+{
+  "titel": "Gullivers Reisen - Da kommt was Großes auf uns zu",
+  "jahr": 2010,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Von wahrer Größe kann Gulliver, kleiner Bürobote und verliebt in die unerreichbare Redakteurin Darcy, nur träumen. Bis er Darcy durch Betrug überzeugt, ihn für einen Reisebericht auf die Bermudas zu schicken, wo Gulliver nach einem Sturm auf der Insel Liliput landet.",
+  "cover": "https://filmpalast.to/files/movies/450/gullivers-reisen-da-kommt-was-groses-auf-uns-zu.jpg",
+  "iframe": "https://voe.sx/e/lv4ri3ztzhuu"
+},
+{
+  "titel": "Cinderellas Revenge",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-02",
+  "beschreibung": "Cinderella wird ständig von ihren bösen Stiefschwestern und ihrer Stiefmutter geärgert, doch eines Tages hat sie genug: Sie rastet aus und beginnt sich in Cinderella's Revenge, mit der Hilfe ihrer guten Fee, gegen ihre gemeine Familie zu wehren - mit Gewalt.",
+  "cover": "https://filmpalast.to/files/movies/450/cinderellas-revenge.jpg",
+  "iframe": "https://voe.sx/e/c453ebuzpyyw"
+},
  {
     titel: "Der Pinguin meines Lebens",
     jahr: 2024,
