@@ -554,27 +554,31 @@
   </div>
   <header>
     <div class="logo-container">
-      <div class="logo">F</div>
-      <div class="brand-name">Filmfrei</div>
-    </div>
-    <div class="search-container"><input class="search-input"
-        placeholder="Film suchen...">
-      <div class="search-icon"><svg fill="none" height="16"
-          stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-          stroke-width="2" viewBox="0 0 24 24" width="16"
-          xmlns="http://www.w3.org/2000/svg">
+      <div class="logo">
+        <img
+          src="https://i.ibb.co/Xk2WdtTN/7063aa5b-7d03-4acb-b913-17f450ee7642.png"
+          alt="Filmfrei Logo"
+          style="width: 100%; height: 100%; border-radius: 50%;">
+      </div>
+
+      <div class="search-container"><input class="search-input"
+          placeholder="Film suchen...">
+        <div class="search-icon"><svg fill="none" height="16"
+            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="2" viewBox="0 0 24 24" width="16"
+            xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+          </svg></div>
+        <div class="search-results"></div>
+      </div>
+      <div class="mobile-search-toggle" style="display:none"><svg fill="none"
+          height="24" stroke="currentColor" stroke-linecap="round"
+          stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+          width="24" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
         </svg></div>
-      <div class="search-results"></div>
-    </div>
-    <div class="mobile-search-toggle" style="display:none"><svg fill="none"
-        height="24" stroke="currentColor" stroke-linecap="round"
-        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
-        xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
-      </svg></div>
   </header>
   <main>
     <section>
@@ -594,7 +598,8 @@
         <div class="film-detail-info">
           <h3 class="film-detail-title"></h3>
           <div class="film-detail-meta"><span class="film-detail-year"></span>
-            <span class="film-detail-upload"></span></div>
+            <span class="film-detail-upload"></span>
+          </div>
           <p class="film-detail-description">
         </div>
       </div>
@@ -4271,7 +4276,7 @@
         } catch (e) {
           console.warn(
             'Cross-Origin-Schutz: window.open konnte nicht überschrieben werden.'
-            );
+          );
         }
       };
 
