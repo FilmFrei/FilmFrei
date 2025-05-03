@@ -451,10 +451,12 @@
     }
 
     @media (max-width:480px) {
-      .search-container {
-        display: none
-      }
-
+  .search-container {
+    width: 100%;
+    margin-top: 10px;
+    padding: 0 10px;
+  }
+}
       .mobile-search-toggle {
         display: block;
         font-size: 20px;
@@ -552,17 +554,18 @@
         euer FilmFrei-Team</strong></center>
   </div>
   <header>
-      <div class="search-container"><input class="search-input"
-          placeholder="Film suchen...">
-        <div class="search-icon"><svg fill="none" height="16"
-            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-            stroke-width="2" viewBox="0 0 24 24" width="16"
-            xmlns="http://www.w3.org/2000/svg">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
-          </svg></div>
-        <div class="search-results"></div>
-      </div>
+  <div class="search-container">
+    <input class="search-input" placeholder="Film suchen...">
+    <div class="search-icon">
+      <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16"
+        xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+      </svg>
+    </div>
+    <div class="search-results"></div>
+  </div>
       <div class="mobile-search-toggle" style="display:none"><svg fill="none"
           height="24" stroke="currentColor" stroke-linecap="round"
           stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
