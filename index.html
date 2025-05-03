@@ -1,6 +1,486 @@
 <!doctypehtml><html lang="de"><meta charset="UTF-8"><meta content="width=device-width,initial-scale=1"name="viewport"><title>Filmfrei: Filme genießen – ganz ohne Werbung</title><link href="https://cdn.plyr.io/3.7.8/plyr.css"rel="stylesheet"><script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script><script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}body{background-color:#121212;color:#f5f5f5;overflow-x:hidden;padding-top:70px}header{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;padding:20px 40px;background-color:rgba(18,18,18,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100;border-bottom:1px solid rgba(255,255,255,.05)}.logo-container{display:flex;align-items:center;gap:15px}.logo{width:40px;height:40px;background-color:#0a84ff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;box-shadow:0 0 10px rgba(10,132,255,.3);transition:all .3s ease}.logo:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(10,132,255,.5)}.brand-name{font-size:24px;font-weight:600;letter-spacing:-.5px}.search-container{position:relative;max-width:300px;width:100%}.search-input{width:100%;padding:10px 40px 10px 15px;border-radius:20px;border:none;background-color:#1e1e1e;color:#f5f5f5;font-size:16px;transition:all .3s ease}.search-input:focus{outline:0;background-color:#2a2a2a;box-shadow:0 0 0 2px rgba(10,132,255,.5)}.search-icon{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:#999;pointer-events:none}.search-results{position:absolute;top:50px;width:100%;background-color:#1a1a1a;border-radius:12px;max-height:0;overflow:hidden;transition:max-height .3s ease;box-shadow:0 5px 20px rgba(0,0,0,.3);z-index:200}.search-results.active{max-height:300px;overflow-y:auto}.search-result-item{padding:12px 15px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05)}.search-result-item:hover{background-color:#2a2a2a}main{padding:40px}.section-title{font-size:22px;font-weight:600;margin-bottom:20px;color:#f5f5f5}.film-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:25px;margin-bottom:40px}.film-card{position:relative;border-radius:12px;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;cursor:pointer;aspect-ratio:2/3;background-color:#1a1a1a}.film-card:hover{transform:scale(1.03) translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.4)}.film-card img{width:100%;height:100%;object-fit:cover;transition:opacity .3s ease}.film-info{position:absolute;bottom:0;left:0;width:100%;padding:60px 15px 15px;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);opacity:0;transition:opacity .3s ease}.film-card:hover .film-info{opacity:1}.film-title{font-size:16px;font-weight:500;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.film-year{font-size:14px;color:#bbb}.film-detail-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}.film-detail-overlay.active{opacity:1;visibility:visible}.film-detail-container{display:flex;max-width:1200px;width:90%;background-color:#1a1a1a;border-radius:15px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.5);transform:translateY(30px);opacity:0;transition:transform .4s ease,opacity .4s ease}.film-detail-overlay.active .film-detail-container{transform:translateY(0);opacity:1}.film-detail-left{flex:1;padding:30px}.film-detail-cover{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.3)}.film-detail-info{margin-top:20px}.film-detail-title{font-size:24px;font-weight:600;margin-bottom:10px}.film-detail-meta{display:flex;margin-bottom:15px;color:#bbb;font-size:14px}.film-detail-upload,.film-detail-year{margin-right:20px}.film-detail-description{line-height:1.6;color:#ddd}.film-detail-right{flex:2;position:relative}.film-detail-player{width:100%;height:100%;background-color:#000}.film-player-iframe{width:100%;height:100%;border:none}.film-detail-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;background-color:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:1010;transition:background-color .3s ease}.film-detail-close:hover{background-color:rgba(255,255,255,.2)}.film-detail-close:after,.film-detail-close:before{content:'';position:absolute;width:18px;height:2px;background-color:#fff}.film-detail-close:before{transform:rotate(45deg)}.film-detail-close:after{transform:rotate(-45deg)}.cookie-banner{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);width:90%;max-width:400px;background-color:#1e1e1e;border-radius:12px;padding:20px;box-shadow:0 5px 20px rgba(0,0,0,.4);z-index:900;display:none}.cookie-title{font-size:18px;font-weight:600;margin-bottom:10px}.cookie-text{font-size:14px;line-height:1.5;margin-bottom:15px;color:#ddd}.cookie-actions{display:flex;justify-content:space-between}.cookie-accept{padding:10px 20px;border-radius:20px;border:none;background-color:#0a84ff;color:#fff;font-weight:500;cursor:pointer;transition:background-color .3s ease}.cookie-accept:hover{background-color:#0071e3}.cookie-more{color:#999;text-decoration:none;font-size:14px;align-self:center}.cookie-more:hover{text-decoration:underline}@media (max-width:1024px){.film-detail-container{flex-direction:column;max-height:90vh;overflow-y:auto}.film-detail-left{display:flex;flex-direction:row;padding:20px}.film-detail-cover{width:40%;max-width:200px}.film-detail-info{margin-top:0;margin-left:20px;flex:1}.film-detail-right{height:400px}}@media (max-width:768px){header{padding:15px 20px}main{padding:20px}.film-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:15px}.film-detail-left{flex-direction:column}.film-detail-cover{width:100%;max-width:none}.film-detail-info{margin-left:0;margin-top:20px}.film-detail-right{height:300px}}@media (max-width:480px){.search-container{display:none}.mobile-search-toggle{display:block;font-size:20px;color:#f5f5f5;cursor:pointer}.mobile-search-container{position:fixed;top:0;left:0;width:100%;padding:15px;background-color:#1a1a1a;z-index:150;display:none}.mobile-search-container.active{display:block}.film-detail-overlay{align-items:flex-end}.film-detail-container{width:100%;height:90%;border-radius:15px 15px 0 0}}.loader{border:8px solid #333;border-top:8px solid #fff;border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;margin:30px auto;display:none}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}#popupNotice{margin-top:20px;color:orange;font-size:14px;display:none;text-align:center}.alert{margin:20px auto;max-width:700px;background-color:#3a1a1a;color:#fff1f1;padding:15px 20px;border-radius:10px;font-size:14px;box-shadow:0 4px 10px rgba(0,0,0,.3);position:relative;text-align:center}.closebtn{position:absolute;right:15px;top:12px;font-size:20px;cursor:pointer;color:#fff;font-weight:700}</style><div class="alert"> <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> <center> <strong>Liebe FilmFrei-User,</strong><br> Wenn Filmcover nicht angezeigt werden, liegt das **nicht an euren DNS-Einstellungen**, sondern entweder an **Google Chrome** oder an **Adblockern** wie <strong>uBlock Origin</strong> oder <strong>uBlock Origin Lite</strong> – diese blockieren manchmal externe Bildquellen.<br> <strong>Schon gewusst?</strong> Unsere Seite läuft **auch ohne Adblocker** einwandfrei – wir zeigen **keine Werbung**. 😉<br> <strong>Danke für euer Vertrauen – euer FilmFrei-Team</strong></center></div><header><div class="logo-container"><div class="logo">F</div><div class="brand-name">Filmfrei</div></div><div class="search-container"><input class="search-input"placeholder="Film suchen..."><div class="search-icon"><svg fill="none"height="16"stroke="currentColor"stroke-linecap="round"stroke-linejoin="round"stroke-width="2"viewBox="0 0 24 24"width="16"xmlns="http://www.w3.org/2000/svg"><circle cx="11"cy="11"r="8"></circle><line x1="21"x2="16.65"y1="21"y2="16.65"></line></svg></div><div class="search-results"></div></div><div class="mobile-search-toggle"style="display:none"><svg fill="none"height="24"stroke="currentColor"stroke-linecap="round"stroke-linejoin="round"stroke-width="2"viewBox="0 0 24 24"width="24"xmlns="http://www.w3.org/2000/svg"><circle cx="11"cy="11"r="8"></circle><line x1="21"x2="16.65"y1="21"y2="16.65"></line></svg></div></header><main><section><h2 class="section-title">Neueste Filme</h2><div class="film-grid"id="latest-films"></div></section><section><h2 class="section-title">Alle Filme</h2><div class="film-grid"id="film-liste"></div></section></main><div class="film-detail-overlay"><div class="film-detail-close"></div><div class="film-detail-container"><div class="film-detail-left"><img alt=""class="film-detail-cover"src=""><div class="film-detail-info"><h3 class="film-detail-title"></h3><div class="film-detail-meta"><span class="film-detail-year"></span> <span class="film-detail-upload"></span></div><p class="film-detail-description"></div></div><div class="film-detail-right"><div class="loader"id="loader"></div><div id="popupNotice">🚫 Popup-Versuch wurde blockiert!</div><div class="film-detail-player"></div></div></div></div><div class="cookie-banner"><div class="cookie-title">Cookies gefällig?</div><div class="cookie-text">Diese Seite verwendet Cookies, um dein Erlebnis zu verbessern.</div><div class="cookie-actions"><button class="cookie-accept">Verstanden</button> <a class="cookie-more"href="https://filmfrei.github.io/FilmFrei-Datenschutz/">Mehr erfahren</a></div></div><script>const filme = 
             [
                         {
+  "titel": "Oppenheimer",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "J. Robert Oppenheimer (Cillian Murphy) ist ein theoretischer Physiker und genau wie seine Ehefrau, die Biologin Kitty (Emily Blunt), ein Wissenschaftler mit Leib und Seele.",
+  "cover": "https://filmpalast.to/files/movies/450/oppenheimer.jpg",
+  "iframe": "https://voe.sx/e/xhoyeqr1jx6s"
+},
+{
+  "titel": "Fight for Freedom - Der blutige Pfad der Freiheit",
+  "jahr": 2022,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Der friesische Freiheitskämpfer Peer Gerlofs Donia besser bekannt als Grutte Pier, ist ein sanfter Riese, der nach dem Mord an seiner Familie zu einem blutrünstigen und rachegetriebenen Krieger wird.",
+  "cover": "https://filmpalast.to/files/movies/450/fight-for-freedom-der-blutige-pfad-der-freiheit.jpg",
+  "iframe": "https://voe.sx/e/doxvviebsde2"
+},
+{
+  "titel": "Founders Day",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Die friedliche Kleinstadt Fairwood bereitet sich auf ihren alljährlichen „Founders Day“ vor – ein Fest, das in diesem Jahr von einem erbitterten Bürgermeisterwahlkampf überschattet wird.",
+  "cover": "https://filmpalast.to/files/movies/450/founders-day.jpg",
+  "iframe": "https://voe.sx/e/oisgdzzxiqda"
+},
+{
+  "titel": "Blood Star - Gnadenlose Jagd",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Eine junge Frau fährt ganz allein durch die Wüste, als sie plötzlich in ein gefährliches Katz-und-Maus-Spiel mit einem psychopathischen Sheriff verwickelt wird. Die Verfolgungsjagd eskaliert und wird tödlich. Nun muss sie Köpfchen beweisen, um die Oberhand zu gewinnen.",
+  "cover": "https://filmpalast.to/files/movies/450/blood-star-gnadenlose-jagd.jpg",
+  "iframe": "https://voe.sx/e/6wdgh4gp3a3t"
+},
+{
+  "titel": "Milchzähne",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "In nicht allzu ferner Zukunft beherrschen Aberglaube und Misstrauen unsere Gesellschaft. Skalde (Mathilde Bundschuh) will unbedingt ein Teil der Gemeinschaft sein und ist in ihrem Streben unter die Fittiche des Dorfvorstehers gekommen.",
+  "cover": "https://filmpalast.to/files/movies/450/milchzahne.jpg",
+  "iframe": "https://voe.sx/e/el7ncvdiy1dx"
+},
+{
+  "titel": "Undercover Blues - Ein Absolut Cooles Trio",
+  "jahr": 1993,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Eigentlich wollte sich das ehemalige Top-Agenten-Ehepaar Jane und Jeff Blue mit seinem Baby ein paar längst verdiente ruhige Tage in New Orleans gönnen. Doch als das FBI um Hilfe bittet, ist das Duo samt Sprößling sofort zur Stelle.",
+  "cover": "https://filmpalast.to/files/movies/450/undercover-blues-ein-absolut-cooles-trio.jpg",
+  "iframe": "https://voe.sx/e/ipddmmwpbfne"
+},
+{
+  "titel": "Tyler Perry's Doppelspiel",
+  "jahr": 2025,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Die renommierte Anwältin Marley (Kat Graham) übernimmt ihren bislang persönlichsten Fall: Sie soll die Wahrheit über die Erschießung des Ehemanns ihrer besten Freundin Fela (Meagan Tandy) aufdecken.",
+  "cover": "https://filmpalast.to/files/movies/450/tyler-perrys-doppelspiel.jpg",
+  "iframe": "https://voe.sx/e/klcdfjaiai40"
+},
+{
+  "titel": "O'Dessa",
+  "jahr": 2025,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Postapokalyptische Rock-Oper mit Sadie Sink in der Hauptrolle. Sink spielt eine Farmerstochter, die sich auf eine abeneteuerliche Reise begibt, um ein Familienerbstück zurückzuholen. Dabei kommt sie in eine fremde und gefährliche Stadt, in der sie ihre große Liebe trifft.",
+  "cover": "https://filmpalast.to/files/movies/450/odessa.jpg",
+  "iframe": "https://voe.sx/e/lzl2f2vea1or"
+},
+{
+  "titel": "Twister: Im Sturm gefangen",
+  "jahr": 2025,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Vor dem Hintergrund düsterer Weltuntergangsprognosen am 22. Mai 2011 begleitet diese Dokumentation eine Gruppe junger Menschen in Joplin, Missouri, die an ihrem Highschool-Abschlusstag unerwartet einer Naturgewalt von unvorstellbarem Ausmaß gegenüberstehen.",
+  "cover": "https://filmpalast.to/files/movies/450/twister-im-sturm-gefangen.jpg",
+  "iframe": "https://voe.sx/e/4fok6h8zaxyc"
+},
+{
+  "titel": "Ellbogen",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Hazal (Melia Kara) lebt in Berlin und hat einen großen Wunsch: Sie möchte einfach nur eine Chance bekommen. Sie will ein Leben, das lebenswert ist und will dafür einen Schritt weiter kommen als ihre Eltern.",
+  "cover": "https://filmpalast.to/files/movies/450/ellbogen.jpg",
+  "iframe": "https://voe.sx/e/qld8k22srbxd"
+},
+{
+  "titel": "Highlander 3 - Die Legende",
+  "jahr": 1994,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Nachdem der Magier Kane von einem Archäologenteam in Japan ausgegraben wurde, macht er sich auf nach New York, um seinem alten Rivalen Connor McLeod endgültig das Lebenslicht auszublasen.",
+  "cover": "https://filmpalast.to/files/movies/450/highlander-3-die-legende.jpg",
+  "iframe": "https://voe.sx/e/rtbqephyuwxv"
+},
+{
+  "titel": "Fire Down Below",
+  "jahr": 1997,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Als er seinen Partner und besten Freund im Kampf gegen kriminelle Giftmüllmakler verliert, entschließt sich der Umweltschutz-Spezialagent Jack Taggart, fortan undercover nach den Hintermännern zu forschen.",
+  "cover": "https://filmpalast.to/files/movies/450/fire-down-below.jpg",
+  "iframe": "https://voe.sx/e/aqnzxg6svwsm"
+},
+{
+  "titel": "Matilda",
+  "jahr": 1996,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Die kleine Matilda Wurmwald ist seit ihrer Geburt nicht gern gesehen in ihrer Familie. Als Betriebsunfall und teuer dazu eingestuft, wird sie daheim mehr oder weniger mit Mitachtung bestraft.",
+  "cover": "https://filmpalast.to/files/movies/450/matilda.jpg",
+  "iframe": "https://voe.sx/e/qugae0fvhimb"
+},
+{
+  "titel": "Bisons",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Steve (Maxime Valvini), muss nach dem Tod seines Vaters die Familienfarm retten, die gefährlich hoch verschuldet ist.",
+  "cover": "https://filmpalast.to/files/movies/450/bisons.jpg",
+  "iframe": "https://voe.sx/e/hh3uq0ximgcj"
+},
+{
+  "titel": "Die unendliche Geschichte",
+  "jahr": 1984,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Der kleine Bastian wird regelmäßig von seinen Klassenkameraden schikaniert.\r\nAuf der Flucht vor ihnen rettet er sich eines Tages in ein Antiquariat, wo er einem alten Buchhändler begegnet, der ihn vor einem geheimnisvollen Buch warnt.",
+  "cover": "https://filmpalast.to/files/movies/450/die-unendliche-geschichte.jpg",
+  "iframe": "https://voe.sx/e/rbwe7l5fh93s"
+},
+{
+  "titel": "Die unendliche Geschichte 2",
+  "jahr": 1990,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Bastian Bux läßt sich erneut auf die magische \"Unendliche Geschichte\" ein. Kaum hat der Junge den Band vom Buchhändler Koreander entliehen, ruft ihn die kindliche Kaiserin nach Phantásien zu Hilfe. Bastian taucht, bewaffnet mit dem Buch-Emblem der zwei Schlangen, dem Auryn, in die Geschichte ein.",
+  "cover": "https://filmpalast.to/files/movies/450/die-unendliche-geschichte-2.jpg",
+  "iframe": "https://voe.sx/e/oywublgbypyn"
+},
+{
+  "titel": "Die unendliche Geschichte 3",
+  "jahr": 1994,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Auf Bastians neuer Schule regiert die Jugendbande \"Nasties\", die ihn gleich am ersten Schultag als neues Opfer erkoren hat. Als man ihm nachjagt, flüchtet er sich in die Schulbibliothek. Dort trifft er nicht nur Herrn Koriander wieder, sondern findet auch das Buch \"Die unendliche Geschichte\".",
+  "cover": "https://filmpalast.to/files/movies/450/die-unendliche-geschichte-3.jpg",
+  "iframe": "https://voe.sx/e/zqij7d266tb9"
+},
+{
+  "titel": "Ice Age 4 - Voll verschoben",
+  "jahr": 2012,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Weil der obsessive Nager Scrat seiner Leibspeise bis in den Erdkern folgt, löst er eine Verschiebung der Kontinentalplatten und monumentale Risse auf der Oberfläche aus.",
+  "cover": "https://filmpalast.to/files/movies/450/ice-age-4-voll-verschoben.jpg",
+  "iframe": "https://voe.sx/e/5hohlaz8xlnw"
+},
+{
+  "titel": "Ice Age - Kollision voraus!",
+  "jahr": 2016,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Faultier Sid (im Original gesprochen von John Leguizamo, im Deutschen von Otto Waalkes), Säbelzahntiger Diego (Denis Leary / Thomas Fritsch) und das Mammut Manni (Ray Romano / Arne Elsholtz) haben schon einige Abenteuer zusammen durchgestanden.",
+  "cover": "https://filmpalast.to/files/movies/450/ice-age-kollision-voraus.jpg",
+  "iframe": "https://voe.sx/e/k9439pbchjyy"
+},
+{
+  "titel": "Ice Age - Jäger der verlorenen Eier",
+  "jahr": 2016,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "In der Eiszeit hält der Frühling Einzug: Blumen erblühen, die Tiere erwachen aus ihrem Winterschlaf und die Familien freuen sich auf den Nachwuchs. Da überkommt Sid die verrückte Idee, einen Eier-Sitting-Service für die werdenden Eltern ins Leben zu rufen.",
+  "cover": "https://filmpalast.to/files/movies/450/ice-age-jager-der-verlorenen-eier.jpg",
+  "iframe": "https://voe.sx/e/aqcm9jfcjcpt"
+},
+{
+  "titel": "Ice Age - Die Abenteuer von Buck Wild",
+  "jahr": 2022,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Nach den Ereignissen in „Ice Age 5“ begibt sich Wiesel Buck mit den Opossum-Brüdern Crash und Eddie auf ein eigenes Abenteuer.",
+  "cover": "https://filmpalast.to/files/movies/450/ice-age-die-abenteuer-von-buck-wild.jpg",
+  "iframe": "https://voe.sx/e/kzxxqc3cxpxk"
+},
+{
+  "titel": "Ice Age 3",
+  "jahr": 2009,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Frostbeulen, Frühling, jetzt wieder Frieren. Auch in \"Ice Age 3\" ändern sich die Temperaturen ... und mit ihnen die beliebten Figuren. Manni und seine quirlige Flokati-Braut Ellie erwarten Nachwuchs. Guter Hoffnung ist auch Sid, der Mammut-Kleinfamilie noch näher auf den Pelz rücken zu können.",
+  "cover": "https://filmpalast.to/files/movies/450/ice-age-3.jpg",
+  "iframe": "https://voe.sx/e/yphcqxnmm1dq"
+},
+{
+  "titel": "Ice Age",
+  "jahr": 2002,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Manni, das selbstgefällige und übellaunige Mammut, wird eines Tages von Sid, dem Faultier, über den Haufen gerannt. Denn die Nervensäge mit dem ewig ratternden Mundwerk zieht Ärger magnetisch an und sucht deshalb einen Beschützer.",
+  "cover": "https://filmpalast.to/files/movies/450/ice-age.jpg",
+  "iframe": "https://voe.sx/e/6nd9obd9wnp7"
+},
+{
+  "titel": "Hachiko - Eine Freundschaft für die Ewigkeit",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Professor Chen entdeckt auf einer Forschungsreise einen süßen chinesischen Hirtenhund Ba Tong. Schockverliebt beschließt er, den Welpen mit nach Hause zu nehmen, obwohl seine Frau auf keinen Fall einen Hund will. Ba Tong und Chen sind von nun an unzertrennlich und beste Freunde, für immer.",
+  "cover": "https://filmpalast.to/files/movies/450/hachiko-eine-freundschaft-fur-die-ewigkeit.jpg",
+  "iframe": "https://voe.sx/e/m6uhgf3ecso1"
+},
+{
+  "titel": "Hachiko - Eine wunderbare Freundschaft",
+  "jahr": 2009,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Einem Universitätsprofessor läuft auf seinem Weg von der Arbeit nach Hause an der Bahnstation ein niedlicher Akita-Welpe zu. Er kann nicht widerstehen und nimmt den jungen Hund mit nach Hause, wo sogar seine Frau, die keinen Köter im Haus haben möchte, dem Charme des niedlichen Fellball erliegt.",
+  "cover": "https://filmpalast.to/files/movies/450/hachiko-eine-wunderbare-freundschaft.jpg",
+  "iframe": "https://voe.sx/e/gohbvjoa39cw"
+},
+{
+  "titel": "Fight Club",
+  "jahr": 1999,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Ein von Schlaflosigkeit geplagter Yuppie findet beim charismatischen Tyler Durden Unterschlupf, nachdem er seine Wohnung verloren hat.",
+  "cover": "https://filmpalast.to/files/movies/450/fight-club.jpg",
+  "iframe": "https://voe.sx/e/mgycoieje1kn"
+},
+{
+  "titel": "Coherence",
+  "jahr": 2013,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Emily und ihr Freund Kevin sind in Mikes Haus zu einem gemeinsamen Abendessen mit weiteren Freunden eingeladen. Auch Laurie, Kevins Exfreundin, hat sich angekündigt, sehr zum Unmut des Paares. Plötzlich fällt in der gesamten Nachbarschaft der Strom aus.",
+  "cover": "https://filmpalast.to/files/movies/450/coherence.jpg",
+  "iframe": "https://voe.sx/e/ooocjirk3xvk"
+},
+{
+  "titel": "Timecrimes - Mord ist nur eine Frage der Zeit",
+  "jahr": 2007,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Ein Mann steigt versehentlich in eine Zeitmaschine und reist fast eine Stunde zurück in der Zeit. Als er auf sich selbst trifft, löst er eine Reihe von Katastrophen mit unvorhersehbaren Folgen aus.",
+  "cover": "https://filmpalast.to/files/movies/450/timecrimes-mord-ist-nur-eine-frage-der-zeit.jpg",
+  "iframe": "https://voe.sx/e/okmswrthicrt"
+},
+{
+  "titel": "The Fall Guy",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Colt Seavers (Ryan Gosling) ist ein in die Jahre gekommener, ab­ge­half­terter Stuntman, der sich verzweifelt an die Erinnerung seiner erfolgreichen Jahre in der Branche festklammert.",
+  "cover": "https://filmpalast.to/files/movies/450/the-fall-guy.jpg",
+  "iframe": "https://voe.sx/e/oti1leqz6n9q"
+},
+{
+  "titel": "Das Boot",
+  "jahr": 1981,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Die letzte Fahrt eines deutschen U-Bootes im II. Weltkrieg, geschildert aus der Perspektive eines jungen Leutnants. Die Besatzung soll die von Alliierten beherrschte Meerenge von Gibraltar durchqueren und einen sicheren Hafen im besetzten Frankreich anlaufen.",
+  "cover": "https://filmpalast.to/files/movies/450/das-boot-1981.jpg",
+  "iframe": "https://voe.sx/e/hm4yvg4wucoq"
+},
+{
+  "titel": "Barbie",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "In Barbieland ist alles an seinem Platz. Die Frisur sitzt, die Kleidung und jedes Accessoire passen zueinander. Kurz: Es ist eine perfekte Welt, zumindest äußerlich. Wer hier leben will, muss sich nämlich ausnahmslos an die aufgestellten Normen halten.",
+  "cover": "https://filmpalast.to/files/movies/450/barbie.jpg",
+  "iframe": "https://voe.sx/e/8fbiiayzvn6v"
+},
+{
+  "titel": "Paterson",
+  "jahr": 2017,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Paterson (Adam Driver) lebt in der Kleinstadt Paterson im Bundesstaat New Jersey. Hier folgt er jeden Tag einer einfachen Routine, von der er so gut wie nie abweicht.",
+  "cover": "https://filmpalast.to/files/movies/450/paterson-2016.jpg",
+  "iframe": "https://voe.sx/e/y1vo5ih85m3x"
+},
+{
+  "titel": "The Lost Talisman - Die Geister, Die Ich Rief",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Dr. Cheon glaubt nicht an Geister. Mit viel psychologischem Geschick und der technischen Hilfe seines Assistenten gaukelt, der von Schamanen abstammende, Ungläubige seinen zahlungskräftigen Kunden einen Exorzismus vor.",
+  "cover": "https://filmpalast.to/files/movies/450/the-lost-talisman-die-geister-die-ich-rief.jpg",
+  "iframe": "https://voe.sx/e/dveosyv9napo"
+},
+{
+  "titel": "Ghostbusters: Legacy",
+  "jahr": 2021,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Da sie mit finanziellen Schwierigkeiten zu kämpfen hat, zieht die alleinerziehende Mutter Callie (Carrie Coon) mit ihren Kindern Trevor (Finn Wolfhard) und Phoebe (Mckenna Grace) auf das heruntergekommene Anwesen ihres verstorbenen Vaters in ein kleines Provinznest in Oklahoma.",
+  "cover": "https://filmpalast.to/files/movies/450/ghostbusters-legacy.jpg",
+  "iframe": "https://voe.sx/e/nwe3ifoe5tfz"
+},
+{
+  "titel": "Ghostbusters",
+  "jahr": 2016,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "New York ist drauf und dran die gruseligste Stadt der Welt zu werden, denn immer mehr paranormale Ereignisse verbreiten Angst und Schrecken bei den Bewohnern.",
+  "cover": "https://filmpalast.to/files/movies/450/ghostbusters-2016.jpg",
+  "iframe": "https://voe.sx/e/qa3nzkhjnzmh"
+},
+{
+  "titel": "Ghostbusters: Frozen Empire",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Callie (Carrie Coon), Trevor (Finn Wolfhard) und Phoebe (Mckenna Grace) Spengler kehren an den Ort zurück, an dem alles begann: in die für Geisterjäger ikonische Feuerwache in New York City.",
+  "cover": "https://filmpalast.to/files/movies/450/ghostbusters-frozen-empire.jpg",
+  "iframe": "https://voe.sx/e/n941dp9cn9a0"
+},
+{
+  "titel": "Ghostbusters - Die Geisterjäger",
+  "jahr": 1984,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Sie sind so eine Art Kammerjäger, die man aber nicht zur Bekämpfung von Kakerlaken, sondern von Geistern ruft - die Ghostbuster, ehemalige Dozenten der Parapsychologie der New Yorker Uni, bekämpfen Spuk und Gespenster aller Art mit Gespensterstaubsaugern, Strahlenpistolen und lockeren Sprüchen, unte.",
+  "cover": "https://filmpalast.to/files/movies/450/ghostbusters-die-geisterjager.jpg",
+  "iframe": "https://voe.sx/e/mch6cds39bq2"
+},
+{
+  "titel": "Ghostbusters 2",
+  "jahr": 1989,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Fünf Jahre nachdem die Geisterjäger die Stadt New York vor den überirdischen Dämonen retteten - und daraufhin die Lizenz entzogen bekamen - pulsiert und blubbert es wieder in den Abwässerkanälen.",
+  "cover": "https://filmpalast.to/files/movies/450/ghostbusters-2.jpg",
+  "iframe": "https://voe.sx/e/91gqbddod85n"
+},
+{
+  "titel": "Frantic",
+  "jahr": 1988,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "In einem Hotelzimmer in Paris kommt ein Arzt aus der Dusche und stellt fest, dass seine Frau verschwunden ist. Bald gerät er in eine Welt voller Intrigen, Spionage, Gangster, Drogen und Mord.",
+  "cover": "https://filmpalast.to/files/movies/450/frantic.jpg",
+  "iframe": "https://voe.sx/e/d2qpi5p2bosb"
+},
+{
+  "titel": "Men of Honor",
+  "jahr": 2000,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Obwohl der Schwarze Carl Brashear in ärmsten Verhältnissen im Süden der USA heranwächst, hat er es sich in den Kopf gesetzt, einmal Taucher bei der US-Navy zu werden - im Amerika der fünfziger Jahre ein schier hoffnungsloses Unterfangen.",
+  "cover": "https://filmpalast.to/files/movies/450/men-of-honor.jpg",
+  "iframe": "https://voe.sx/e/9bhnnrzxzzpr"
+},
+{
+  "titel": "Der unglaubliche Hulk",
+  "jahr": 2008,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Noch immer verwandelt sich Dr. Bruce Banner (Edward Norton) in Stress-Situationen in das grüne Aggressionsmonster Hulk. Seit seiner Gamma-Verstrahlung ist er untergetaucht und sucht verzweifelt nach einem Gegenmittel.",
+  "cover": "https://filmpalast.to/files/movies/450/der-unglaubliche-hulk.jpg",
+  "iframe": "https://voe.sx/e/5a76uo0cloaq"
+},
+{
+  "titel": "Mr. Babysitter",
+  "jahr": 1993,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Leibwächter Sean Armstrong (Hulk Hogan) ist mit dicken Muskeln beschenkt und eigentlich eine gute Seele. Mit diesen Eigenschaften bestückt macht er sich auf, die Bälger eines gewissen Alex Mason (Austin Pendleton) zu babysitten.",
+  "cover": "https://filmpalast.to/files/movies/450/mr-babysitter.jpg",
+  "iframe": "https://voe.sx/e/1bmibffzuqr5"
+},
+{
+  "titel": "Hulk Vs. - Wolverine",
+  "jahr": 2009,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Wenn der ansonsten brave Dr. Banner mal so richtig sauer wird, verwandelt er sich in den grasgrünen, muskelbepackten Giganten Hulk und haut alles zu Klump. Der nordische Untergott Loki macht sich diesen Umstand zunutze und hetzt den Hulk auf seinen ungeliebten Bruder Thor.",
+  "cover": "https://filmpalast.to/files/movies/450/hulk-vs-wolverine.jpg",
+  "iframe": "https://voe.sx/e/14h21nbckfbk"
+},
+{
+  "titel": "Hulk Vs. - Thor",
+  "jahr": 2009,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Wenn der ansonsten brave Dr. Banner mal so richtig sauer wird, verwandelt er sich in den grasgrünen, muskelbepackten Giganten Hulk und haut alles zu Klump. Der nordische Untergott Loki macht sich diesen Umstand zunutze und hetzt den Hulk auf seinen ungeliebten Bruder Thor.",
+  "cover": "https://filmpalast.to/files/movies/450/hulk-vs-thor.jpg",
+  "iframe": "https://voe.sx/e/9bx7qxgd5fzn"
+},
+{
+  "titel": "Planet Hulk",
+  "jahr": 2010,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Eine Kriegerrasse im fernen Weltenall ist versessen auf Gladiatorenkämpfe und entführt sich zum puren Spaßvergnügen Dr. Banners destruktives Alter Ego, den fürchterlichen Hulk, geradewegs in ihre Version des Zirkus Maximus.",
+  "cover": "https://filmpalast.to/files/movies/450/planet-hulk.jpg",
+  "iframe": "https://voe.sx/e/kh5fhejyclfv"
+},
+{
+  "titel": "Hulk",
+  "jahr": 2003,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Vom Marvel-Kult-Comic endlich auf die Leinwand - hier kommt der legendäre Hulk! Als Doktor Bruce Banner (Eric Bana), Atomphysiker mit Fachgebiet Gamma-Bestrahlung, bei einem Unfall mit einer großen Menge Strahlen belastet wird, verwandelt sich der Forscher von nun an bei jedem Anstieg des Aggression.",
+  "cover": "https://filmpalast.to/files/movies/450/hulk.jpg",
+  "iframe": "https://voe.sx/e/pbq36s540v2a"
+},
+{
+  "titel": "Manodrome",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Uber-Fahrer und aufstrebender Bodybuilder Ralphie (Jesse Eisenberg) wird in einen libertären Männlichkeitskult hineingezogen und verliert den Bezug zur Realität, als seine unterdrückten Wünsche geweckt werden.",
+  "cover": "https://filmpalast.to/files/movies/450/manodrome.jpg",
+  "iframe": "https://voe.sx/e/rfq5layas5yr"
+},
+{
+  "titel": "Mr. Monk's Last Case: A Monk Movie",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Monk (Tony Shalhoub) kehrt zurück, um einen letzten, sehr persönlichen Fall zu lösen, in den seine geliebte Stieftochter Molly (Caitlin McGee), eine Journalistin, die sich auf ihre Hochzeit vorbereitet, verwickelt ist.",
+  "cover": "https://filmpalast.to/files/movies/450/mr-monks-last-case-a-monk-movie.jpg",
+  "iframe": "https://voe.sx/e/6lgjvwpo6cqc"
+},
+{
+  "titel": "South Park: Das Ende der Fettleibigkeit",
+  "jahr": 2024,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Die Einführung eines neuen Medikaments zum Abnehmen hat große Auswirkungen auf alle in South Park. Als Cartman der Zugang zu dem lebensverändernden Medikament verwehrt wird, bittet er Kyle, Stan, Butters und Kenny um Hilfe.",
+  "cover": "https://filmpalast.to/files/movies/450/south-park-das-ende-der-fettleibigkeit.jpg",
+  "iframe": "https://voe.sx/e/frihssqothmq"
+},
+{
+  "titel": "South Park - Für Kinder Nicht Geeignet",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Nachdem die OnlyFans-Seite einer Lehrerin der South Park Grundschule entdeckt wurde, nimmt Randy das zum Anlass, in die\r\nzwielichtige Unterwelt der Online-Influencer einzutauchen.",
+  "cover": "https://filmpalast.to/files/movies/450/south-park-fur-kinder-nicht-geeignet.jpg",
+  "iframe": "https://voe.sx/e/brjuaeiatzd4"
+},
+{
+  "titel": "South Park - Christmas Time in South Park",
+  "jahr": 2000,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Es gibt keine schönere Zeit als Weihnachten, besonders in South Park. Zeit für die Familie, sich am Kamin zu versammeln und in gemeinsamer Besinnlichkeit und Harmonie die legendären Episoden zum Fest zu genießen, wie „Mr.",
+  "cover": "https://filmpalast.to/files/movies/450/south-park-christmas-time-in-south-park.jpg",
+  "iframe": "https://voe.sx/e/jgxojqkyc2zt"
+},
+{
+  "titel": "Das Erwachen der Jägerin",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Helenas (Daisy Ridley) scheinbar gewöhnliches Leben birgt eine dunkle und gefährliche Wahrheit: Ihr entfremdeter Vater ist der berüchtigte Marsh King (Ben Mendelsohn) – der Mann, der sie und ihre Mutter jahrelang in der Wildnis gefangen hielt.",
+  "cover": "https://filmpalast.to/files/movies/450/das-erwachen-der-jagerin.jpg",
+  "iframe": "https://voe.sx/e/2imjnqm2mc3c"
+},
+{
+  "titel": "Men in Black 3",
+  "jahr": 2012,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Agent J und Agent K, besser bekannt als die \"Men in Black\", treten wieder in Aktion, nachdem Boris, die Bestie, aus seinem Mondgefängnis ausgebrochen ist. Als K plötzlich verschwindet, erfährt J von Chefin O, dass sein Partner bereits seit 40 Jahren tot ist.",
+  "cover": "https://filmpalast.to/files/movies/450/men-in-black-3.jpg",
+  "iframe": "https://voe.sx/e/f0mgk872s3nq"
+},
+{
+  "titel": "Men in Black International",
+  "jahr": 2019,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Als junges Mädchen beobachtete Molly (Tessa Thompson) einen Einsatz der Men In Black. Seitdem ist sie fest entschlossen, die Wahrheit über Aliens und die mysteriösen Männer in den schwarzen Anzügen herauszufinden.",
+  "cover": "https://filmpalast.to/files/movies/450/men-in-black-international.jpg",
+  "iframe": "https://voe.sx/e/gqobwz12xjlu"
+},
+{
+  "titel": "Men in Black 2",
+  "jahr": 2002,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Die fiese Außerirdische Serleena verbreitet in Gestalt eines Top-Models auf der Erde Angst und Schrecken. Mit Hilfe des dort stationierten Unholds Scrad will sie das Licht von Zartha sicherstellen, um sich die Herrschaft über das Universum zu sichern.",
+  "cover": "https://filmpalast.to/files/movies/450/men-in-black-2.jpg",
+  "iframe": "https://voe.sx/e/qgqsqk5mory7"
+},
+{
+  "titel": "Men in Black",
+  "jahr": 1997,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Nur wenige wissen, daß die Erde schon seit den 50er Jahren von Außerirdischen bevölkert wird. Um diese zu kontrollieren, gibt es die \"Men in Black\", Spezialagenten, die je nach Situation die Aliens jagen, fangen und im Notfall auch eliminieren.",
+  "cover": "https://filmpalast.to/files/movies/450/men-in-black.jpg",
+  "iframe": "https://voe.sx/e/19omejuy8t7s"
+},
+{
+  "titel": "Die Nachbarn von oben",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Nach 20 gemeinsamen Jahren der Ehe ist es im Schlafzimmer von Anna (Ursina Lardi) und Thomas (Roeland Wiesnekker) ziemlich ruhig geworden. Wie ruhig genau, reiben ihnen die Nachbarn regelmäßig unter die Nase.",
+  "cover": "https://filmpalast.to/files/movies/450/die-nachbarn-von-oben.jpg",
+  "iframe": "https://voe.sx/e/rvfvrij3bhl2"
+},
+{
+  "titel": "12 Desperate Hours",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Im Mittelpunkt steht Val, die mit ihren kleinen Kindern von Denny als Geisel gehalten wird, als er in ihr Haus eindringt, nachdem er an diesem Tag einen Mord begangen hat.",
+  "cover": "https://filmpalast.to/files/movies/450/12-desperate-hours.jpg",
+  "iframe": "https://voe.sx/e/qycvapsgq4oa"
+},
+{
+  "titel": "Silent Night - Stumme Rache",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Eine Schießerei zwischen zwei verfeindeten Gangs endet an Heiligabend tragischerweise tödlich für einen gänzlich Unbeteiligten: den Sohn von Brian Godlock (Joel Kinnaman). Godlock fackelt nicht lange und macht sich kurzerhand selbst auf die Suche nach den Tätern.",
+  "cover": "https://filmpalast.to/files/movies/450/silent-night-stumme-rache.jpg",
+  "iframe": "https://voe.sx/e/fripgtmufvbu"
+},
+{
+  "titel": "Die unwahrscheinliche Pilgerreise des Harold Fry",
+  "jahr": 2023,
+  "hochgeladenAm": "2025-05-03",
+  "beschreibung": "Als Harold Fry (Jim Broadbent) mitbekommt, dass seine alte Freundin Queenie (Linda Bassett) im Sterben liegt, will er ihr einen letzten Brief schreiben. Auf dem Weg zum Postamt scheint sich in ihm jedoch irgendetwas in Gang zu setzen. Harold läuft nämlich einfach weiter und immer weiter.",
+  "cover": "https://filmpalast.to/files/movies/450/die-unwahrscheinliche-pilgerreise-des-harold-fry.jpg",
+  "iframe": "https://voe.sx/e/h00r9z2lslhv"
+},
+                        {
   "titel": "Unten am Fluss",
   "jahr": 1978,
   "hochgeladenAm": "2025-05-02",
