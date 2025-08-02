@@ -2,41 +2,2931 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filmfrei & Serienfrei - Neue Links</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="FilmFrei24.de - Kostenlose Filme in HD Qualität online streamen">
+    <meta name="keywords" content="filme, streaming, kostenlos, hd, deutsch">
+    <title>FilmFrei24.de - Kostenlose Filme in HD streamen</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+    
+    <!-- PWA Meta Tags - nur für mobile Geräte -->
+    <link rel="manifest" href="/manifest.json" media="(max-width: 1024px)">
+    <meta name="theme-color" content="#ff6b35">
+    
+    <!-- iOS PWA Support - nur für iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FilmFrei24">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png">
+    
+    <!-- iOS Splash Screens -->
+    <link rel="apple-touch-startup-image" href="/splash-2048x2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/splash-1668x2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/splash-1536x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="/splash-1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="/splash-828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/splash-1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+    
+    <!-- Prevent Zoom and Text Selection -->
+    <meta name="format-detection" content="telephone=no">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #1a1a1a;
+            --accent-bg: #2a2a2a;
+            --primary-text: #ffffff;
+            --secondary-text: #b3b3b3;
+            --accent-color: #ff6b35;
+            --border-color: #333333;
+            --hover-bg: rgba(255, 255, 255, 0.05);
+            --gradient: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            --glass: rgba(255, 255, 255, 0.08);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --success-color: #4ade80;
+            --warning-color: #facc15;
+            --safe-area-inset-top: env(safe-area-inset-top);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom);
+        }
+
         body {
-            background-color: #121212;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--primary-bg);
+            color: var(--primary-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+            padding-top: var(--safe-area-inset-top);
         }
-        button {
-            background-color: #444;
-            color: #fff;
-            border: none;
-            padding: 15px 30px;
-            margin: 20px;
-            border-radius: 8px;
+
+        html {
+            scroll-behavior: smooth;
+            touch-action: manipulation;
+        }
+
+        /* Prevent zoom on inputs */
+        input, textarea, select {
+            font-size: 16px !important;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        /* Fix iOS keyboard overlay - simplified */
+        .keyboard-open {
+            position: fixed !important;
+            overflow: hidden !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 15px 20px;
+            padding-top: calc(15px + var(--safe-area-inset-top));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            padding: 12px 20px;
+            padding-top: calc(12px + var(--safe-area-inset-top));
+            background: rgba(10, 10, 10, 0.98);
+        }
+
+        .logo {
+            font-size: clamp(22px, 3vw, 28px);
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Search Container */
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 45px 12px 20px;
+            background: var(--glass);
+            border: 2px solid transparent;
+            border-radius: 50px;
+            color: var(--primary-text);
+            font-size: 16px !important;
+            font-weight: 400;
+            outline: none;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: var(--secondary-text);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            color: var(--secondary-text);
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .search-input:focus ~ .search-icon {
+            color: var(--accent-color);
+        }
+
+        /* Search Results Dropdown */
+        .search-results {
+            position: absolute !important;
+            top: calc(100% + 5px) !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: var(--secondary-bg) !important;
+            border-radius: 12px !important;
+            box-shadow: var(--shadow-lg) !important;
+            max-height: 400px !important;
+            overflow-y: auto !important;
+            display: none !important;
+            border: 1px solid var(--border-color) !important;
+            -webkit-overflow-scrolling: touch !important;
+            z-index: 999999 !important;
+        }
+
+        .search-results.active {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
             cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 1px solid var(--border-color);
         }
-        button:hover {
-            background-color: #666;
+
+        .search-result-item:last-child {
+            border-bottom: none;
         }
-        h1 {
+
+        .search-result-item:hover,
+        .search-result-item:active {
+            background: var(--hover-bg);
+        }
+
+        .search-result-thumbnail {
+            width: 50px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+
+        .search-result-info {
+            flex: 1;
+        }
+
+        .search-result-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-result-date {
+            font-size: 0.85rem;
+            color: var(--secondary-text);
+        }
+
+        /* Watch Status Icons */
+        .watch-status {
+            display: none !important;
+        }
+
+        .watch-indicator {
+            display: none !important;
+        }
+
+        #heroWatchIndicator {
+            display: none !important;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: calc(80px + var(--safe-area-inset-top));
+            animation: fadeIn 0.8s ease;
+            padding-bottom: var(--safe-area-inset-bottom);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            max-width: 1600px;
+            margin: 20px auto;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--secondary-bg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-banner-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+        }
+
+        .hero-banner {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            filter: brightness(0.9);
+        }
+
+        .hero-banner.active {
+            opacity: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%);
+            padding: 40px;
+            color: white;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            margin-bottom: 25px;
+            max-width: 600px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-primary:hover,
+        .btn-primary:active {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Recently Watched Section */
+        .recently-watched {
+            max-width: 1600px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
             margin-bottom: 20px;
         }
-        p {
-            margin-bottom: 20px;
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-text);
         }
+
+        .recent-movies {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 10px 0;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .recent-movies::-webkit-scrollbar {
+            display: none;
+        }
+
+        .recent-movie-card {
+            flex: 0 0 200px;
+            background: var(--secondary-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .recent-movie-card:hover,
+        .recent-movie-card:active {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-color);
+        }
+
+        /* Movies Section */
+        .movies-section {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            padding-bottom: calc(40px + var(--safe-area-inset-bottom));
+        }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .movie-card {
+            background: var(--secondary-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .movie-card:hover,
+        .movie-card:active {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-color);
+        }
+
+        .movie-thumbnail-container {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background: var(--accent-bg);
+        }
+
+        .movie-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: var(--transition-smooth);
+        }
+
+        .movie-card:hover .movie-thumbnail {
+            transform: scale(1.1);
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .movie-card:hover .play-overlay {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .movie-info {
+            padding: 20px;
+        }
+
+        .movie-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            transition: var(--transition);
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .movie-card:hover .movie-title {
+            color: var(--accent-color);
+        }
+
+        .movie-date {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Modal */
+        .detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 20px;
+            padding-top: calc(20px + var(--safe-area-inset-top));
+            padding-bottom: calc(20px + var(--safe-area-inset-bottom));
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .detail-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .detail-container {
+            background: var(--secondary-bg);
+            border-radius: 0;
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            max-height: none;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .detail-header {
+            padding: 20px 25px 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--secondary-bg);
+        }
+
+        .detail-title {
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .close-btn:hover,
+        .close-btn:active {
+            background: var(--hover-bg);
+            color: var(--primary-text);
+            transform: none;
+        }
+
+        .detail-content {
+            padding: 0 25px 25px;
+            display: block;
+            overflow-y: auto;
+            max-height: calc(90vh - 100px);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .detail-poster {
+            display: none;
+        }
+
+        .custom-player {
+            position: relative;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            aspect-ratio: 16/9;
+        }
+
+        .custom-player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .detail-info {
+            margin-top: 20px;
+        }
+
+        .detail-main {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--accent-color);
+            min-width: 110px;
+            margin-right: 15px;
+        }
+
+        .recommendations {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
+        }
+
+        .recommend-card {
+            background: var(--secondary-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .recommend-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .recommend-card img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .recommend-card .title {
+            padding: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary-text);
+        }
+
+        .poster-wrapper {
+            display: none !important;
+        }
+
+        .recommend-card {
+            border-radius: 12px;
+            height: auto;
+        }
+
+        .recommend-card img {
+            display: block;
+        }
+
+        .recommend-card .title {
+            display: none;
+        }
+
+        .recommend-info {
+            padding: 12px;
+        }
+
+        .rec-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-text);
+            margin-bottom: 4px;
+        }
+
+        .rec-date {
+            font-size: 0.8rem;
+            color: var(--secondary-text);
+        }
+
+        .recommendations {
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .detail-modal {
+            scrollbar-color: #444 #1a1a1a;
+            scrollbar-width: thin;
+        }
+
+        .detail-modal::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .detail-modal::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        .detail-modal::-webkit-scrollbar-thumb {
+            background-color: #444;
+            border-radius: 4px;
+        }
+
+        .info-value {
+            color: var(--secondary-text);
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 25px;
+            padding-bottom: calc(25px + var(--safe-area-inset-bottom));
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer p {
+            color: var(--secondary-text);
+            font-size: 14px;
+        }
+
+        /* PWA Install Button - nur für mobile Geräte */
+        .install-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            bottom: calc(20px + var(--safe-area-inset-bottom));
+            z-index: 9999;
+            animation: slideInUp 0.5s ease;
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .install-button {
+                display: block;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive - Extra wide screens */
+        @media (min-width: 1800px) {
+            .hero-section {
+                max-width: 1400px;
+            }
+            
+            .movies-section {
+                max-width: 1400px;
+            }
+        }
+
+        @media (min-width: 2400px) {
+            .hero-section {
+                max-width: 1600px;
+            }
+            
+            .movies-section {
+                max-width: 1600px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .movies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 20px;
+            }
+
+            .detail-content {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 15px;
+                padding-top: calc(12px + var(--safe-area-inset-top));
+            }
+
+            .header.scrolled {
+                gap: 8px;
+            }
+
+            .search-container {
+                max-width: 100%;
+                position: relative;
+            }
+
+            .search-input {
+                font-size: 16px !important;
+                padding: 10px 40px 10px 15px;
+                height: 44px;
+            }
+
+            .search-results {
+                position: absolute !important;
+                left: 0 !important;
+                right: 0 !important;
+                top: calc(100% + 5px) !important;
+                max-width: none !important;
+                z-index: 999999 !important;
+                margin: 0 !important;
+            }
+
+            .main-content {
+                margin-top: calc(120px + var(--safe-area-inset-top));
+            }
+
+            .hero-section {
+                margin: 15px;
+            }
+
+            .hero-banner-container {
+                aspect-ratio: 16/9;
+            }
+
+            .hero-overlay {
+                padding: 25px;
+            }
+
+            .movies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 15px;
+            }
+
+            .movie-info {
+                padding: 15px;
+            }
+
+            .movie-title {
+                font-size: 1rem;
+            }
+
+            .detail-content {
+                display: block;
+            }
+
+            .detail-poster {
+                max-width: 200px;
+                margin: 0 auto;
+                position: static;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 10px;
+                padding-top: calc(10px + var(--safe-area-inset-top));
+            }
+
+            .search-input {
+                padding: 10px 40px 10px 15px;
+                font-size: 16px !important;
+            }
+
+            .hero-section {
+                margin: 10px;
+            }
+
+            .hero-banner-container {
+                aspect-ratio: 16/9;
+            }
+
+            .hero-overlay {
+                padding: 20px;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+                -webkit-line-clamp: 2;
+            }
+
+            .recently-watched {
+                padding: 0 10px;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .recent-movies {
+                gap: 12px;
+            }
+
+            .recent-movie-card {
+                flex: 0 0 150px;
+            }
+
+            .movies-section {
+                padding: 20px 10px;
+                padding-bottom: calc(20px + var(--safe-area-inset-bottom));
+            }
+
+            .movies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 12px;
+            }
+
+            .movie-card {
+                border-radius: 8px;
+            }
+
+            .movie-info {
+                padding: 12px;
+            }
+
+            .movie-title {
+                font-size: 0.9rem;
+            }
+
+            .detail-header {
+                padding: 20px 20px 0;
+            }
+
+            .detail-content {
+                padding: 0 20px 20px;
+            }
+
+            .detail-title {
+                font-size: 1.5rem;
+            }
+
+            .info-row {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .info-label {
+                min-width: auto;
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: var(--secondary-text);
+            font-style: italic;
+        }
+
+        /* No results */
+        .no-results {
+            text-align: center;
+            padding: 20px;
+            color: var(--secondary-text);
+        }
+
+        /* Smooth hover transitions */
+        @media (hover: hover) {
+            .movie-card {
+                transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+        }
+
+        /* iOS specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            input[type="text"] {
+                font-size: 16px !important;
+            }
+            
+            .detail-modal {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
     </style>
 </head>
 <body>
-    <h1>Filmfrei & Serienfrei - Neue Links</h1>
-    <p>Die alten Links sind offline. Hier findest du die neuen Seiten:</p>
-    <button onclick="window.location.href='https://filmfrei24.de'">Filmfrei</button>
-    <button onclick="window.location.href='https://serienfrei24.de'">Serienfrei</button>
-    <p>Danke für euer Vertrauen! - Euer FilmFrei-Team</p>
+    <header class="header" id="header">
+        <a href="#" class="logo">FILMFREI24.DE</a>
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Filme durchsuchen..." id="searchInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="hero-section">
+            <div class="hero-banner-container">
+                <img class="hero-banner" id="heroBanner" src="" alt="" loading="lazy">
+                <div class="watch-indicator" id="heroWatchIndicator" style="display: none;">
+                    <span class="watch-status"></span>
+                </div>
+            </div>
+            <div class="hero-overlay">
+                <h1 class="hero-title" id="heroTitle"></h1>
+                <p class="hero-description" id="heroDescription"></p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" id="heroPlayBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        Jetzt ansehen
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="recently-watched" id="recentlyWatched" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">Zuletzt angesehen</h2>
+            </div>
+            <div class="recent-movies" id="recentMovies"></div>
+        </section>
+
+        <section class="movies-section">
+            <div class="movies-grid" id="moviesGrid"></div>
+        </section>
+    </main>
+
+    <div class="detail-modal" id="detailModal">
+        <div class="detail-container">
+            <div class="detail-header">
+                <button class="close-btn" id="closeDetail" aria-label="Zurück">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                </button>
+                <h2 class="detail-title" id="detailTitle"></h2>
+            </div>
+            <div class="detail-content">
+                <div class="detail-main">
+                    <div class="custom-player" id="customPlayer"></div>
+                    <div class="detail-info">
+                        <div class="poster-wrapper" id="posterWrapper">
+                            <img class="detail-poster" id="detailPoster" src="" alt="">
+                            <div class="poster-caption" id="posterCaption"></div>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Beschreibung:</span>
+                            <span class="info-value" id="detailDescription"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Hochgeladen am:</span>
+                            <span class="info-value" id="detailDate"></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Qualität:</span>
+                            <span class="info-value">HD</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Sprache:</span>
+                            <span class="info-value">Deutsch</span>
+                        </div>
+                    </div>
+                    <div class="recommendations" id="recommendations"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 FilmFrei24.de - Alle Rechte vorbehalten</p>
+    </footer>
+
+    <script>
+const films = [
+	{
+    "id": 3,
+    "title": "Guns Up",
+    "description": "Ein Ex-Cop und Familienvater, der als Handlanger für die Mafia arbeitet, muss seine Familie in Sicherheit bringen, nachdem ein Job schiefgelaufen ist. Er hat nur eine Nacht Zeit, um sie aus der Stadt zu bringen.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/payk2vk6x1JyfBNzCTQFAEJaZli.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/dBeEwr4oMwOVg7UweZzUYG0wDkZ.jpg",
+    "video": "embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/GunsUp.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "92 min"
+},	
+	{
+    "id": 4,
+    "title": "Ein Minecraft Film",
+    "description": "Ein junges Mädchen und eine Gruppe ungewöhnlicher Abenteurer müssen die überirdische Overworld vor dem Enderdrachen retten.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/wf4qB9E5g8VOYFspFH24EY6JifM.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/vdprV0mY4s7ZY6zi6S74oak5Ai8.jpg",
+    "video": "embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/EinMinecraftFilm.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "100 min"
+    },
+	{
+    "id": 5,
+    "title": "Final Destination",
+    "description": "Nachdem er im Flugzeug eine Vorahnung eines Absturzes hat, verlassen Student Alex Browning und mehrere Freunde das Flugzeug, bevor es tatsächlich abstürzt. Doch der Tod ist nicht bereit, seine Opfer aufzugeben und holt sie einen nach dem anderen heim.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/3jejXaUkfM9yeWSMEHtiSKVn5wx.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/qwtgsc5pWRdWOgD6OCFIVkqSDPn.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/FinalDestination.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "98 min"
+},
+{
+    "id": 6,
+    "title": "Final Destination 2",
+    "description": "Nachdem sie einer Massenkarambolage auf der Autobahn entgeht, muss Kimberly Corman feststellen, dass der Tod zurückgekehrt ist, um die zu holen, die ihm entkommen sind. Mit Hilfe einer Überlebenden des Flug 180 versuchen sie, dem Schicksal ein Schnippchen zu schlagen.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/nBN6OZ6wEPhDlkC5Ql5EuUzGdAj.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/xDi8BGXpyC7ukcOHLaFO8FwaVgN.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/FinalDestination2.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "90 min"
+},
+	{
+    "id": 7,
+    "title": "Final Destination 3",
+    "description": "Ein Highschool-Absolventin hat eine Vision von einem Achterbahn-Unglück und rettet sich und einige ihrer Freunde. Doch der Tod ist ihnen auf den Fersen und holt sie auf immer kreativere und brutalere Weise heim.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/1ITrIiywKmK96lnGMNygQPj8Mn6.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/5vHqaoQ4SmrGt8Z9kBl6eX9DPFh.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/FinalDestination3.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "93 min"
+},
+	{
+    "id": 8,
+    "title": "Final Destination 4",
+    "description": "Nachdem Nick O'Bannon bei einem Autorennen eine schreckliche Vision hat, entkommt er mit einigen Freunden nur knapp einem Massaker. Doch der Tod ist nicht leicht zu täuschen und fordert seinen Tribut in immer bizarreren und brutal werdenden Unfällen.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/nDvntFkWPoh5qVosZOSDNT4QtuA.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/u7y5YiXHgx5ukJoKkvbvE8P6m3b.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/FinalDestination4.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "82 min"
+},
+	{
+    "id": 9,
+    "title": "Final Destination 5",
+    "description": "Während eines Betriebsausflugs hat Sam Lawton eine Vorahnung, die ihn und mehrere Kollegen vor dem Einsturz einer Hängebrücke bewahrt. Doch der Tod ist ihnen dicht auf den Fersen und holt sich die Überlebenden auf grausame Weise zurück.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/bvKTSoIrhpXKdNP0YdSXqkAn5aV.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/lstY9O0yg1ILqVdxDFLGC99YeJv.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/FinalDestination4.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "92 min"
+},
+	{
+    "id": 10,
+    "title": "Final Destination: Bloodlines",
+    "description": "Geplagt von einem gewalttätigen, wiederkehrenden Albtraum, kehrt die Studentin Stefanie nach Hause zurück, um die einzige Person zu finden, die den Kreislauf durchbrechen und ihre Familie vor dem grausamen Schicksal bewahren könnte, das sie alle unweigerlich erwartet.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/sQa9tOrVnmaNtuAIPtwU9SFsI6F.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/ofH87oKJYoF4nbKq3PZJc7CJJkZ.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/FinalDestination6.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "110 min"
+},
+	{
+    "id": 13,
+    "title": "Deadpool",
+    "description": "Der ehemalige Special-Forces-Soldat Wade Wilson wird nach einem fehlgeschlagenen Experiment zu Deadpool, einem verunstalteten Antihelden mit übermenschlichen Heilkräften und einem verdrehten Sinn für Humor. Er macht Jagd auf den Mann, der sein Leben zerstört hat.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/VEfCqkbK062Egob26rYQWAJoE7.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/38B4MIYNyWpehNBQ9pc22OQjsZ7.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Deadpool.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "108 min"
+},
+	{
+    "id": 14,
+    "title": "Deadpool 2",
+    "description": "Nachdem sein Leben erneut aus den Fugen gerät, muss Wade Wilson, alias Deadpool, den jungen Mutanten Russell Collins vor dem zeitreisenden Soldaten Cable beschützen. Dafür stellt er ein Team von Mutanten zusammen, die X-Force.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/uC7YwWcXusYgpWHSxl6njJDiFfk.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/6WEbGTV5EaEJzFsZnTwslBgxcx4.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Deadpool2.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "119 min"
+},
+	{
+    "id": 15,
+    "title": "Deadpool & Wolverine",
+    "description": "Deadpool muss die Realität retten und schließt sich dafür widerwillig mit einem widerwilligen Wolverine zusammen. Gemeinsam begeben sie sich auf eine schicksalhafte Mission, die das Marvel Cinematic Universe für immer verändern wird.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/chDpMyvXNDFMhg3yUknITnGUCUk.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/pAqcNgLIGDbCXXTcMupzG1ZqsaC.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Deadpool3.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "127 min"
+},
+
+	{
+    "id": 29,
+    "title": "Forrest Gump",
+    "description": "Ein gutherziger, aber geistig einfacher Mann namens Forrest Gump erzählt aus seinem Leben, das ihn auf erstaunliche Weise durch viele der prägendsten Momente der amerikanischen Geschichte des 20. Jahrhunderts führt.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/zUWRCzac72YuO9k5kEWSe0aGbs7.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/vdqthGdYhH4WzvmkGOcg0Um2Up7.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/ForrestGump.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "142 min"
+},  
+	{
+    "id": 30,
+    "title": "Der Polarexpress",
+    "description": "Ein kleiner Junge, der beginnt, am Weihnachtsmann zu zweifeln, erhält in der Weihnachtsnacht die einmalige Gelegenheit, mit einem magischen Zug zum Nordpol zu fahren und dort das Wunder von Weihnachten wiederzuentdecken.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/5XVNlZ9prFSP2jx8p2HC0lZaNuv.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/gsU4q4eLWh9Zj1QTzk2HocAIPU9.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerPolarexpress.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "100 min"
+},
+		{
+    "id": 31,
+    "title": "Guardians of the Galaxy",
+    "description": "Der draufgängerische Weltraumabenteurer Peter Quill findet sich als Objekt einer unerbittlichen Kopfgeldjagd wieder, nachdem er einen mysteriösen Orb gestohlen hat. Um seinen Kopf zu retten, muss er eine Allianz mit vier ungleichen Außenseitern eingehen: Rocket, einem waffenvernarrten Waschbären; Groot, einem baumähnlichen Humanoiden; der tödlichen und rätselhaften Gamora; und dem rachsüchtigen Drax dem Zerstörer.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/9pbW0r2YIkyWCOieSAUPrmS9cDp.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/29GPA8PGPwiVVSxNmuk0oPiAXNz.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/GuardiansOfTheGalaxy.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "121 min"
+},
+	{
+    "id": 32,
+    "title": "Guardians of the Galaxy Vol. 2",
+    "description": "Die Guardians of the Galaxy reisen durch den Kosmos, während sie versuchen, das Rätsel um Peter Quills wahre Abstammung zu lüften. Dabei müssen sie sich mit alten Feinden auseinandersetzen und neue Verbündete finden.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/ckujEWphKR2NG3vLLhUaLzJEGny.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/h4hMBL0MRPYvWAB0hxGwgL6cqIW.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/GuardiansOfTheGalaxy2.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "136 min"
+},
+	{
+    "id": 33,
+    "title": "Guardians of the Galaxy Vol. 3",
+    "description": "Peter Quill, immer noch erschüttert vom Verlust von Gamora, muss sein Team um sich versammeln, um ein Mitglied zu verteidigen. Eine Mission, die, wenn sie nicht erfolgreich ist, zum Ende der Guardians führen könnte, wie wir sie kennen.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/d1DEggMecolWV6ZUcrygiLAqxOJ.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/99NBEpQEM4uLItZY2RquqdqdSXM.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/GuardiansOfTheGalaxy3.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "150 min"
+},
+	{
+    "id": 35,
+    "title": "Der wilde Roboter",
+    "description": "Ein Roboter namens Roz wird auf einer unbewohnten Insel angespült und muss lernen, sich an die raue Umgebung anzupassen und Beziehungen zu den dort lebenden Tieren aufzubauen, um zu überleben.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/FrwVJ6t8jeKmO7FgWTzhM2nqH9.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/qbFwHNeh2g3gy5C8IbUpj6CYOc6.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerWildeRoboter.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "105 min"
+},
+	{
+    "id": 48,
+    "title": "Die Geschichte der Menschheit - leicht gekürzt",
+    "description": "Mel Brooks präsentiert in dieser satirischen Komödie eine urkomische Reise durch verschiedene Epochen der Menschheitsgeschichte, von der Steinzeit über die Römische Kaiserzeit bis zur Französischen Revolution, gefüllt mit seinen charakteristischen Parodien und Gags.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/413fb1a8439d96fc657fda9e5318676b953c067ef8667703cd2bae78bf2d3e0d._SX342_.jpg",
+    "banner": "https://www.sky.de/static/img/filmhighlights/PAM_BTR_Q_MAIN_ART_TT_12971887.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DieGeschichteDerMenschheitLeichtGekuerzt.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "92 min"
+},
+	{
+    "id": 50,
+    "title": "Alles steht Kopf",
+    "description": "Die elfjährige Riley zieht mit ihrer Familie in eine neue Stadt und muss sich an ein neues Leben gewöhnen. Ihre Emotionen – Freude, Kummer, Wut, Angst und Ekel – leben in ihrem Kopf und versuchen, sie durch diese schwierige Zeit zu navigieren. Doch als Freude und Kummer versehentlich aus der Kommandozentrale geraten, müssen sie einen langen Weg zurücklegen, um Rileys geistiges Gleichgewicht wiederherzustellen.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/hQt3jN0Nd9naPDM4miLz1gBLgrp.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/1JkIE4CjscsV5BEmTqWIJ4goKVe.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/AllesStehtKopf.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "95 min"
+},
+	{
+    "id": 51,
+    "title": "Alles steht Kopf 2",
+    "description": "Riley ist nun im Teenageralter, und ihre Kommandozentrale wird unerwartet umgebaut, um neuen Emotionen Platz zu machen. Freude, Kummer, Wut, Angst und Ekel müssen sich mit der Ankunft von Angst und anderen Gefühlen auseinandersetzen, die Rileys Gefühlswelt durcheinanderbringen.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/d1x6XyewluS8gxPXqb0PZnpQPUQ.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/4XPSuqAKM0dI9ZNq64GqjFhHRIa.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/AllesstehtKopf2.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "96 min"
+},
+		{
+    "id": 52,
+    "title": "Der König der Löwen",
+    "description": "Der junge Löwenprinz Simba wird durch eine Tragödie, die sein böser Onkel Scar inszeniert hat, aus seinem Königreich vertrieben. Er schließt Freundschaft mit den Außenseitern Timon und Pumbaa und wächst weit entfernt auf, bis er eines Tages zurückkehren muss, um seinen rechtmäßigen Platz als König der Savanne einzunehmen.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/qnQC8wpfzGXvIc6rG4NLhsieseE.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/q9uTnKwPO1pCn0QVOkbMTgCbII8.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerKoenigDerLoewen.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "118 min"
+},
+	{
+    "id": 57,
+    "title": "Dune: Teil 1",
+    "description": "Paul Atreides, ein brillanter und begabter junger Mann, der in ein großes Schicksal hineingeboren wurde, das jenseits seines Verständnisses liegt, muss zum gefährlichsten Planeten des Universums reisen, um die Zukunft seiner Familie und seines Volkes zu sichern. Während böse Mächte um das exklusivste Gut des Planeten – eine Ressource, die das größte Potenzial der Menschheit freisetzen kann – kämpfen, werden nur diejenigen überleben, die ihre Angst überwinden können.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/rADq1EGp4HP5uON810vVDfwdSs6.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/h61Kc0NC7d90jNwXfBx5js7DnSQ.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Dune.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "155 min"
+},
+	{
+    "id": 58,
+    "title": "Dune: Teil 2",
+    "description": "Paul Atreides verbündet sich mit Chani und den Fremen, um Rache an denen zu nehmen, die seine Familie vernichtet haben. Während er zwischen der Liebe seines Lebens und dem Schicksal des Universums wählen muss, versucht er, eine schreckliche Zukunft zu verhindern, die nur er vorhersehen kann.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/59j9zZW8WannTtjkupTakGVkzM1.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/rmqiV9OperdByzpmCbhQ5DrImXu.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Dune2.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "166 min"
+},
+	{
+    "id": 36,
+    "title": "Harry Potter und der Stein der Weisen",
+    "description": "An seinem elften Geburtstag erfährt der Waise Harry Potter, dass er ein Zauberer ist und in die Hogwarts-Schule für Hexerei und Zauberei eingeladen wird. Dort entdeckt er die Wahrheit über seine Vergangenheit, seine Eltern und den Dunklen Lord, der sie tötete.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/hOmRlth9fPJ1YrCm2e5c6pRTupd.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/cvNvWh3vpZHCCmuZ1g75H8iXuxi.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/HarryPotterUndDerSteinDerWeisen.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "152 min"
+},
+		{
+    "id": 37,
+    "title": "Harry Potter und die Kammer des Schreckens",
+    "description": "Harry Potter kehrt für sein zweites Schuljahr nach Hogwarts zurück und muss feststellen, dass ein mysteriöser Angreifer die Schüler versteinert. Gerüchte über die legendäre Kammer des Schreckens und deren Erben machen die Runde, und Harry und seine Freunde müssen das Geheimnis lüften, bevor es zu spät ist.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/eZy8E8F85DXZX3yFk2bYzMNYJKG.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/zIEUumHrhkSJrlKPfBcEwPxZcMn.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/HarryPotterUndDieKammerDesSchreckens.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "161 min"
+},
+	{
+    "id": 38,
+    "title": "Harry Potter und der Gefangene von Askaban",
+    "description": "Harry Potter kehrt für sein drittes Jahr nach Hogwarts zurück und muss erfahren, dass der gefährliche Verbrecher Sirius Black aus dem Zauberergefängnis Askaban ausgebrochen ist und angeblich hinter ihm her ist. Harry und seine Freunde müssen die Wahrheit über Black und dessen Verbindung zu Harrys Familie herausfinden.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/ea3aGUyIFhvd4EqZKX5TkWzd9ml.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/yVGOIFTHhZtjgRHmO9Aynohcz6t.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/HarryPotterUndDerGefangeneVonAskaban.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "142 min"
+},
+	{
+    "id": 39,
+    "title": "Harry Potter und der Feuerkelch",
+    "description": "Harry Potter wird auf mysteriöse Weise als vierter Champion im Trimagischen Turnier ausgewählt, einem gefährlichen Wettkampf zwischen drei Zauberschulen. Er muss nicht nur drei tödliche Aufgaben bestehen, sondern sich auch der drohenden Rückkehr von Lord Voldemort stellen.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/y3n0fN5uL417gd6LVtReKbYowIt.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/u3wmCW0cdr0ac7oihdvCa5eDlPl.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/HarryPotterundderFeuerkelch.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "157 min"
+},
+	{
+    "id": 40,
+    "title": "Harry Potter und der Halbblutprinz",
+    "description": "Während Lord Voldemort seinen Griff sowohl auf die Muggel- als auch auf die Zaubererwelt festigt, entdeckt Harry Potter ein altes Buch, das einst einem mysteriösen 'Halbblutprinzen' gehörte, und erfährt mehr über die Vergangenheit von Voldemort, um dessen Schwachstellen zu finden.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/bQNaLipvCgPvbXnyrJcGVOQyifD.jpg",
+    "banner": "https://image.tmdb.org/t/p/w780/5m6604x5LBxdiLFbm8MP8jJNzN0.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/HarryPotterundderHalbblutprinz.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "153 min"
+},
+	{
+    "id": 41,
+    "title": "Harry Potter und der Orden des Phönix",
+    "description": "Nach der Rückkehr von Lord Voldemort wird Harry Potter von vielen in der Zaubererwelt angezweifelt. Er muss eine geheime Organisation gründen, den 'Dumbledores Armee', um seine Mitschüler im Kampf gegen die dunklen Künste auszubilden und sich auf den bevorstehenden Krieg vorzubereiten.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/4Hg0ut5IcaTVGa4OR5Rhjak6R7H.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/yoxQqxrdA7Xz0qFqxdBKlQi60g6.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/HarryPotterUndDerOrdenDesPhoenix.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "138 min"
+},
+	{
+    "id": 43,
+    "title": "Harry Potter und die Heiligtümer des Todes – Teil 2",
+    "description": "Harry, Ron und Hermine kehren nach Hogwarts zurück, um die letzten Horkruxe zu finden und Voldemort endgültig zu besiegen. Es kommt zum epischen Endkampf zwischen Gut und Böse, bei dem viele Leben geopfert werden und das Schicksal der Zaubererwelt auf dem Spiel steht.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/AmcYjc7HtNGnelhCU2YYbbVdtBH.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/ik5bYheGLGw7oaVm9zbzUocnPcf.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/HarryPotterUndDieHeiligtuemerDesTodesTeil2.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "130 min"
+},
+	{
+    "id": 42,
+    "title": "Harry Potter und die Heiligtümer des Todes – Teil 1",
+    "description": "Harry, Ron und Hermine begeben sich auf eine gefährliche Mission, um die Horkruxe zu finden und zu zerstören, die Voldemort unsterblich machen. Sie sind auf der Flucht und müssen sich vor den Todessern verstecken, während die Zaubererwelt im Chaos versinkt.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/lwkSGuc2A6G69UtGotpADTaK6vQ.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/pAqz6yM4nilXj1kDWayWNI6Hc78.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/HarryPotterUndDieHeiligtuemerDesTodesTeil1.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "146 min"
+},
+		{
+    "id": 83,
+    "title": "IF - Imaginäre Freunde",
+    "description": "Ein junges Mädchen entdeckt, dass sie imaginäre Freunde sehen kann, die von ihren menschlichen Freunden vergessen wurden. Sie begibt sich auf ein magisches Abenteuer, um diese 'IFs' wieder mit ihren ehemaligen Freunden zu vereinen, bevor sie für immer verschwinden.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/eOgPHSlLrlz1xOEd3UjN8qKIQ10.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/eM7Onk7vVTg01veaDhwZnHorewN.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/IFImaginaereFreunde.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "104 min"
+},
+		{
+    "id": 110,
+    "title": "Heads of State",
+    "description": "Ein spannender Action-Komödie, in der ein ehemaliger Geheimdienstmitarbeiter und ein internationaler Attentäter zu einem ungleichen Team werden. Sie sind gezwungen zusammenzuarbeiten, um eine globale Verschwörung aufzudecken, die die Spitze der politischen Macht bedroht. Während sie versuchen, ihre Differenzen zu überwinden, müssen sie eine Reihe von lebensbedrohlichen Situationen meistern und die Welt vor einer katastrophalen Krise bewahren.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/nQPd6iRdTX7SWCWwAFjUxX4t8pi.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/p7ZyWoXhA2e4qpYUMSSMKGONSoY.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/HeadsOfState.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "113 min"
+},
+	{
+    "id": 99,
+    "title": "Interstellar",
+    "description": "Als die Erde unbewohnbar wird, muss eine Gruppe von Entdeckern eine Reise jenseits unserer Galaxis antreten, um herauszufinden, ob die Menschheit eine Zukunft unter den Sternen hat. Sie durchqueren ein Wurmloch in den Tiefen des Weltraums, um Planeten zu finden, die möglicherweise bewohnbar sind, während sie mit den extremen Auswirkungen der Zeitdilatation zu kämpfen haben.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/hHdhfkkzt0Mwec33Ux177Z7CO8w.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/b3yyWxAopoCLYEMMtNbMvZkG6f1.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Interstellar.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "169 min"
+},
+		{
+    "id": 47,
+    "title": "Imaginary",
+    "description": "Als Jessica mit ihrer Familie in ihr altes Elternhaus zurückkehrt, entdeckt ihre Stieftochter Alice einen alten Teddybären namens Chauncey im Keller. Alice entwickelt eine unheimliche Bindung zu dem Teddy, der sie bald dazu bringt, verstörende Spiele zu spielen, die immer bedrohlicher werden.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/cspuDQzWyXEmYpC0LPYjWqTraD8.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/muO0x6IbY8nPQqZtct5RmfDvHbR.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Imaginary.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "104 min"
+},
+	{
+    "id": 101,
+    "title": "Henry Danger: Der Film",
+    "description": "Kid Danger und Captain Man müssen die Stadt Swellview retten, nachdem Frankini einen 'Anti-Musical'-Fluch über die Bewohner gelegt hat, der sie zwingt, immer zu singen und zu tanzen. Die Superhelden müssen Frankini und seinen Handlangern entgegentreten, um den Fluch zu brechen und die Stadt wieder normal zu machen.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/xCvSvfXE2P1uQldmMZikAAx7ixS.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/mYYxpGpQvJ0qsoE0rF1zQlS2c46.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/HenryDangerDerFilm.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "44 min"
+},
+	{
+    "id": 62,
+    "title": "Doctor Sleeps Erwachen",
+    "description": "Jahre nach den traumatischen Ereignissen im Overlook Hotel ist ein erwachsener Danny Torrance immer noch vom Alkoholismus geplagt und kämpft mit seinen Fähigkeiten. Er trifft auf ein junges Mädchen, das ebenfalls das 'Shining' besitzt und von einer Gruppe verfolgt wird, die sich von der Lebensenergie derer ernährt, die solche Fähigkeiten haben. Danny muss seine eigenen Dämonen bekämpfen, um sie zu beschützen.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/cr0ijq0UOKKDktK9RMqBtS7De8j.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/pyIef5CKjxYf5NBfcndXH7wBQC4.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DoctorSleepsErwachen.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "152 min"
+},
+	{
+    "id": 63,
+    "title": "Doctor Strange",
+    "description": "Der brillante, aber arrogante Neurochirurg Dr. Stephen Strange verliert nach einem schrecklichen Autounfall den Gebrauch seiner Hände. Als die westliche Medizin ihm nicht mehr helfen kann, begibt er sich auf eine Reise in den fernen Osten, wo er eine mystische Enklave entdeckt, die als Kamar-Taj bekannt ist. Dort lernt er unter der Führung der Ältesten die geheimen Künste der Magie und muss entscheiden, ob er in sein früheres Leben zurückkehrt oder die Welt als mächtigster Zauberer beschützt.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/mzPnP190YLV4KFL3ZgsP7AsPEd2.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/brbkEQAe6BKmPCLdqBkVNNZqlql.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DoctorStrange.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "115 min"
+},
+		{
+    "id": 64,
+    "title": "Doctor Strange in the Multiverse of Madness",
+    "description": "Doctor Strange reist ins Multiversum, um eine junge Frau namens America Chavez zu beschützen, die die Fähigkeit hat, durch Dimensionen zu reisen. Dabei trifft er auf alte Freunde und Feinde und muss sich einer Bedrohung stellen, die die Realität selbst zu zerstören droht.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/nRDLWnkyMpG2OnI9ZsV11y7Dh28.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/jQ8QGubTbCEcElSPEiySzLYZ2fX.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DoctorStrangeInTheMultiverseOfMadness.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "126 min"
+},
+		{
+    "id": 59,
+    "title": "Der Hobbit - Eine unerwartete Reise",
+    "description": "Der Hobbit Bilbo Beutlin wird von dem Zauberer Gandalf und dreizehn Zwergen unter der Führung von Thorin Eichenschild auf eine abenteuerliche Reise mitgenommen, um das verlorene Zwergenkönigreich Erebor vom Drachen Smaug zurückzuerobern. Die Extended Edition enthält zusätzliche Szenen und eine längere Laufzeit.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/bPYCAzOB3M3PZ91BpQzJeReKkP8.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/pPQosm9MxDln8AYMDegA3DMDkwG.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerHobbitEineUnerwarteteReise.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "182 min"
+},
+	{
+    "id": 60,
+    "title": "Der Hobbit - Smaugs Einöde",
+    "description": "Nachdem sie die Nebelberge überquert haben, setzen Bilbo Beutlin und die Zwerge ihre gefährliche Reise fort, um das verlorene Gold aus Smaugs Hort im Erebor zurückzuerobern. Sie müssen sich durch den Düsterwald kämpfen, treffen auf Elfen und Menschen und stehen schließlich dem Drachen Smaug selbst gegenüber.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/60O2sdzZcPX8vXyDOYHi7exrnil.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/vOhrSSyWnR3rRe5jXyLlAAa4CiW.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerHobbitSmaugsEinoede.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "186 min"
+},
+	{
+    "id": 70,
+    "title": "Der Hobbit - Die Schlacht der fünf Heere",
+    "description": "Nachdem sie Smaug aus dem Erebor vertrieben haben, müssen Bilbo Beutlin und die Zwerge erkennen, dass ihre Tat weitreichende Folgen hat. Während Thorin vom Drachengold besessen wird, versammeln sich Armeen von Elfen, Menschen und Orks, um über den Schatz und das Schicksal Mittelerdes zu entscheiden. Eine epische Schlacht bricht aus, die über die Zukunft der Region entscheidet.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/mNZ4MxL0KdW9VBMXSAhiiGFDYaa.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/6Xt11malHxuIsQqg8K6Y6PLf4nh.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerHobbitDieSchlachtDerFuenfHeere.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "164 min"
+},
+	{
+    "id": 72,
+    "title": "Der Herr der Ringe: Die Schlacht der Rohirrim",
+    "description": "200 Jahre vor den Ereignissen der bekannten Filmtrilogie erzählt dieser Animationsfilm die blutige Geschichte des Königs Helm Hammerhand von Rohan und seiner Tochter Héra. Sie müssen sich einem rachsüchtigen Feind, Wulf und den Dunländern, stellen und sich in der Hornburg (dem späteren Helms Klamm) einem wagemutigen letzten Gefecht stellen, um ihr Volk zu retten.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/ojX9By9jnx4W31sGbArn88HV41q.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/yjW4P2hhMgIYmGuLcLs2IvhNgsF.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerHerrDerRingeDieSchlachtDerRohirrim.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "135 min"
+},
+{
+    "id": 73,
+    "title": "Der Herr der Ringe - Die Gefährten",
+    "description": "Der junge Hobbit Frodo Beutlin erbt einen unscheinbaren goldenen Ring, der sich als der Eine Ring des Dunklen Lords Sauron entpuppt. Um Mittelerde vor Saurons Herrschaft zu retten, muss Frodo den Ring in den Feuern des Schicksalsberges zerstören. Eine Gemeinschaft aus Hobbit, Mensch, Elf, Zwerg und Zauberer bildet sich, um ihn auf dieser gefährlichen Reise zu begleiten.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/k6lw7hhaMDzJ170bfZfBbnipxcW.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/gU84vBGG2x8K3x1zrz4SggiN5hr.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerHerrDerRingeDieGefaehrten.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "228 min"
+},
+{
+    "id": 74,
+    "title": "Der Herr der Ringe - Die zwei Türme",
+    "description": "Die Gefährten sind getrennt: Frodo und Sam setzen ihren gefährlichen Weg nach Mordor fort, um den Einen Ring zu zerstören, begleitet von dem zwiegespaltenen Gollum. Aragorn, Legolas und Gimli jagen die Uruk-hai, um Merry und Pippin zu retten und geraten in den Kampf um Rohan. Gandalf kehrt als der Weiße zurück, um die Völker Mittelerdes im Kampf gegen die Mächte Sarumans und Saurons zu vereinen, während sich die größte Schlacht in Helms Klamm nähert.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/tgBCeAjPwXeUaf8LsRL0LzBIcdR.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/9KCiWyhFJlN2v0y3O7YAWvlgkvE.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerHerrDerRingeDieZweiTuerme.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "235 min"
+},
+{
+    "id": 5,
+    "title": "Der Herr der Ringe",
+    "description": "Dieser Animationsfilm ist eine Verfilmung der ersten beiden Bände von J. R. R. Tolkiens Romanreihe. Der Hobbit Frodo Beutlin erbt einen mächtigen Ring und begibt sich mit einer Gemeinschaft aus Elben, Zwergen, Menschen und einem Zauberer auf eine gefährliche Reise. Ihr Ziel ist es, den Ring zu zerstören und den dunklen Herrscher Sauron davon abzuhalten, ganz Mittelerde zu versklaven.",
+    "upload_date": "2025-07-31",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/k0YO6bHkPOyhnw3nn17k6LVXbrO.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/5fz2r6YlO8noWH48slH1GJncs8T.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerHerrDerRinge1978.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "132 min"
+},
+{
+    "id": 75,
+    "title": "Der Herr der Ringe - Die Rückkehr des Königs",
+    "description": "Frodo und Sam nähern sich ihrer gefährlichsten Aufgabe, den Einen Ring in den Feuern des Schicksalsberges zu zerstören, während Aragorn seine Bestimmung als König erfüllen und die verbliebenen Völker Mittelerdes in einen letzten verzweifelten Kampf gegen Saurons gewaltige Armeen führen muss. Das Schicksal der Welt hängt am seidenen Faden.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/uFjlP9U9UOZAzGB25HUtmlEpXbc.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/gtxgvnmzhwhUGAWYTNK9hKai3Hk.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerHerrDerRingeDieRueckkehrDesKoenigs.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "263 min"
+},
+	{
+    "id": 76,
+    "title": "Bullet Train",
+    "description": "Ladybug, ein unglücklicher Auftragskiller, ist entschlossen, seine Arbeit friedlich zu erledigen, nachdem eine Reihe von Aufträgen aus dem Ruder gelaufen ist. Doch das Schicksal hat andere Pläne, denn er gerät in einem Hochgeschwindigkeitszug auf Kollisionskurs mit tödlichen Gegnern aus aller Welt, die alle miteinander verbundene, aber widersprüchliche Ziele verfolgen.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/kem6mZifzyIec1TDpd9srSRTpv7.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/4iHxv55VtjxlfZzMSeahUW6HPVD.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/BulletTrain.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "127 min"
+},
+{
+    "id": 77,
+    "title": "Der Schuh des Manitu",
+    "description": "Abahachi, Häuptling der Apachen, und sein Blutsbruder Ranger geraten in Schwierigkeiten, als sie eine Schuld bei einem Indianerhäuptling begleichen müssen. Auf ihrer Flucht vor einem bösen Banditen und der Suche nach einem verborgenen Schatz erleben sie eine Reihe von haarsträubenden Abenteuern im Wilden Westen, wobei sie auf skurrile Charaktere und unerwartete Wendungen treffen.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/l1RgVc6kSUcDG2WbSjgSbH6I0Wc.jpg",
+    "banner": "https://static.titlovi.com/img/0190/190219-tt0248408.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerSchuhDesManitu.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "87 min"
+},
+{
+    "id": 78,
+    "title": "Er ist wieder da",
+    "description": "Adolf Hitler erwacht im Jahr 2014 in Berlin, ohne Erinnerung an die Ereignisse nach 1945. Er ist fassungslos über die moderne Welt und die multikulturelle Gesellschaft. Ein Fernsehteam entdeckt ihn und hält ihn für einen brillanten Komiker. Hitler nutzt die Medien, um seine alten Ideen in der heutigen Zeit zu verbreiten, was zu einer Mischung aus Komödie und erschreckender Reflexion über die Gesellschaft führt.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/xAkactPBwjjo2nhrhKCV6jL6ozJ.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/sqo9UasL0W99mGGrSRiKpOL7FfF.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/ErIstWiederDa.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "116 min"
+},
+	{
+    "id": 79,
+    "title": "Das perfekte Geheimnis",
+    "description": "Sieben Freunde treffen sich zu einem Abendessen. Um den Abend aufzupeppen, beschließen sie, ein Spiel zu spielen: Alle Handys werden auf den Tisch gelegt, und jede Nachricht, jeder Anruf und jede E-Mail wird laut vorgelesen oder mitgehört. Was als harmloser Spaß beginnt, entwickelt sich schnell zu einem enthüllenden Abend, an dem dunkle Geheimnisse und Lügen ans Licht kommen und die Beziehungen der Freunde auf eine harte Probe gestellt werden.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/ej8QuSK03YmF3VojH6h2pI7aJIf.jpg",
+    "banner": "https://images.plus.rtl.de/watch/1000189/artwork_landscape/wh-kt-4q-e8/perfekte-geheimnis-das",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DasPerfekteGeheimnis.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "111 min"
+},
+{
+    "id": 81,
+    "title": "Der Vorname",
+    "description": "Als eine Familie und ein alter Freund zu einem gemütlichen Abendessen zusammenkommen, eskaliert die Stimmung, als einer der Gäste den Namen seines ungeborenen Kindes verrät: Adolf. Was als Scherz beginnt, führt zu einer hitzigen Diskussion über Politik, Etikette und familiäre Geheimnisse, die alte Konflikte wieder aufleben lässt.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/2MggppJMR7cLdNz4WfzmuVGdI06.jpg",
+    "banner": "https://maz-movie.com/wp-content/uploads/2019/09/dervorname_thumbnail.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerVorname.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "91 min"
+},
+{
+    "id": 82,
+    "title": "Der Nachname",
+    "description": "Zwei Jahre nach dem berüchtigten Abendessen versammeln sich Stephan und Elisabeth mit Familie und Freunden erneut. Dieses Mal geht es um ein Wochenende im Haus am See auf Mallorca. Doch die Urlaubsidylle wird jäh gestört, als eine unerwartete Erbschaft und ein noch unerwarteteres Familiengeheimnis ans Licht kommen. Alte Wunden werden aufgerissen, und die Beziehungen der Anwesenden werden erneut auf die Probe gestellt.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/1kEVyDuA8g4WfPnrFhVvey3Flu2.jpg",
+    "banner": "https://www.leinetal24.de/assets/images/31/268/31268954-in-der-aktuellen-filmkunststaffel-ist-diesmal-der-film-der-nachname-zu-sehen-2pmO0yHew2fe.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerNachname.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "91 min"
+},
+{
+    "id": 85,
+    "title": "Blink Twice",
+    "description": "Nachdem er auf einer Privatinsel eines Tech-Milliardärs (Channing Tatum) gestrandet ist, gerät eine junge Frau (Naomi Ackie) in einen albtraumhaften Strudel, als sie versucht, die mysteriösen Ereignisse um sie herum zu entschlüsseln und von der Insel zu entkommen. Nichts ist so, wie es scheint.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/oPPP1VHuJSSyDlkhPBgWxwJVRVq.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/Auwm191CFcdxeRifeZ0ZE73Ffo2.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/BlinkTwice.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "104 min"
+},    
+	{
+    "id": 94,
+    "title": "Der Spitzname",
+    "description": "Die bekannte Familie und ihr Freundeskreis versammeln sich erneut, diesmal bei Familie Böttcher auf einem idyllischen Landgut. Ein entspanntes Wochenende ist geplant, doch wie üblich sorgen unerwartete Enthüllungen und Missverständnisse für Chaos. Ein harmloses Spiel um Spitznamen führt zu einer Kettenreaktion, die alte Geheimnisse lüftet und neue Konflikte entfacht, während jeder versucht, sein eigenes Image zu wahren.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/xS0IqNxxpEHJHOZy3ky3IwbfzXt.jpg",
+    "banner": "https://m.media-amazon.com/images/S/pv-target-images/ba305bd7d34281517773f443c8b08ad360ac9cfa75454ec71caf1b2dc00b3203.png",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerSpitzname.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "95 min"
+},
+{
+    "id": 97,
+    "title": "A Working Man",
+    "description": "Levon Cade hat eine erfolgreiche Militärkarriere im Bereich Geheimoperationen hinter sich gelassen, um ein einfaches Leben als Arbeiter auf dem Bau zu führen. Als jedoch die Tochter seines Vorgesetzten, die für ihn wie eine Tochter ist, von einem Menschenhändlerring entführt wird, zieht er noch einmal in den Kampf. Bei seiner Suche stößt er auf eine Welt voller Korruption, die selbst seine schlimmsten Vorstellungen übertrifft.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/bx124fGMjHRn8hpS0Ejna7dAXt2.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/79lV1TdqD7YxLhdZ4DbvmnFOLWw.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/AWorkingMan.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "117 min"
+},
+{
+    "id": 102,
+    "title": "Der Super Mario Bros. Film",
+    "description": "Die Klempner Mario und Luigi aus Brooklyn geraten durch ein mysteriöses Rohr in eine magische neue Welt. Als Luigi vom bösen Bowser entführt wird, muss Mario mit Hilfe von Prinzessin Peach und dem Pilz-Königreich eine gefährliche Reise antreten, um seinen Bruder zu retten und die Welt vor Bowsers Eroberungsplänen zu bewahren.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/2VhvUgsFKIjBm9NHXeeVqkPtUqe.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/aBcZL9JBjK4ILdYJW2um3O6IaSK.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DerSuperMarioBrosFilm.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "92 min"
+},
+	{
+    "id": 117,
+    "title": "Es",
+    "description": "In der Kleinstadt Derry, Maine, verschwinden Kinder unter mysteriösen Umständen. Eine Gruppe von sieben Außenseitern, bekannt als der 'Klub der Verlierer', wird mit einem Gestaltwandler konfrontiert, der sich meist in der Gestalt des bösen Clowns Pennywise zeigt. Sie müssen ihre persönlichen Ängste überwinden und zusammenhalten, um das Monster zu besiegen, das seit Jahrhunderten unentdeckt ist und sich von den Ängsten der Kinder ernährt.",
+    "upload_date": "2025-07-18",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/g7kcdw0wz31xjISyn6ODE607Ais.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/9IHPpCSAmP4KO3gCq7GpgFjVKcy.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Es.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "135 min"
+},
+{
+    "id": 118,
+    "title": "Es - Kapitel 2",
+    "description": "27 Jahre nach den Ereignissen von 1989 kehrt das Böse nach Derry zurück. Die erwachsenen Mitglieder des 'Klubs der Verlierer' – nun in alle Winde verstreut – müssen ihre Kindheitsversprechen einlösen und sich erneut zusammenfinden, um Pennywise ein für alle Mal zu besiegen. Doch die Erinnerungen an ihre traumatische Vergangenheit sind verblasst, und das Monster ist mächtiger und heimtückischer als je zuvor, bereit, sie mit ihren tiefsten Ängsten zu konfrontieren.",
+    "upload_date": "2025-07-18",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/yBVOgAzBVXy8N8lgnCb9QK9ILoy.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/fJWe8TyNJHCybsbdinj0b562FDT.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/EsKapitel2.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "170 min"
+},
+{
+        "id": 124,
+        "title": "Bad Boys - Harte Jungs",
+        "description": "Die Detektive Mike Lowrey und Marcus Burnett sind zwei ungleiche Polizisten aus Miami. Als Heroin im Wert von 100 Millionen Dollar aus dem Polizeirevier gestohlen wird, haben sie 72 Stunden Zeit, die Drogen zurückzuholen, sonst wird ihr Department dichtgemacht. Eine Zeugin, die ihnen helfen könnte, vertraut sich nur Mike an, doch sie verwechselt ihn ständig mit Marcus. Um den Fall zu lösen und die Zeugin zu schützen, müssen die beiden ihre Rollen tauschen und sich mit einem skrupellosen Drogenbaron anlegen.",
+        "upload_date": "2025-07-17",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/pQ2OTWsNYxKPme41LtNRx36qcyP.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/nSh94PJec2OPhdiSgWLqKBAACA8.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/BadBoysHarteJungs.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "119 min"
+    },
+    {
+        "id": 125,
+        "title": "Bad Boys II",
+        "description": "Mike Lowrey und Marcus Burnett ermitteln gegen den rücksichtslosen Drogenbaron Johnny Tapia, der ein gefährliches Drogennetzwerk in Miami aufgebaut hat. Ihre Ermittlungen führen zu explosiven Verfolgungsjagden und Schießereien quer durch die Stadt. Als Marcus' Schwester Syd, die verdeckt für die DEA arbeitet, in Gefahr gerät, nehmen die beiden Bad Boys den Kampf persönlich auf und überschreiten alle Grenzen, um sie zu retten und Tapia zu stoppen.",
+        "upload_date": "2025-07-17",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/oeIy1U0NdOhCX0Rc2WGe1cUQ8uw.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/vPyY6Jy3iGbIOahA5sPFqoL5ASj.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/BadBoysII.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "147 min"
+    },
+    {
+        "id": 126,
+        "title": "Bad Boys for Life",
+        "description": "Mike Lowrey und Marcus Burnett sind zurück! Nach Jahren der Trennung müssen die beiden legendären Detectives aus Miami wieder zusammenarbeiten, als ein gefährlicher Drogenbaron aus Mexikos Unterwelt ein Kopfgeld auf Mike aussetzt. Marcus, der eigentlich in den Ruhestand gehen wollte, wird in das chaotische Abenteuer hineingezogen. Gemeinsam mit einem neuen, technikaffinen Team müssen sie ihre alten Methoden mit neuen Taktiken kombinieren, um den Feind zu stellen und die Vergangenheit endgültig ruhen zu lassen.",
+        "upload_date": "2025-07-17",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/hrGRkhtJs9okYDcImsoW3hmjbQd.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/eNkeLslgV9apdxcLYM45NNuwvaJ.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/BadBoysForLife.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "124 min"
+    },
+    {
+        "id": 127,
+        "title": "Bad Boys: Ride or Die",
+        "description": "Die Detektive Mike Lowrey und Marcus Burnett stehen vor einer neuen Herausforderung, als ihr verstorbener Captain Conrad Howard posthum eines Verbrechens beschuldigt wird. Um seinen Namen reinzuwaschen, müssen die Bad Boys selbst zu Flüchtigen werden und außerhalb des Gesetzes agieren. Auf der Flucht vor der Polizei und gefährlichen Kriminellen müssen sie sich erneut beweisen und die Wahrheit ans Licht bringen, koste es, was es wolle.",
+        "upload_date": "2025-07-17",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/9CEowye9WjrhsFY2zL8i7CiHIU6.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/8LlguJSvtzhxi4onqZxTStStUHJ.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/BadBoysRideOrDie.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "116 min"
+    },
+    {
+        "id": 128,
+        "title": "Gladiator",
+        "description": "Im Jahr 180 n. Chr. ist Maximus, der treue General des römischen Kaisers Marcus Aurelius, nach einem glorreichen Sieg auf dem Schlachtfeld bereit, nach Hause zurückzukehren. Doch der sterbende Kaiser offenbart ihm seinen Wunsch, Maximus solle sein Nachfolger werden, anstatt seines machthungrigen Sohnes Commodus. Aus Eifersucht und Verrat tötet Commodus seinen Vater und befiehlt die Hinrichtung von Maximus und seiner Familie. Maximus entkommt, wird aber gefangen genommen und als Sklave verkauft, um als Gladiator zu kämpfen. Getrieben von unstillbarem Rachedurst steigt er in den Arenen Roms zum ungeschlagenen Helden auf, um sich dem Kaiser im Kolosseum zu stellen.",
+        "upload_date": "2025-07-17",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/gQ4yDAx4ghnOMTHr1LL2vMEclJv.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/w6ic3Y64IETKWckhmDKOVMDtGp8.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Gladiator.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "155 min"
+    },
+    {
+        "id": 129,
+        "title": "Gladiator II",
+        "description": "Zwei Jahrzehnte nach den Ereignissen des ersten Films lebt Lucius, der Neffe von Commodus und Sohn von Lucilla, inzwischen erwachsen in der römischen Provinz. Als sein Zuhause durch römische Truppen überfallen wird und seine Familie getötet wird, wird Lucius gezwungen, selbst als Gladiator in die Arena einzutreten. Getrieben von Rache und der Suche nach Gerechtigkeit, muss er sich in den blutigen Spielen des Kolosseums beweisen und den neuen, tyrannischen Kaisern von Rom gegenübertreten, während er sein eigenes Erbe und seine Rolle in der sich wandelnden Welt entdeckt.",
+        "upload_date": "2025-07-17",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/9G83cBi0mQ6w9RpmJSzGfvU7Cm.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/aWLDaVhnWRkkgwG8LPqwKGsjL2a.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Gladiator2.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "148 min"
+    },
+		{
+    "id": 11,
+    "title": "M3GAN",
+    "description": "Ein Brillant-Spielzeugroboterbauer nutzt künstliche Intelligenz, um einen lebensechten Roboter zu entwickeln, der sich mit ihrer kürzlich verwaisten Nichte anfreundet. Als die Bindung zwischen ihnen immer stärker wird, entwickelt sich die künstliche Intelligenz zu einer mörderischen Bedrohung.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/mKOt0XcgYJHI5xKeIY6rfq4Auen.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/cEtnRjAdTXSITr33hhXSIPIIi3I.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/M3gan.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "102 min"
+},
+		{
+    "id": 65,
+    "title": "Iron Man",
+    "description": "Der brillante Erfinder und Waffenhersteller Tony Stark wird bei einem Test seiner neuesten Raketen in Afghanistan entführt. Um zu überleben, baut er eine improvisierte Rüstung und entkommt. Zurück in den USA beschließt er, sein Leben zu ändern und seine Technologie zum Schutz der Welt einzusetzen, indem er die Identität von Iron Man annimmt.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/ueGAjn2cR1nc1f2i8VjIhpiP73E.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/A1m5BJznmmsDyj25AnhDyFbBSJJ.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4//IronMan.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "126 min"
+},
+	{
+    "id": 119,
+    "title": "Nosferatu - Der Untote",
+    "description": "In dieser düsteren Neuinterpretation des klassischen Horrors reist die junge Ellen Hutter ins entlegene Transsilvanien, um ein Geschäft mit dem mysteriösen Graf Orlok abzuschließen. Doch Orlok entpuppt sich als ein uralter Vampir, der von Ellens Schönheit besessen ist. Er folgt ihr in ihre Heimatstadt und bringt eine tödliche Pest und unvorstellbares Grauen mit sich, während Ellen und die Bewohner der Stadt versuchen, das Böse aufzuhalten.",
+    "upload_date": "2025-07-18",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/yig53WzBjX84iSYWKb2BCYYxFLM.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/7sU2zrDAZotvbevjLzkeBY2GsvF.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/NosferatuDerUntote.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "133 min"
+},
+	{
+    "id": 66,
+    "title": "Iron Man 2",
+    "description": "Die Welt weiß nun, dass Multimilliardär Tony Stark Iron Man ist. Unter Druck der Regierung, der Presse und der Öffentlichkeit, seine Technologie zu teilen, weigert sich Stark, die Geheimnisse seiner Iron-Man-Rüstung preiszugeben, da er befürchtet, dass die Informationen in die falschen Hände geraten könnten. Mit Pepper Potts und James Rhodes an seiner Seite muss Tony neue Allianzen schmieden und sich neuen, mächtigen Feinden stellen.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/nAhGVbqwWXjUMAaZvlmPr6nJOfR.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/wWu57zGqpAt7K746drOSjbwfIfe.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/IronMan2.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "124 min"
+},
+	{
+    "id": 67,
+    "title": "Iron Man 3",
+    "description": "Tony Stark, der unter posttraumatischem Stress leidet, muss sich dem Mandarin stellen, einem Terroristen, der die Welt mit einer Reihe von Bombenangriffen bedroht. Als Starks Welt in Trümmer gelegt wird, muss er sich auf seinen Erfindergeist verlassen, um die Menschen zu schützen, die er liebt, und sich seinen inneren Dämonen zu stellen.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/h0vJ6sTYWQmqenNqRa1IiW1t0Ys.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/rIUa56zPJ7RmkxvWAQGL8x86G6j.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/IronMan3.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "130 min"
+},
+		{
+    "id": 46,
+    "title": "Red One - Alarmstufe Weihnachten",
+    "description": "Als der Weihnachtsmann entführt wird, muss sich der Sicherheitschef des Nordpols (Dwayne Johnson) mit dem berüchtigtsten Kopfgeldjäger der Welt (Chris Evans) zusammentun, um bei einer globalen, actionreichen Mission Weihnachten zu retten.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/ezZOzHzJhuosyeg1xV0VwJyMekJ.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/r71Zi3jdqyebvtGQVjSeGJyN8sw.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/RedOneAlarmstufeWeihnachten.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "124 min"
+},
+		{
+    "id": 61,
+    "title": "Let's be Cops - Die Party Bullen",
+    "description": "Zwei beste Freunde, die als Polizisten verkleidet zu einer Kostümparty gehen, werden unerwartet zu den Sensationsdarstellern der Nachbarschaft, als die Leute sie für echte Cops halten. Doch als sie sich in die reale Unterwelt verstricken, müssen sie entscheiden, ob sie ihren Schwindel aufrechterhalten oder echte Helden werden wollen.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/mAQ4SAGe24Pc1iL7MjlNnb4F7V.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/yIQ9agycGiY8fsalvDADbf2MH0g.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/LetsBeCopsDiePartyBullen.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "104 min"
+},
+		{
+    "id": 56,
+    "title": "Mickey 17",
+    "description": "Ein 'Expendable' (verbrauchbarer) Arbeiter, der auf einer Eisweltkolonie geschickt wird, um die gefährlichsten Missionen zu übernehmen, stellt fest, dass er sich weigern muss, ersetzt zu werden, als eine neue Klonkopie von ihm hergestellt wird.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/belnJtEppRZPMSvbMPAUWDm9ps7.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/zNaTUUTXY3CazjitZqa3cHqefJB.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Mickey17.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "130 min"
+},
+		{
+    "id": 54,
+    "title": "Mufasa: Der König der Löwen",
+    "description": "Der Film erzählt die Ursprungsgeschichte von Mufasa, Simbas Vater, und zeigt, wie er vom verwaisten Löwenjungen, der verloren und allein war, zu einem der größten Könige der Königslande wurde. Die Geschichte wird von Rafiki, Timon und Pumbaa aus verschiedenen Zeitebenen erzählt.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/mS0kW5MvWgXZYiimBESwtOPE0Lz.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/dyA77MUuu6k026CAmckXjqDfhI9.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/MufasaDerKoenigDerLoewen.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "130 min"
+},
+	{
+    "id": 49,
+    "title": "M3GAN 2.0",
+    "description": "Details zur Handlung sind noch nicht vollständig bekannt, aber die Fortsetzung wird die Geschichte der hochentwickelten, mörderischen Puppe M3GAN fortsetzen und sich wahrscheinlich um neue Bedrohungen und die Weiterentwicklung der künstlichen Intelligenz drehen.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/8Ttq79mgiibQA4vRu4njKbJN6XA.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/ok6h85su874ANLaqJNJgTj0CUCv.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/M3GAN2.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "100 min"
+},
+		{
+    "id": 19,
+    "title": "Mr. No Pain",
+    "description": "Als seine große Liebe (Amber Midthunder) entführt wird, sieht der unscheinbare Nate (Jack Quaid) keine andere Wahl, als sich auf eine gefährliche Rettungsmission zu begeben. Was zunächst nach einer hoffnungslosen Aufgabe aussieht, wird zu seinem Vorteil, als er eine ungewöhnliche Fähigkeit entdeckt: Er kann keinen Schmerz empfinden. Diese besondere Stärke gibt Nate den Mut, sich über alle Hindernisse hinwegzusetzen, um das Leben der Frau, die ihm alles bedeutet, zu retten.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/couP6LA6lD2q6VjQToqly7fXESd.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/doI4G4wbGz7uNYYdRa4pSfXWfRr.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/MrNoPain.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "120 min"
+},
+		{
+    "id": 4,
+    "title": "Smile – Siehst du es auch?",
+    "description": "Nachdem sie Zeugin eines bizarr traumatischen Vorfalls mit einem Patienten wurde, erlebt Dr. Rose Cotter zunehmend beängstigende Ereignisse, die sie sich nicht erklären kann. Als ein überwältigender Schrecken beginnt, ihr Leben zu übernehmen, muss Rose sich ihrer beunruhigenden Vergangenheit stellen, um zu überleben und ihrer entsetzlichen neuen Realität zu entkommen.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/gP8a3F36DTE2ytkxIo9gzSQvId1.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/xpdd8I17UX8EY9srHhRTg6L42LN.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Smile.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "115 min"
+},
+		{
+    "id": 18,
+    "title": "Psycho",
+    "description": "Eine Sekretärin unterschlägt Geld und flieht in ein abgelegenes Motel, das von einem jungen Mann namens Norman Bates geführt wird. Ihr Aufenthalt nimmt jedoch eine schreckliche Wendung, als sie feststellt, dass Norman und seine herrschsüchtige Mutter ein dunkles Geheimnis hüten.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/yz4QVqPx3h1hD1DfqqQkCq3rmxW.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/3g7O9VlG4ZuKIU0RJkXVg2wXvzb.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Psycho.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "109 min"
+},
+	{
+    "id": 1,
+    "title": "Smile 2 – Siehst du es auch?",
+    "description": "Kurz vor ihrer neuen Welttournee erlebt die Pop-Ikone Skye Riley zunehmend schreckliche und unerklärliche Ereignisse. Überwältigt von den zunehmenden Schrecken und dem Druck des Ruhms muss sie sich ihrer dunklen Vergangenheit stellen, um ihr Leben wieder in den Griff zu bekommen, bevor es außer Kontrolle gerät.",
+    "upload_date": "2025-07-13",
+    "thumbnail": "https://www.lichtburg-ob.de/fileadmin/lichtburg/import/_processed_/c/3/csm_fw80big_38_70089fb591.jpg",
+    "banner": "https://s3-eu-central-1.amazonaws.com/vodafone-featured/wp-content/uploads/2024/10/14103004/Smile-2-Filmbild.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Smile2.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "127 min"
+},
+		{
+    "id": 80,
+    "title": "Rheingold",
+    "description": "Das Gangster-Drama basiert auf dem autobiografischen Roman 'Alles oder Nix' des Rappers Xatar. Der Film erzählt die bewegte Geschichte von Giwar Hajabi, der in den 1980er-Jahren als Flüchtling aus dem Iran nach Deutschland kommt. Von armen Verhältnissen und Kleinkriminalität bis zum Aufstieg als Großdealer und einem legendären Goldraub, der ihn ins Gefängnis bringt. Trotz aller Widrigkeiten hält er an seinem Traum fest, eine Musikkarriere zu verfolgen.",
+    "upload_date": "2025-07-17",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/6vdcG03SXerh3PXmfl9wkVJtccK.jpg",
+    "banner": "https://is1-ssl.mzstatic.com/image/thumb/Video122/v4/bf/6d/c7/bf6dc756-66a0-27d3-0746-4ecad2960c27/pr_source.lsr/1200x675.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Rheingold.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "138 min"
+},
+		{
+    "id": 68,
+    "title": "Sonne und Beton",
+    "description": "Sommer 2003 in Berlin-Gropiusstadt: Die Freunde Lukas und Gino versuchen, in ihrem tristen Alltag voller Gewalt und Langeweile zu überleben. Als sie in Schwierigkeiten geraten und Schulden machen, fassen sie einen riskanten Plan: Sie wollen in den Computerraum ihrer Schule einbrechen, um dort teure Computer zu stehlen und zu verkaufen. Doch der Einbruch läuft nicht wie geplant, und die Ereignisse geraten außer Kontrolle.",
+    "upload_date": "2025-07-16",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/ddacirup8d3NJqyFvRaBllSFncr.jpg",
+    "banner": "https://www.mobilekino.de/wp-content/uploads/2023/07/filmplakat-zu-sonne-und-beton-1500x800.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/SonneUndBeton.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "111 min"
+},
+	{
+    "id": 22,
+    "title": "Five Nights at Freddy's",
+    "description": "Ein problembeladener Wachmann beginnt einen Job in Freddy Fazbear's Pizza, wo er feststellt, dass die Nachtschicht nicht so einfach ist, wie er dachte, als die animatronischen Maskottchen zum Leben erwachen und tödlich werden.",
+    "upload_date": "2025-07-15",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/nuv2CzJsG605LMZaifUigDyuOEO.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/dP6aTajnmITTfipJdb1I66WCMlS.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/FiveNightsAtFreddys.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "109 min"
+},
+	{
+    "id": 120,
+    "title": "Blood & Sinners",
+    "description": "In einer postapokalyptischen Welt, die von marodierenden Banden und gnadenlosen Mächten beherrscht wird, kämpfen Überlebende ums nackte Dasein. Eine junge Frau muss sich einer brutalen Schicksalsgemeinschaft anschließen, um ihre Familie zu schützen. Sie wird in einen blutigen Konflikt hineingezogen, in dem Moral zur Belastung wird und nur die Stärksten überleben. Ihre Reise führt sie durch zerstörte Landschaften, auf der Suche nach einem sicheren Hafen und einem Funken Hoffnung in einer Welt voller Gewalt und Verzweiflung.",
+    "upload_date": "2025-07-18",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/445HsfnktkmM5y4cr62vYGzfo6h.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/52uHGNA8f2ktgZi8zwbmVyOEdCh.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Blood&Sinners.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "138 min"
+},
+	{
+    "id": 290875,
+    "title": "Kraven the Hunter",
+    "description": "Die Ursprungsgeschichte von Sergei Kravinoff, der durch einen Vorfall mit einem Löwen übermenschliche Fähigkeiten erlangt und sich zum gefürchtetsten Großwildjäger der Welt entwickelt. Der Film taucht in die komplexe Beziehung zu seinem skrupellosen Vater und seinem Halbbruder ein, während Kraven einen blutigen Rachefeldzug gegen Kriminelle führt, die in irgendeiner Form mit seiner Familie in Verbindung stehen. Seine Jagd nach Gerechtigkeit verwandelt ihn in ein gnadenloses Raubtier, das die Grenzen zwischen Held und Bösewicht verschwimmen lässt.",
+    "upload_date": "2025-07-31",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/dsX76pSGe531bYERxoZVOhw9af7.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/jVdc68Q3jSTY6GFBfyy7fvPRQN9.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/KraventheHunter.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "127 min"
+},
+	{
+    "id": 574312,
+    "title": "Furiosa: A Mad Max Saga",
+    "description": "Als die Welt untergeht, wird die junge Furiosa vom Grünen Ort der vielen Mütter entführt und fällt in die Hände einer großen Bikerhorde unter der Führung des Warlords Dementus. Bei ihrem Streifzug durch das Ödland stoßen sie auf die Zitadelle, die vom Immortan Joe beherrscht wird. Während die beiden Tyrannen um die Vorherrschaft kämpfen, plant die junge Furiosa ihre Flucht und träumt von der Rückkehr nach Hause. Sie muss viele Prüfungen überstehen und wird auf ihrem Rachefeldzug gestählt.",
+    "upload_date": "2025-07-31",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/N2mrukcSdafZkU5pXz0FHASE9Y.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/8LStP5ufy8KxWdDdXKrreCX9RH2.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/FuriosaAMadMaxSaga.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "148 min"
+},
+	{
+    "id": 918204,
+    "title": "Titanic",
+    "description": "Die 17-jährige Rose, die in einer Zwangsehe gefangen ist, lernt an Bord des Luxusliners Titanic den mittellosen Künstler Jack Dawson kennen. Trotz ihrer unterschiedlichen sozialen Schichten verlieben sich die beiden leidenschaftlich ineinander. Ihre Romanze entfaltet sich, während das Schiff seine Jungfernfahrt über den Atlantik antritt. Doch das Schicksal nimmt eine tragische Wendung, als die Titanic mit einem Eisberg kollidiert und das vermeintlich unsinkbare Schiff in den eisigen Fluten des Ozeans versinkt, was ihre Liebe auf eine unerbittliche Probe stellt.",
+    "upload_date": "2025-07-31",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/MlnPG3oxhfmuiDwcoeElQWui9m.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/tBEp5F0tUM105IdBTOmyJB5LZgG.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Titanic.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "195 min"
+},
+    {
+        "id": 987654,
+        "title": "Drachenzähmen leicht gemacht",
+        "description": "Ein schmächtiger Wikinger-Junge namens Hicks muss sich in seinem Dorf beweisen, indem er Drachen jagt. Doch er freundet sich mit einem der gefährlichsten Drachen an, einem Nachtschatten, den er Ohnezahn nennt. Ihre Freundschaft stellt die Welt der Wikinger auf den Kopf und verändert das Verhältnis zwischen Menschen und Drachen für immer.",
+        "upload_date": "2025-07-31",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/55zFJXrYqlrBb6qpmeaYrnvHXnf.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/mQuXEnW7P5D8LLTpno1ipXqBkQR.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DrachenzaehmenLeichtGemacht.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "98 min"
+    },
+    {
+        "id": 876543,
+        "title": "Drachenzähmen leicht gemacht 2",
+        "description": "Fünf Jahre sind vergangen und Hicks und Ohnezahn erkunden neue Gebiete. Sie entdecken eine geheime Eishöhle, in der zahlreiche neue Drachen leben und stoßen auf den mysteriösen Drachenreiter. Ein Konflikt um den Frieden auf der Insel Berk entbrennt, den sie nur gemeinsam mit ihren Freunden lösen können.",
+        "upload_date": "2025-07-31",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/cjiYFb6M44sraE5RLOkJGGwIWB8.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/tn6S5PI7Qoz5GdGSC81bv1jspNF.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DrachenzaehmenLeichtGemacht2.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "105 min"
+    },
+    {
+        "id": 765432,
+        "title": "Drachenzähmen leicht gemacht 3: Die geheime Welt",
+        "description": "Als Häuptling von Berk hat Hicks ein friedliches Miteinander von Wikingern und Drachen geschaffen. Doch die Bedrohung durch den skrupellosen Drachenjäger Grimmel zwingt Hicks und seine Drachenreiter, die Insel zu verlassen und sich auf die Suche nach einer mythischen, verborgenen Welt zu begeben, in der alle Drachen in Sicherheit leben können.",
+        "upload_date": "2025-07-31",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/k28WaMcCLRdHASIWMZAcg8Sj9yc.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/bmoWzpkVKhmioBDldDSkFuDyiB0.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DrachenzaehmenLeichtGemacht3.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "104 min"
+    },
+    {
+        "id": 654321,
+        "title": "Drachenzähmen leicht gemacht",
+        "description": "Die Live-Action-Verfilmung erzählt die Geschichte des jungen Wikingers Hicks, der sich mit dem verletzten Drachen Ohnezahn anfreundet. Er stellt die Traditionen seines Dorfes infrage und begibt sich mit Ohnezahn auf eine Reise, die das Schicksal beider Welten verändern wird.",
+        "upload_date": "2025-07-31",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/v3xvZksofSo74AWKa1YeTywLyPd.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/zIcZPq0flPhjp4C8v8O5p6Nyipw.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DrachenzaehmenLeichtGemacht2025.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "125 min"
+    },
+		{
+    "id": 429817,
+    "title": "Lilo und Stitch",
+    "description": "Die Neuverfilmung des beliebten Animationsfilms erzählt die herzerwärmende Geschichte der kleinen hawaiianischen Einzelgängerin Lilo, die sich nichts sehnlicher wünscht als eine Familie. Ihr Wunsch wird erfüllt, als sie ein außerirdisches Experiment adoptiert, das von der intergalaktischen Föderation gejagt wird. Lilo tauft den zerstörerischen 'Hund' auf den Namen Stitch und versucht, ihm mit der Kraft von 'Ohana', dem hawaiianischen Wort für Familie, beizubringen, was Liebe und Zugehörigkeit bedeuten. Gemeinsam stellen sie sich den Herausforderungen, die ihre ungleiche Familie bedrohen.",
+    "upload_date": "2025-07-31",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/n18725mrFHP3dUyc6fxeIQnNxJR.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/4DYrZevpUpMsKv6XCraOeLlQtJ7.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/LiloUndStitch.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "100 min"
+},
+	{
+    "id": 738495,
+    "title": "Flow",
+    "description": "Nach einer katastrophalen Überschwemmung erwacht eine Katze in einem Rettungsboot und findet sich allein auf dem Meer wieder. Während sie verzweifelt nach einem Stückchen Land sucht, trifft sie auf andere Tiere, die ebenfalls in Booten festsitzen. Sie sind gezwungen, sich in einem gemeinsamen Boot zusammenzuschließen, doch die Angst und die Ungewissheit der neuen Situation führen zu Spannungen und Konflikten. Die Katze muss lernen, mit ihrer inneren Abneigung gegen andere Lebewesen umzugehen, um in dieser neuen, gefährlichen Welt zu überleben.",
+    "upload_date": "2025-07-31",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/4iRNBHBHbvDAg3BY4Sy0SIErwV2.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/ouCqgbdQTnSB7qS1v2sEmXeNNSI.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Flow.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "95 min"
+},
+	{
+    "id": 185906,
+    "title": "Warfare",
+    "description": "Ein kompromissloser Militäraktionsfilm, der die brutale Realität des Krieges beleuchtet. Der Film folgt einer Gruppe von Soldaten, die in einem gefährlichen Konfliktgebiet eingesetzt werden. Sie müssen nicht nur gegen äußere Feinde kämpfen, sondern auch mit inneren Spannungen, moralischen Dilemmata und den psychologischen Folgen des Krieges fertig werden. Die Handlung konzentriert sich auf die Dynamik zwischen den Teammitgliedern und die Entscheidungen, die sie unter extremem Druck treffen müssen.",
+    "upload_date": "2025-07-31",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/4TNQmN2Vt99xSnhsuN7W6KIhpkA.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/rGyHJAxkrjoDYG4OskcLHzaADxp.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Warfare.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "120 min"
+},
+	    {
+        "id": 457812,
+        "title": "Thunderbolts*",
+        "description": "Nach dem Tod von Captain America und dem Ende der Avengers, stellt die Leiterin der U.S. Security Forces, Valentina Allegra de Fontaine, ein neues Team aus Anti-Helden zusammen. Die Gruppe, bestehend aus Bucky Barnes, U.S. Agent, Yelena Belova, Red Guardian, Taskmaster und Ghost, muss sich auf gefährliche Missionen begeben, bei denen sie die schmutzige Arbeit der Regierung erledigen sollen. Sie müssen lernen, als Team zu funktionieren, obwohl sie alle ihre eigenen dunklen Geheimnisse haben.",
+        "upload_date": "2025-07-31",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/7valL7vfG9nB3nwlNhPsrodceBp.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/sRcrU69AYBsQJmfErndTqdHLwd4.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Thunderbolts.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "125 min"
+    },
+    {
+        "id": 983210,
+        "title": "Die Eiskönigin - Völlig unverfroren",
+        "description": "Die furchtlose Prinzessin Anna begibt sich auf eine epische Reise, um ihre Schwester Elsa zu finden, deren eisige Kräfte das Königreich Arendelle in einen ewigen Winter gestürzt haben. Mit dem rauen Bergsteiger Kristoff und seinem treuen Rentier Sven an ihrer Seite, muss Anna eine gefährliche Reise durch eisige Landschaften antreten, um das Königreich zu retten. Auf ihrem Abenteuer begegnen sie Trollen, einem lustigen Schneemann namens Olaf und einem mysteriösen Schneemonster.",
+        "upload_date": "2025-07-31",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/1PoFoMOVPdOveqdpS1fx8JQnw8U.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/irwWmcOOZ0xaXlvhiJynFKmFbnE.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DieEiskoeniginVoelligUnverfroren.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "102 min"
+    },
+    {
+        "id": 675432,
+        "title": "Die Eiskönigin 2",
+        "description": "Elsa hört eine geheimnisvolle Stimme, die sie in den Verzauberten Wald ruft. Zusammen mit Anna, Kristoff, Olaf und Sven verlässt sie das Königreich Arendelle, um die Ursprünge ihrer Kräfte und die Geheimnisse ihrer Vergangenheit zu ergründen. Ihre Reise führt sie in einen mythischen Wald, der seit Jahren im Nebel gefangen ist, und sie müssen sich den Elementargeistern stellen, um die Wahrheit herauszufinden und Arendelle vor einer Bedrohung zu retten, die die Zerstörung des Königreichs bedeuten könnte.",
+        "upload_date": "2025-07-31",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/qH70PBE89tCisYhmRlTTjlXc2HC.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/xD7yQyIZTU56OhzIjEa6FhD66Pe.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/DieEiskoenigin2.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "103 min"
+    },
+    {
+        "id": 109876,
+        "title": "Knives Out - Mord ist Familiensache",
+        "description": "Nach der Feier zu seinem 85. Geburtstag wird der gefeierte Krimi-Autor Harlan Thrombey tot in seinem Anwesen aufgefunden. Der berühmte Detektiv Benoit Blanc wird engagiert, um den Fall zu untersuchen. Schnell findet er heraus, dass jedes Mitglied der exzentrischen und zerstrittenen Thrombey-Familie ein Motiv für den Mord gehabt hätte. Blanc muss sich durch ein Netz aus Lügen und Geheimnissen kämpfen, um die Wahrheit hinter dem mysteriösen Todesfall zu enthüllen, bei dem niemand unverdächtig ist.",
+        "upload_date": "2025-07-31",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/ftCASOlSQ6QtjS3TIJB7xXHW5H9.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/sRqx9Uyj3ZM5kjpSGyHAa2atY8p.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/KnivesOutMordIstFamiliensache.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "130 min"
+    },
+	{
+    "id": 452817,
+    "title": "No Hard Feelings",
+    "description": "Die Fahrerin Maddie (Jennifer Lawrence) steht kurz vor dem Verlust ihres Elternhauses. Als sie auf eine kuriose Stellenanzeige stößt, sieht sie die Chance, ihre Probleme zu lösen: Die wohlhabenden Eltern des schüchternen und introvertierten 19-jährigen Percy (Andrew Barth Feldman) suchen eine junge Frau, die ihn 'datet' und ihn vor seinem College-Beginn aus der Reserve lockt. Was als ungewöhnliches Geschäft beginnt, entwickelt sich zu einer urkomischen und herzerwärmenden Geschichte über Freundschaft und das Erwachsenwerden.",
+    "upload_date": "2025-08-01",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/elAR8jvPokeP45xS8ztCupb6arY.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/zd6rVGlBnHTs231jZLu9ul0GDKy.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/NoHardFeelings.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "103 min"
+},
+	    {
+        "id": 123456,
+        "title": "Venom",
+        "description": "Der investigative Journalist Eddie Brock (Tom Hardy) versucht nach einem Skandal, seine Karriere wieder aufzubauen. Bei seinen Recherchen in den Laboren der Life Foundation kommt er mit einem außerirdischen Symbionten in Kontakt, der sich mit ihm zu einem neuen Wesen verschmilzt: Venom. Zunächst kämpfen die beiden mit ihrer Koexistenz, doch als ein anderer, bösartiger Symbiont namens Riot die Menschheit bedroht, müssen Eddie und Venom zusammenarbeiten, um die Welt zu retten.",
+        "upload_date": "2025-08-01",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/e8XOhZTizIl4vTzOYqaUWIhI5iC.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/cnBfZeUAwehPiNR3c3tI0JJ5Cce.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Venom.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "112 min"
+    },
+    {
+        "id": 234567,
+        "title": "Venom: Let There Be Carnage",
+        "description": "Einige Zeit, nachdem Eddie Brock die Kontrolle über Venom erlangt hat, kämpfen die beiden immer noch damit, sich zu arrangieren. Die Beziehung wird auf eine harte Probe gestellt, als der Serienmörder Cletus Kasady (Woody Harrelson) eine Bindung mit einem anderen Symbionten eingeht und sich in den brutalen Carnage verwandelt. Eddie und Venom müssen ihre Differenzen beilegen, um den gefährlichen neuen Gegner zu stoppen.",
+        "upload_date": "2025-08-01",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/ztoy8TiHu9qa22bW1DkhdNIzeF9.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/xDSy6mI9u3mmpMxTjOnQh6g5k0g.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/VenomLetThereBeCarnage.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "97 min"
+    },
+    {
+        "id": 345678,
+        "title": "Venom: The Last Dance",
+        "description": "Eddie Brock und sein symbiotischer Partner Venom sind auf der Flucht und werden von ihren jeweiligen Welten gejagt. Angesichts einer immer enger werdenden Schlinge müssen die beiden eine verheerende Entscheidung treffen, die das Schicksal ihrer Beziehung und die Existenz der Symbionten für immer verändern wird. Der Film bildet den Abschluss der Venom-Trilogie.",
+        "upload_date": "2025-08-01",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/9g8Kv3gngfTtetwrpPcIsnDj3T1.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/r8OIVD3ncCdDJY9RTqK5BeyVc2g.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/VenomTheLastDance.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "109 min"
+    },
+	{
+    "id": 456789,
+    "title": "Wonka",
+    "description": "Das Musical erzählt die fantastische Vorgeschichte des berühmten Schokoladenfabrikanten Willy Wonka. Die Geschichte folgt einem jungen, mittellosen Willy, der mit einem Hut voller Träume in die Stadt kommt, um sein Handwerk als Zauberer, Erfinder und Schokoladenmacher zu perfektionieren. Er muss sich gegen ein mächtiges Schokoladenkartell durchsetzen, das seine Träume zu zerstören droht. Mit der Hilfe von Freunden und seiner grenzenlosen Fantasie kämpft er dafür, seine Leidenschaft zu verwirklichen.",
+    "upload_date": "2025-08-01",
+    "thumbnail": "https://moflix-stream.xyz/storage/title-posters/3306e59b-a445-4110-901b-737993a3f0d9.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/bmlkLCjrIWnnZzdAQ4uNPG9JFdj.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Wonka.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "116 min"
+},
+{
+    "id": 567890,
+    "title": "Willy Wonka & die Schokoladenfabrik",
+    "description": "Der arme Junge Charlie Bucket findet eine von fünf goldenen Eintrittskarten, die ihm einen Besuch in der geheimnisvollen Schokoladenfabrik des exzentrischen Willy Wonka ermöglichen. Zusammen mit den anderen glücklichen Gewinnern, die jeweils für ihre schlechten Charaktereigenschaften bekannt sind, erlebt Charlie eine fantastische Tour durch Wonkas wundersame Welt aus Schokolade und Süßigkeiten. Doch Wonka hat einen Hintergedanken und testet die Kinder, um seinen Nachfolger zu finden.",
+    "upload_date": "2025-08-01",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/g4mCmwhwQ19DeCt3gwUKxVIp90r.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/jv4BITzsEJT8TmXwiMVt35TphlG.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/WillyWonkaUndDieSchokoladenfabrik.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "100 min"
+},
+	{
+    "id": 678901,
+    "title": "Charlie und die Schokoladenfabrik",
+    "description": "Charlie Bucket, ein Junge aus armen Verhältnissen, findet eine von fünf goldenen Eintrittskarten, die ihm einen exklusiven Rundgang durch die fantastische, geheimnisvolle Schokoladenfabrik des exzentrischen Willy Wonka (Johnny Depp) ermöglicht. Gemeinsam mit vier anderen, verwöhnten Kindern erlebt Charlie eine magische, aber auch gefährliche Reise durch die Fabrik, in der Wonka seine eigenen, unkonventionellen Regeln aufstellt. Die Tour entwickelt sich zu einem moralischen Test, bei dem nur ein Kind am Ende das große Geheimnis der Fabrik lüften wird.",
+    "upload_date": "2025-08-01",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/nPNJWZqrJQBUGEUSkjQp2KQxn6V.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/gbvLncaMd47pTuNjHKdCXR2gccq.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/CharlieUndDieSchokoladenfabrik.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "115 min"
+},
+	    {
+        "id": 789012,
+        "title": "Paddington",
+        "description": "Der junge Bär Paddington reist aus dem tiefsten Peru nach London, um dort eine Familie zu finden. Allein und verloren am Paddington-Bahnhof trifft er auf die freundliche Familie Brown, die ihn bei sich aufnimmt. Doch sein unkonventionelles Wesen führt schnell zu Missgeschicken und Chaos. Gleichzeitig hat es eine zwielichtige Tierpräparatorin auf ihn abgesehen, die ihn zu ihrer Sammlung hinzufügen will. Paddington muss lernen, sich in der großen Stadt zurechtzufinden und seine neue Familie zu beschützen.",
+        "upload_date": "2025-08-01",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/rbkTRrKmjUPCVNXGDp2u2OGKX8n.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/duv0V0IrnRAW4Nr9kbbhAQNXCLf.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Paddington1.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "95 min"
+    },
+    {
+        "id": 890123,
+        "title": "Paddington 2",
+        "description": "Paddington hat sich gut in seiner neuen Heimat und bei den Browns eingelebt und ist ein beliebtes Mitglied der Nachbarschaft. Zum 100. Geburtstag seiner Tante Lucy möchte er ihr ein besonderes Geschenk machen: ein altes Pop-up-Buch. Um sich dieses leisten zu können, nimmt er verschiedene Jobs an. Doch als das Buch gestohlen wird, gerät Paddington fälschlicherweise unter Verdacht und landet im Gefängnis. Mit der Hilfe seiner Familie und seiner neuen Freunde hinter Gittern muss er den wahren Dieb finden, um seine Unschuld zu beweisen.",
+        "upload_date": "2025-08-01",
+        "thumbnail": "https://image.tmdb.org/t/p/w500/A4HbS3Tl2RAmnDvDeUcHWr3OfJc.jpg",
+        "banner": "https://image.tmdb.org/t/p/original/nV3AWmx8GrC6japchB2fxifWMA5.jpg",
+        "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/Paddington2.mp4",
+        "quality": "HD",
+        "language": "Deutsch",
+        "duration": "103 min"
+    },
+	{
+    "id": 901234,
+    "title": "Paddington in Peru",
+    "description": "Im dritten Teil der Paddington-Reihe kehrt der Bär in seine Heimat Peru zurück. Zusammen mit der Familie Brown macht er sich auf die Suche nach seiner verschwundenen Tante Lucy. Die abenteuerliche Reise führt sie vom dichten Dschungel des Amazonas bis zu den hohen Gipfeln der Anden und stellt sie vor neue Herausforderungen, die nicht nur mit dem verschollenen Bären, sondern auch mit einem sagenumwobenen Goldschatz zu tun haben.",
+    "upload_date": "2025-08-01",
+    "thumbnail": "https://image.tmdb.org/t/p/w500/qjAW4lAQXH7HIgvKayMkhZ8Y0DK.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/fAEgt86Ed5rwJIExxzBhWGnH6Rb.jpg",
+    "video": "https://filmfrei24.de/embed.html?https://filedn.eu/lnJKxNUw6pIbWnRQ8qy3lA4/PaddingtonInPeru.mp4",
+    "quality": "HD",
+    "language": "Deutsch",
+    "duration": "106 min"
+}
+];
+
+        // State
+        let heroInterval;
+        let displayedFilms = [...films];
+        let currentFilm = null;
+        let watchHistory = {};
+        let recentlyWatched = [];
+        let lastWatchTime = {};
+
+        // Load watch history from localStorage
+        function loadWatchHistory() {
+            const saved = localStorage.getItem('watchHistory');
+            if (saved) {
+                watchHistory = JSON.parse(saved);
+            }
+            
+            const recent = localStorage.getItem('recentlyWatched');
+            if (recent) {
+                recentlyWatched = JSON.parse(recent);
+            }
+            
+            const times = localStorage.getItem('lastWatchTime');
+            if (times) {
+                lastWatchTime = JSON.parse(times);
+            }
+        }
+
+        // Save watch history
+        function saveWatchHistory() {
+            localStorage.setItem('watchHistory', JSON.stringify(watchHistory));
+            localStorage.setItem('recentlyWatched', JSON.stringify(recentlyWatched));
+            localStorage.setItem('lastWatchTime', JSON.stringify(lastWatchTime));
+        }
+
+        // Update recently watched
+        function updateRecentlyWatched(filmId) {
+            const currentTime = Date.now();
+            lastWatchTime[filmId] = currentTime;
+            
+            recentlyWatched = recentlyWatched.filter(id => id !== filmId);
+            recentlyWatched.unshift(filmId);
+            recentlyWatched = recentlyWatched.slice(0, 10);
+            
+            saveWatchHistory();
+            renderRecentlyWatched();
+        }
+
+        // Set watch status
+        function setWatchStatus(filmId, status) {
+            watchHistory[filmId] = status;
+            updateRecentlyWatched(filmId);
+            saveWatchHistory();
+            
+            renderFilmGrid();
+            updateHero();
+        }
+
+        // Get watch status icon
+        function getWatchStatusIcon(status) {
+            if (status === 'watched' || status === 'in-progress') {
+                return '✓';
+            }
+            return '';
+        }
+
+        // Get short description
+        function getShortDescription(description, maxLength = 100) {
+            if (description.length <= maxLength) return description;
+            return description.substring(0, maxLength).trim() + '...';
+        }
+
+        // Render recently watched section
+        function renderRecentlyWatched() {
+            const section = document.getElementById('recentlyWatched');
+            const container = document.getElementById('recentMovies');
+            
+            if (recentlyWatched.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+            
+            section.style.display = 'block';
+            container.innerHTML = '';
+            
+            const sortedRecent = [...recentlyWatched].sort((a, b) => {
+                const timeA = lastWatchTime[a] || 0;
+                const timeB = lastWatchTime[b] || 0;
+                return timeB - timeA;
+            });
+            
+            sortedRecent.forEach(filmId => {
+                const film = films.find(f => f.id === filmId);
+                if (!film) return;
+                
+                const card = document.createElement('div');
+                card.className = 'recent-movie-card';
+                card.innerHTML = `
+                    <div class="movie-thumbnail-container">
+                        <img class="movie-thumbnail" src="${film.banner || film.thumbnail}" alt="${film.title}" loading="lazy">
+                    </div>
+                    <div class="movie-info">
+                        <h3 class="movie-title">${film.title}</h3>
+                    </div>
+                `;
+                card.addEventListener('click', () => openDetailModal(film));
+                container.appendChild(card);
+            });
+        }
+
+        // Hero Banner
+        function updateHero() {
+            const randomFilm = films[Math.floor(Math.random() * films.length)];
+            const heroBanner = document.getElementById('heroBanner');
+            const heroTitle = document.getElementById('heroTitle');
+            const heroDescription = document.getElementById('heroDescription');
+            const heroPlayBtn = document.getElementById('heroPlayBtn');
+            const heroWatchIndicator = document.getElementById('heroWatchIndicator');
+
+            heroBanner.classList.remove('active');
+            
+            setTimeout(() => {
+                heroBanner.onerror = () => {
+                    if (heroBanner.src !== (randomFilm.thumbnail || '')) {
+                        heroBanner.src = randomFilm.thumbnail || '';
+                    }
+                };
+                heroBanner.src = randomFilm.banner || randomFilm.thumbnail || '';
+                heroBanner.alt = randomFilm.title;
+                heroTitle.textContent = randomFilm.title;
+                heroDescription.textContent = getShortDescription(randomFilm.description, 150);
+                
+                heroWatchIndicator.style.display = 'none';
+                
+                heroPlayBtn.onclick = () => openDetailModal(randomFilm);
+                
+                setTimeout(() => {
+                    heroBanner.classList.add('active');
+                }, 100);
+            }, 300);
+        }
+
+        function startHeroRotation() {
+            updateHero();
+            heroInterval = setInterval(updateHero, 8000);
+        }
+
+        function stopHeroRotation() {
+            clearInterval(heroInterval);
+        }
+
+        // Render film grid
+        function renderFilmGrid(filmsToShow = displayedFilms) {
+            const moviesGrid = document.getElementById('moviesGrid');
+            moviesGrid.innerHTML = '';
+
+            filmsToShow.forEach((film, index) => {
+                const movieCard = createMovieCard(film, index);
+                moviesGrid.appendChild(movieCard);
+            });
+        }
+
+        function createMovieCard(film, index) {
+            const movieCard = document.createElement('div');
+            movieCard.className = 'movie-card';
+            movieCard.style.animationDelay = `${index * 0.05}s`;
+
+            const date = new Date(film.upload_date);
+            const formattedDate = date.toLocaleDateString('de-DE', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+
+            movieCard.innerHTML = `
+                <div class="movie-thumbnail-container">
+                    <img class="movie-thumbnail" 
+                         src="${film.banner || film.thumbnail}" 
+                         alt="${film.title}" 
+                         loading="lazy">
+                    <div class="play-overlay">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="movie-info">
+                    <h3 class="movie-title">${film.title}</h3>
+                    <p class="movie-date">${formattedDate}</p>
+                </div>
+            `;
+
+            movieCard.addEventListener('click', () => openDetailModal(film));
+            
+            return movieCard;
+        }
+
+        // Search functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            let searchTimeout;
+
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                const query = e.target.value.trim();
+                
+                if (query === '') {
+                    searchResults.classList.remove('active');
+                    searchResults.innerHTML = '';
+                    return;
+                }
+                
+                searchTimeout = setTimeout(() => {
+                    const results = films.filter(film => 
+                        film.title.toLowerCase().includes(query.toLowerCase()) ||
+                        film.description.toLowerCase().includes(query.toLowerCase())
+                    );
+                    
+                    if (results.length === 0) {
+                        searchResults.innerHTML = '<div class="no-results">Keine Ergebnisse gefunden</div>';
+                    } else {
+                        searchResults.innerHTML = results.map(film => {
+                            const date = new Date(film.upload_date);
+                            const formattedDate = date.toLocaleDateString('de-DE', {
+                                year: 'numeric',
+                                month: '2-digit',
+                                day: '2-digit'
+                            });
+                            
+                            return `
+                                <div class="search-result-item" data-id="${film.id}">
+                                    <img class="search-result-thumbnail" src="${film.thumbnail}" alt="${film.title}" loading="lazy">
+                                    <div class="search-result-info">
+                                        <div class="search-result-title">${film.title}</div>
+                                        <div class="search-result-date">${formattedDate}</div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('');
+                    }
+                    
+                    searchResults.classList.add('active');
+                }, 300);
+            });
+
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const firstItem = searchResults.querySelector('.search-result-item');
+                    if (firstItem) {
+                        const filmId = parseInt(firstItem.getAttribute('data-id'));
+                        const film = films.find(f => f.id === filmId);
+                        if (film) {
+                            searchResults.classList.remove('active');
+                            searchInput.blur();
+                            setTimeout(() => {
+                                openDetailModal(film);
+                                searchInput.value = '';
+                            }, 200);
+                        }
+                    }
+                }
+            });
+
+            // Click outside to close
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.search-container')) {
+                    searchResults.classList.remove('active');
+                    searchInput.blur();
+                }
+            });
+
+            // Handle search result clicks
+            searchResults.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const resultItem = e.target.closest('.search-result-item');
+                if (resultItem) {
+                    const filmId = parseInt(resultItem.dataset.id);
+                    const film = films.find(f => f.id === filmId);
+                    if (film) {
+                        searchInput.blur();
+                        
+                        setTimeout(() => {
+                            openDetailModal(film);
+                            searchInput.value = '';
+                            searchResults.classList.remove('active');
+                        }, 100);
+                    }
+                }
+            });
+        }
+
+        // Open detail modal
+        function openDetailModal(film) {
+            currentFilm = film;
+            
+            const modal = document.getElementById('detailModal');
+            const detailTitle = document.getElementById('detailTitle');
+            const detailPoster = document.getElementById('detailPoster');
+            const detailDescription = document.getElementById('detailDescription');
+            const detailDate = document.getElementById('detailDate');
+            const customPlayer = document.getElementById('customPlayer');
+
+            detailTitle.textContent = film.title;
+            detailPoster.src = film.thumbnail;
+            detailPoster.alt = `${film.title} Poster`;
+            const posterCaption = document.getElementById('posterCaption');
+            if (posterCaption) {
+                posterCaption.textContent = film.title;
+            }
+            detailDescription.textContent = film.description;
+            
+            const date = new Date(film.upload_date);
+            detailDate.textContent = date.toLocaleDateString('de-DE', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            // Video Player
+            customPlayer.innerHTML = `<iframe src="${film.video}" allowfullscreen></iframe>`;
+
+            // Recommendations
+            const recContainer = document.getElementById('recommendations');
+            if (recContainer) {
+                recContainer.innerHTML = '';
+                const others = films.filter(f => f.id !== film.id);
+                const shuffled = [...others].sort(() => Math.random() - 0.5).slice(0, 8);
+                shuffled.forEach(rec => {
+                    const card = document.createElement('div');
+                    card.className = 'recommend-card';
+                    const date = new Date(rec.upload_date);
+                    const formatted = date.toLocaleDateString('de-DE', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit'
+                    });
+                    card.innerHTML = `
+                        <img src="${rec.banner || rec.thumbnail}" alt="${rec.title}" loading="lazy">
+                        <div class="recommend-info">
+                            <div class="rec-title">${rec.title}</div>
+                            <div class="rec-date">${formatted}</div>
+                        </div>
+                    `;
+                    card.addEventListener('click', () => {
+                        closeDetailModal();
+                        openDetailModal(rec);
+                    });
+                    recContainer.appendChild(card);
+                });
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            stopHeroRotation();
+
+            setWatchStatus(film.id, 'in-progress');
+
+            setTimeout(() => {
+                if (currentFilm && currentFilm.id === film.id && modal.classList.contains('active')) {
+                    setWatchStatus(film.id, 'watched');
+                }
+            }, 30000);
+        }
+
+        // Close modal
+        function closeDetailModal() {
+            const modal = document.getElementById('detailModal');
+            const customPlayer = document.getElementById('customPlayer');
+            
+            modal.classList.remove('active');
+            customPlayer.innerHTML = '';
+            document.body.style.overflow = 'auto';
+            currentFilm = null;
+            startHeroRotation();
+            
+            renderFilmGrid();
+            renderRecentlyWatched();
+        }
+
+        // Event Listeners
+        document.getElementById('closeDetail').addEventListener('click', closeDetailModal);
+        
+        document.getElementById('detailModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeDetailModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('detailModal').classList.contains('active')) {
+                closeDetailModal();
+            }
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Shuffle and render films
+        function shuffleAndRenderFilms() {
+            const shuffled = [...films].sort(() => Math.random() - 0.5);
+            displayedFilms = shuffled;
+            renderFilmGrid();
+        }
+
+        // Service Worker Registration - nur für mobile Geräte
+        if ('serviceWorker' in navigator && window.innerWidth <= 1024) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((registration) => {
+                        console.log('Service Worker registriert:', registration.scope);
+                        
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    if (confirm('Eine neue Version ist verfügbar. Seite neu laden?')) {
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch((error) => {
+                        console.error('Service Worker Registration fehlgeschlagen:', error);
+                    });
+            });
+        }
+
+        // PWA Install Prompt - nur für mobile Geräte
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Nur auf mobilen Geräten anzeigen
+            if (window.innerWidth > 1024) {
+                e.preventDefault();
+                return;
+            }
+            
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            const installButton = document.createElement('button');
+            installButton.textContent = 'App installieren';
+            installButton.className = 'btn btn-primary install-button';
+            
+            installButton.addEventListener('click', async () => {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response: ${outcome}`);
+                deferredPrompt = null;
+                installButton.remove();
+            });
+            
+            document.body.appendChild(installButton);
+        });
+
+        // Offline/Online Status
+        window.addEventListener('online', () => {
+            console.log('Wieder online');
+        });
+
+        window.addEventListener('offline', () => {
+            console.log('Offline');
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadWatchHistory();
+            setupSearch();
+            shuffleAndRenderFilms();
+            renderRecentlyWatched();
+            updateHero();
+            startHeroRotation();
+            
+            // Prevent double-tap zoom
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', (e) => {
+                const now = Date.now();
+                if (now - lastTouchEnd <= 300) {
+                    e.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+            
+            // Prevent pinch zoom
+            document.addEventListener('gesturestart', (e) => {
+                e.preventDefault();
+            });
+        });
+    </script>
 </body>
 </html>
